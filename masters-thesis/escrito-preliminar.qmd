@@ -1,0 +1,77 @@
+---
+title: "Escrito preliminar"
+author: "Tomás Urzúa"
+format:
+  html:
+    theme:
+           - thesis.scss
+title-block-banner: true
+editor: visual
+toc: true
+toc-location: right
+toc-depth: 2
+toc-expand: true
+toc-title: Contenidos
+bibliography: masters-thesis.bib
+---
+
+## El neoliberalismo en la educación: políticas y transformaciones
+
+La dictadura fue un pasaje de la historia marcado por una algidez política innegable, en el cual se llevaron a cabo transformaciones sustantivas en todas las esferas de la vida, haciendo de la implementación del modelo neoliberal la herencia que trascendió ese período hasta la actualidad. Los Chicago Boys traerían consigo la formalización de un sistema que, gestado desde una perspectiva económica, sería capaz de desplegarse en toda cuestión social, cultural y política, asentándose el libre mercado como eje regulador de la sociedad chilena.
+
+La mercantilización de los derechos y servicios se reajustarían bajo la dinámica de la oferta-demanda, en donde su prestación ya no responde a una garantía de derechos básicos, sino a la capacidad de pago individual, es decir, la acumulación de capital económico como posibilitador de mejores condiciones. El sistema educativo no quedó exento de este fenómeno, al contrario, se implementaron una serie de reformas que fomentaron la subsidiariedad del Estado a los establecimientos educacionales, el incentivo económico de acaparar matrículas y los procesos de selección escolar, por mencionar algunas [@valenzuela_socioeconomic_2014]. Fue tal la inserción de las lógicas de mercado en este campo, que hoy en día varios académicos plantean el caso de Chile como el estudio del mercado educacional, más que de la educación misma [@corvalan_mercado_2016a].
+
+Durante las últimas décadas, si bien se han implementado reformas que pretenden mitigar los efectos más crudos y evidentemente desiguales del modelo –como la Ley 20.845–, las bases estructurales del mercado educativo permanecen profundamente arraigadas a la operatividad educativa. La función subsidiaria del Estado, que delega su responsabilidad al mercado, perpetúa la reproducción de las desigualdades sociales. El caso particular de la educación chilena se estudia, por ende, como el ejemplo paradigmático de la mercantilización de la educación, fenómeno que se opone por completo con la idea de la educación como un derecho social universal.
+
+## Implicancias socioculturales del neoliberalismo
+
+### Meritocracia
+
+La implementación del neoliberalismo como un proyecto de sociedad influyó en la gestación de un ideario marcado por el individualismo, en donde las riendas que orientaban la trayectoria de una persona pasaron a ser sujetadas por nadie más que ellas mismas. En este sentido, cobró una relevancia fundamental la responsabilidad individual en la realización humana, defendiendo la idea de la igualdad de oportunidades en la vida en sociedad, pues dependiendo del esfuerzo que un sujeto pusiera en su vida, podría ser capaz de dirigir su destino y, siguiendo esa lógica, cualquiera sería ser capaz de dirigirlo. 
+
+La idea que las posiciones sociales y económicas están determinadas por el esfuerzo y talento de los individuos sostiene el concepto de *meritocracia*. El término acuñado por Michael Young estableció que las capacidades individuales serían el mecanismo por el cual se configuraría la sociedad, eliminando el factor heredado del privilegio. Sin embargo, el término ha evolucionado, considerando que este sistema sostenido por las competencias y logros individuales omite la influencia de los contextos socioeconómicos de origen, lo que termina por obviar las desigualdades de oportunidades que se enmarcan en las condiciones estructurales societales [@bell_politics_2020].
+
+La meritocracia es uno de los elementos constitutivos del funcionamiento de la educación en Chile, toda vez que las instituciones educativas son las que albergan las aspiraciones individuales de los estudiantes, y con ello han sido reconocidas históricamente como impulsoras para la movilidad social. Sin embargo, esta perspectiva oculta las desigualdades que sostienen al sistema educativo chileno, en donde, la retórica de la meritocracia, más que defender la igualdad de oportunidades para el surgimiento de los más desfavorecidos, opera como un recurso para la legitimación de las desigualdades en tanto las habilidades individuales se consideran como heredadas, y el logro académico es altamente influenciado por el contexto familiar [@goldin_meritocracy_2001; @larranaga_desiguales_2017]. 
+
+### Justicia de mercado 
+
+Las políticas neoliberales en Chile lograron permear en las subjetividades de los individuos, cuyas creencias han sido atravesadas profundamente por las lógicas mercantiles. En este sentido, los cambios sociales implementados institucionalmente no son meramente políticos o económicos, sino que encarnan un componente normativo que se proyecta en las ideologías de los sujetos [@fourcade_moral_2007]. 
+
+Desde esta noción de valores orientados al mercado surge el término *justicia de mercado*, el cual sugiere el acuerdo en que el acceso a bienes fundamentales y servicios esté basado en la capacidad de pago individual y familiar [@lane_market_1986]. 
+
+La justicia de mercado es un concepto que se asocia a los valores individualizantes que sostiene el neoliberalismo, donde, en campos que se enmarcan en lógicas mercantiles -como el sistema educativo en Chile- las personas tienden a atribuir los resultados al esfuerzo propio, aun cuando Chile se caracteriza por una de las brechas económicas más desiguales a nivel mundial, y con una movilidad social limitada. 
+
+En Chile, la justicia de mercado es uno de los fundamentos implícitos del sistema educacional, cuya máxima expresión se observa en los resultados académicos por tipo de financiamiento, en donde la educación privada se queda con los galardones de excelencia, mientras que la educación pública se ve relegada a un estado residual. De esta forma, el éxito académico es pauteado por la cantidad de dinero que una familia se puede permitir pagar, lo que en última instancia fomenta las dinámicas de segregación escolar y, a mayor escala, la perpetuación de las desigualdades socioeconómicas. 
+
+
+
+## Motivación
+
+En la literatura investigativa en torno a meritocracia y justicia de mercado se han analizado anteriormente las percepciones y/o preferencias de las personas sobre cada uno de estos conceptos, así como la relación entre ambos. Esto ya ha sido estudiado en escolares [@castillo_socialization_2024a], aportando en los factores que inciden en las preferencias por la justicia de mercado. No obstante, hasta el momento no hay estudios que hayan profundizado en la existencia de patrones que permitan vincular la meritocracia con la justicia de mercado en la educación. 
+
+A partir del vínculo entre meritocracia y justicia de mercado en la educación, esta investigación pretende contribuir al campo de la sociología mediante la búsqueda de perfiles de individuos que puedan dar cuenta de relaciones consistentes entre preferencias meritocráticas y la justicia de mercado en educación. 
+
+El argumento principal es que _**las preferencias por justicia de mercado en educación se asocian positivamente a la idea que las recompensas en la sociedad deben ser distribuidas a partir del esfuerzo individual**_. 
+
+## Ideas 
+
+Como una suerte de borrador, este apartado es un esbozo de ideas que pueden ser incluidas en el proyecto de tesis.
+
+**Tipo de financiamiento de la escuela donde estudió el encuestado**
+
+Se piensa en un tipificar un perfil a partir de haber egresado de una escuela pública y privada. 
+
+Como hipótesis tentativas serían: 
+
+$H_{1}$: Las personas egresadas de colegio público tienen una menor preferencia meritocrática
+
+$H_{2}$: Las personas egresadas de colegio privado tienen una mayor preferencia meritocrática
+
+
+**Preferencias meritocráticas**
+
+En una suerte de paso posterior, tomando como referencia los perfiles por tipo de financiamiento de escuela, se podrían tipificar perfiles respecto a la justicia de mercado en educación, donde las hipótesis serían:
+
+$H_{3}$: Las personas con menores preferencias meritocráticas presentan un menor acuerdo con la justicia de mercado en educación
+
+$H_{4}$: Las personas con mayores preferencias meritocráticas presentan un mayor acuerdo con la justicia de mercado en educación
