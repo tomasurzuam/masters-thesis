@@ -1,0 +1,118 @@
+---
+title: "Informe final de Práctica Profesional: Observatorio de Cohesión Social - COES"
+author: "Tomás Urzúa"
+format:
+  html:
+    theme:
+           - ocs.scss
+title-block-banner: true
+editor: visual
+toc: true
+toc-location: right
+toc-depth: 2
+toc-expand: 1
+toc-title: Contenidos
+number-sections: true 
+date: today
+---
+
+# Información general
+
+**Institución**
+
+Observatorio de Cohesión Social (OCS) - Centro de Estudios de Conflicto y Cohesión Social (COES).
+
+**Supervisor de la práctica**
+
+Andreas Laffert - Coordinador del Observatorio de Cohesión Social.
+
+Sociólogo, Universidad de Chile; Mg. en Sociología, Pontificia Universidad Católica.
+
+**Profesor guía**
+
+Juan Carlos Castillo -  Profesor titular del Departamento de Sociología, Facultad de Ciencias Sociales, Universidad de Chile.
+
+Doctor en Sociología, Universidad de Humboldt de Berlín; Magíster en Public Management, Universidad de Potsdam; Licenciado en Psicología, Pontificia Universidad Catolica de Valparaíso.
+
+**Registro temporal de la práctica**
+
+Fecha de inicio: 02 de mayo de 2025.
+
+Fecha de término: 31 de agosto de 2025.
+
+Modalidad: Presencial, media jornada (20 horas semanales).
+
+Horas totales: 360 horas.
+
+# Sobre la institución 
+
+Para profundizar sobre el Observatorio de Cohesión Social, primero es necesario dar a conocer el proyecto que lo enmarca: el [Centro de Estudios de Conflicto y Cohesión Social (COES)](https://coes.cl). COES nace de un FONDAP el año 2014 con el objetivo de abordar las diversas dinámicas que se dan en los procesos de tensión y fortalecimiento del lazo social. Desde un enfoque multidisciplinario, el centro ha contribuido durante más de diez años a la producción de conocimiento, orientado a nutrir el debate público y político con el propósito de aportar al desarrollo y bienestar del país. 
+
+En el contexto de COES nace el OCS, un Observatorio que ha concentrado sus esfuerzos en la producción y difusión de conocimiento sobre la cohesión social desde un enfoque empírico. El OCS ha sido propulsor de varios marcos de medición de la cohesión social a nivel nacional y regional, esto con el fin de poder acercar el concepto al campo práctico, volviéndolo medible y, a la misma vez, comprensible desde los hechos. Durante su trayectoria se han elaborado investigaciones, informes e incluso visualizaciones interactivas, todo ello puesto a disposición de la ciudadanía a través del acceso abierto a sus trabajos. 
+
+# Descripción de labores realizadas
+
+## Construcción y mantención de página web 
+
+Uno de los objetivos principales en la planificación del OCS era construir un sitio web que tuviera la función de visibilizar, difundir y volver más accesible a la ciudadanía el trabajo realizado por el Observatorio a lo largo de los años. Con esto en mente, se creó el sitio [ocs-coes.com](https://ocs-coes.com).
+
+El proceso de construcción se realizó mediante Quarto, proceso el cual se caracterizó por un trabajo iterativo que permitiera llegar a una página que cumpliera con dos máximas: un diseño pulcro que diera cuenta del tono académico/investigativo de la web (1), y un formato que fuese lo más intuitivo posible, garantizando al usuario la mejor experiencia al navegar por las distintas secciones de la página. 
+
+Dentro de la página se generaron diversas secciones, tal como la de noticias, donde se añadieron los principales hitos que tenía programado el Observatorio para aquel entonces. Asimismo, se creó una sección de reportes, la cual cumplió el propósito de sistematizar y ordenar todos los documentos (artículos, informes, presentaciones, entre otros) en que estuviera involucrado el Observatorio para disponerlos abiertamente a los usuarios.
+
+Una vez lista la página web, se llevaron a cabo labores de actualización del estado del sitio. Esto implicó la subida de posts a la sección de noticias a medida que ocurrían hitos que requerían difusión, así como la solución de errores del sitio cuando algo dejaba de funcionar correctamente. 
+
+## Propuesta teórica - operacional de instrumentos de medición
+
+El OCS ya había creado anteriormente instrumentos de medición que operacionalizaban la cohesión social, y con el propósito de generar instrumentos actualizados, más pertinentes y completos, se plantearon dos propuestas: el marco de medición para América Latina y el marco de medición para Chile[^1]. 
+
+[^1]: Cabe aclarar que mi rol en la construcción del marco de medición para América Latina fue más bien de apoyo, mientras que la propuesta enfocada en Chile fue pensada, construida y validada en su totalidad por mí.
+
+La propuesta centrada en América Latina fue realizada utilizando datos principalmente de la encuesta [Latin American Public Opinion Project (LAPOP)](https://ropercenter.cornell.edu/latin-american-public-opinion-project-lapop), y de manera auxiliar se recurrió a [Latinobarómetro](https://www.latinobarometro.org) para complementar la información. Por su parte, la propuesta pensada en Chile se llevó a cabo utilizando datos únicamente de [El Estudio Longitudinal Social de Chile (ELSOC)](https://conferencias.coes.cl/encuesta-panel).
+
+Para concretar esta tarea, el trabajo consistió, en primer lugar, realizar una revisión bibliográfica de las propuestas anteriores del OCS y de medición de cohesión social a nivel general (Castillo et al 2021a, Castillo et al 2021b). Luego, se pensaron las dimensiones que permitirían operacionalizar la cohesión social a partir de lo ya revisado y de la disponibilidad de datos, es decir, la construcción de la propuesta fue contemplada desde un sentido teórico y empírico. Con las propuestas ya esquematizadas, se estudiaron los datos aplicando análisis de validez de constructos (EFA y CFA), para corroborar que la construcción teórica del instrumento fuera viable también en su dimensión estadística. 
+
+## Preparación, análisis y visualización de datos
+
+
+base de variables contextuales - foro I
+
+análisis confirmatorios, descriptivos, bivariados y gráficos para documentos
+
+## Elaboración de documentos
+
+Todas las tareas desarrolladas en el OCS tuvieron como finalidad ser sistematizadas en productos que permitieran la divulgación de los hallazgos, los cuales fueron difundidos en instancias de debate académico, público y en la página web. 
+
+Para la elaboración de los documentos, se organizó el trabajo ya realizado (los dos puntos anteriores) y se estructuró en diversos formatos en función de la necesidad y el público dirigido. En este contexto, se produjeron informes de resultados, cuyo contenido era una síntesis de resultados de los análisis en torno a la cohesión social, incluyendo gráficos e interpretaciones. También se crearon presentaciones, las cuales contuvieron visualización de datos, pero también contenido más sustantivo para desplegar un argumento, con tal de atraer a la audiencia y relevar el trabajo del OCS en materia de cohesión social. Por último, se elaboraron documentos de trabajo, que incluirían todo lo anteriormente mencionado, pero de manera más explayada y detallada, integrando esquemas conceptuales, tablas de disponibilidad y operacionalización de variables, análisis de datos e interpretación de resultados. 
+
+Es sumamente importante destacar que todos los documentos generados en el proceso de la Práctica Profesional fueron hechos con Quarto y siguiendo principios de Ciencia Abierta, cuya aplicación práctica tiene el objetivo de transparentar los flujos de trabajo y la investigación misma, así como facilitar el acceso a los productos. 
+
+
+## Coordinación logística de foros
+
+A lo largo del período de práctica, se celebraron dos hitos claves para el OCS: el Foro I de Cohesión Social, el cual fue organizado junto a [CEPAL](https://www.cepal.org/es), y el Foro II de Cohesión Social, que contó con la participación del [Centro de Estudios Públicos](https://www.cepchile.cl). 
+
+En el marco de estos hitos, se tuvo que realizar un trabajo orientado a la logística de los eventos, pasando por dos momentos claves: la organización previa al foro (1) y la organización el día del foro (2). En el primer punto se encuentran actividades de gestión externa, como el coordinar con miembros de la contraparte, y también de gestión interna, como la impresión de documentos y organización de merchandising para el día del hito respectivo. En el segundo punto se llevaron a cabo tareas de planificación del espacio, como preparar el espacio para recibir a los asistentes y guiar al público para asegurar su llegada al salón del evento. Por último, en el proceso de coordinación el día del foro, se verificó tanto con el equipo interno como con la contraparte que todos los recursos (presentaciones, transmisión, entre otras) estuvieran disponibles para asegurarse que la ejecución del hito estuviera exenta de imprevistos. 
+
+# Aprendizajes de la Práctica Profesional
+
+El proceso de la Práctica Profesional ha contribuido significativamente mi formación, y pretendiendo dar cuenta de manera clara los aportes que me ha traído, los dividiré términos técnicos y laborales.
+
+En cuanto a aspectos técnicos, he logrado profundizar sustancialmente mis conocimientos en el área cuantitativa de la sociología, consolidando conocimientos que fueron adquiridos en mi formación académica (como lo impartido en los tres cursos de estadística), pero sobre todo logrando aprender y ampliar el repertorio de herramientas metodológicas y estadísticas que puedo emplear en el ámbito de la investigación empírica. 
+
+La construcción operacional de un marco de medición y su sometimiento a análisis confirmatorios me han permitido dar cuenta de la importancia que supone construir un instrumento, pero también que este instrumento sea válido estadísticamente hablando, adquiriendo así una nueva perspectiva para mi quehacer sociológico relacionado a la relevancia de la medición. 
+
+Siguiendo en la línea de los aprendizajes técnicos, he llegado a comprender la lógica detrás de la construcción de una página web, siendo capaz de poder construir un sitio por mi cuenta. Esto, junto a la creación de documentos fundamentados en la Ciencia Abierta, me han enseñado el orden y estructura que debe seguir un tipo de documento dependiendo del contexto y el propósito que tiene, así como el garantizar la difusión y accesibilidad a los trabajos. Estos principios se han integrado a mis expectativas de trabajo, marcando un punto de inflexión en la manera de concebir y desarrollar mis obligaciones académicas y laborales.
+
+Desde los aprendizajes laborales, considero que el ambiente del OCS se constituye bajo un estándar de alta calidad, lo que se expresa en la prolijidad que debe caracterizar cualquier producto que se crea, mas también en la dedicación que impregnan los demás integrantes en su trabajo. Por ello, la posibilidad de tener mi primer acercamiento al mundo laboral de las ciencias sociales en el Observatorio me permitió nutrirme enormemente de las más grandes cualidades que se consideran en un trabajo, esto es, puntualidad, asertividad, trabajo en equipo, entre muchas otras. 
+
+En suma, finalizado mi período de práctica en el OCS, he podido ampliar fundamentalmente mi visión en el mundo laboral, ahora con la capacidad de dilucidar las expectativas que tiene una institución en el desempeño de sus trabajadores, pero también me he vuelto capaz de hacerme cargo de labores que requieren el despliegue de habilidades analíticas, lógicas y reflexivas, promoviendo mi formación como un sujeto competente en el mercado laboral. 
+
+# Autoevaluación
+
+En términos generales, considero que la Práctica Profesional fue completada de manera exitosa, donde todas las tareas anteriormente descritas fueron efectivamente realizadas. Ahora bien, es importante reconocer algunos desaciertos por mi parte, en donde hubieron entregas de avance que no contenían todo lo exigido, atrasándome con puntos de la planificación y demostrando desorganización en momentos. 
+
+Como bien lo dice el proceso, pienso que la práctica es ciertamente un período que da el espacio a cometer algunos errores. Esto no quiere decir que las faltas cometidas tuvieran que ser dejadas pasar, pero creo fervientemente que pude aprender de ellas y que he logrado forjarme como un mejor profesional, consciente de cómo hacer un trabajo de gran calidad. En relación con esto, al hacer el balance de todo el trabajo que estuvo a mi cargo, ponderando los puntos altos y bajos de mi práctica, puedo asegurar que como practicante he podido responder de gran manera con el cumplimiento de la mayoría de las tareas. 
+
+Tomando en cuenta mi autoevaluación, como nota final de la Práctica Profesional me pondría un: 6.5. 
+
