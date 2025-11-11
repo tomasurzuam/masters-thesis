@@ -77,7 +77,7 @@ editor_options:
 
 <br>
 
-_**el hecho de reconocer como justo que el acceso a bienes y servicios esté determinado por la capacidad de pago individual o familiar**_ [@lane_market_1986].
+- _**el hecho de reconocer como justo que el acceso a bienes y servicios esté determinado por la capacidad de pago individual o familiar**_ [@lane_market_1986].
 
 :::
 
@@ -87,15 +87,23 @@ _**el hecho de reconocer como justo que el acceso a bienes y servicios esté det
 
 ::: {.incremental}
 
-- En última instancia, la justicia de mercado se relaciona íntimamente con la justificación de las desigualdades 
+- La literatura indica que los individuos que ocupan posiciones socioeconómicas más aventajadas tienden a apoyar los principios de mercado [@koos_moral_2019]. 
+
+- En última instancia, la justicia de mercado se relaciona íntimamente con la justificación de las desigualdades al comprenderla como un resultado individual [@kluegel_legitimation_1999].
 
 :::
 
 ## Preferencias de mercado en educación: justicia de mercado vs justicia educacional
 
-- La inversión privada en el sistema educativo tiene un impacto cultural significativo en las preferencias distributivas [@busemeyer_education_2013].
+- Existen mercados que son más propensos a causar impactos estructurales, fomentando relaciones sociales desiguales [@satz_why_2010]. Este es el caso del mercado en la educación. 
 
-- Choque de perspectivas normativas: la educación como un bien accesible por el poder adquisitivo **/** la educación como derecho social [@lane_market_1986; @moyano_justicia_2020].
+:::{.incremental}
+
+- La inversión privada en el sistema educativo ha afectado significativamente la esfera cultural, mermando las preferencias distributivas en la sociedad [@busemeyer_education_2013].
+
+- Aquí se genera un choque de perspectivas normativas: la educación como un bien accesible mediante el poder adquisitivo **/** la educación como derecho social [@lane_market_1986; @moyano_justicia_2020].
+
+:::
 
 ::: notes
 
@@ -106,7 +114,7 @@ aquí es importante mencionar que la base de la justicia educacional es la justi
 
 ## Meritocracia y la justificación de la desigualdad
 
-- La meritocracia es un sistema de distribución de recompensas en base al esfuerzo y al talento, presenciándose su auge en sociedades orientadas al mercado [@young_rise_2017; @sandel_tyranny_2020]. De la misma manera, ha funcionado como el argumento por excelencia para la legitimación de las disparidades socioeconómicas [@mijs_unfulfillable_2016].
+- La meritocracia es un sistema de distribución de recompensas en base al esfuerzo y al talento, presenciándose su auge en sociedades orientadas al mercado [@young_rise_2017; @sandel_tyranny_2020]. En esta línea, la meritocracia se ha asociado a la legitimación de las disparidades socioeconómicas [@mijs_unfulfillable_2016; @castillo_perceptions_2025].
 
 ::: {.incremental}
 - En este contexto, las desigualdades generadas por el mercado se atribuyen al esfuerzo individual, obviando las condiciones estructurales [@mau_inequality_2015]. 
@@ -120,37 +128,59 @@ aquí es importante mencionar que la base de la justicia educacional es la justi
 
 - La meritocracia se ha medido como una variable unidimensional, fallando en capturar la complejidad no-lineal del concepto [@zhu_meritocratic_2025]. 
 
+:::{.incremental}
+
 - Dando cuenta de esto, [@castillo_multidimensional_2023] propusieron un modelo conceptual que operacionaliza meritocracia como un constructo multidimensional. 
 
-- A partir de este modelo, se pueden revelar ciertas creencias contradictorias en torno a la meritocracia [@zhu_meritocratic_2025].
+- A partir de este modelo, se pueden revelar distintas configuraciones en torno a las creencias meritocráticas de las personas [@zhu_meritocratic_2025], las cuales movilizan para apoyar o rechazar la justicia de mercado en educación.
 
+:::
 
 ## El caso chileno
 
 - A nivel general, se destaca la presencia de alta desigualdad y rígida movilidad social [@flores_top_2020; @espinoza_estratificacion_2013].
 
-- El país cuenta con uno de los sistemas educativos más privatizados del mundo, sumado a una profunda segregación socioeconómica [@bellei_problema_2025; @valenzuela_socioeconomic_2014].
+:::{.incremental}
 
+- Resiliencia del neoliberalismo y carácter central de la inversión privada en el funcionamiento del país [@madariaga_three_2020]
+
+- Se cuenta con uno de los sistemas educativos más privatizados del mundo, sumado a una profunda segregación socioeconómica [@bellei_problema_2025; @corvalan_mercado_2016; @valenzuela_socioeconomic_2014].
+
+:::
 
 # Pregunta de investigación {background-color="#303029"}
 
-##
+## {background-color="#303029"}
 
-¿Cuáles son los distintos guiones que movilizan las personas al relacionar preferencias de mercado en la educación con meritocracia? {style="font-size:35px; text-align:center; line-height:1.1; margin-top:10px;"}
+::: {.center style="font-size:45px; text-align:center; line-height:1.1; margin-top:45px;"}
+*¿Cuáles son los distintos guiones que movilizan las personas al relacionar la preferencia de mercado en la educación con la meritocracia?*
+:::
 
 ## Hipótesis
 
-Una investigación reciente [@zhu_meritocratic_2025] estudió las 
+Una investigación reciente [@zhu_meritocratic_2025] estudió las creencias meritocráticas en EE.UU, Finlandia y China, estableciendo tres perfiles meritocráticos en relación con la estratificación social: meritocracia pura, meritocracia predominante y conciencia dual. 
+
+Los resultados mostraron variaciones tipológicas entre cada país, siendo Finlandia el país que exhibió creencias meritocráticas puras, mientras que EE.UU destacaron las creencias predominantemente meritocráticas. Por último, China se caracterizó por una conciencia dual, siendo el único perfil observado estadísticamente. 
+
+::: {.incremental}
+
+- A partir de esto, se hipotetizan dos perfiles ($H_{1}$) que expliquen la justicia de mercado en educación: creencias meritocráticas puras (1) y creencias meritocráticas predominantes (2). 
+
+:::
+
+::: notes
+Argumento de países occidentales para justificar solamente estos dos perfiles
+:::
 
 # Estrategia metodológica {background-color="#303029"}
 
 ## Análisis en dos pasos
 
-Primer paso: Analizar los distintos perfiles que conjugan meritocracia y preferencias de mercado en la educación desde una **perspectiva comparada**, apuntando a encontrar diferencias significativas entre países
+- Primer paso: Analizar los distintos perfiles que conjugan meritocracia y preferencias de mercado en la educación desde una **perspectiva comparada**, apuntando a encontrar diferencias significativas entre países
 
 :::{.incremental}
 
-Segundo paso: Analizar los distintos perfiles que conjugan meritocracia y preferencias de mercado en la educación **en Chile**, utilizando una mejor medición de meritocracia, lo cual permitiría explorar perfiles que no se pueden observar a nivel internacional.
+- Segundo paso: Analizar los distintos perfiles que conjugan meritocracia y preferencias de mercado en la educación **en Chile**, utilizando una mejor medición de meritocracia, lo cual permitiría explorar perfiles que no se pueden observar a nivel internacional.
 
 :::
 
