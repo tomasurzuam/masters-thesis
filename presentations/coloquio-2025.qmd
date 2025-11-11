@@ -1,0 +1,166 @@
+---
+bibliography: "thesis.bib"
+csl: "apa6.csl"
+lang: es
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+    R.options:
+      
+      knitr.graphics.auto_pdf: true
+format:
+  revealjs:
+    #logo: images/edumer.png
+    slide-number: true
+    theme: "edumer.scss"
+    auto-stretch: false
+    title-slide-attributes:
+      visibility: false
+    transition: fade
+    transition-speed: slow
+# data-background-image: images/cover.jpg
+# data-background-size: cover
+    auto-play-media: true
+    mathjax: "default"
+editor_options: 
+  chunk_output_type: console
+---
+
+:::: columns
+
+::: {.column width="20%"}
+
+</br></br> </br></br></br></br>
+
+![](jusmer-logo-vert.png)
+
+:::
+
+::: {.column .column-right width="80%"}
+
+# Preferencias de mercado en la educación
+
+ Un análisis de clases latentes sobre creencias meritocráticas en perspectiva comparada {style="font-size:25px; text-align:right; line-height:1.1; margin-top:10px;"}
+------------------------------------------------------------------------ 
+<br>
+
+**Tomás Urzúa Moreno**
+
+### *Coloquio en justicia distributiva y desigualdad económica* <br> 13 octubre 2025
+
+:::
+
+::::
+
+# Contexto y antecedentes {background-color="#303029"}
+
+## Comodificación y *policy feedback*
+
+- Históricamente, los estados de bienestar se han comprometido con la mitigación de los riesgos sociales y el desarrollo humano, promoviendo oportunidades que permitieran reducir las desigualdades [@svallfors_bedrock_2011; @mau_social_2007].
+
+::: {.incremental}
+
+- Sin embargo, en los últimos años se ha experimentado la expansión del mercado en el campo de los derechos sociales, emergiendo alternativas privadas en paralelo de la provisión pública [@busemeyer_welfare_2020].
+
+- Estos cambios institucionales no sólo involucran cambios formales, sino que moldean las creencias de las personas [@beland_varieties_2019; @fernandez_positive_2013].
+
+:::
+
+## Justicia de mercado
+
+- Las políticas orientadas al mercado operan como un proyecto moral, donde las personas movilizan valores de mercado como criterios normativos [@fourcade_moral_2007].
+
+::: {.incremental}
+
+- Estos valores permean el sentido de justicia de los sujetos. En este punto, surge el concepto *justicia de mercado*, que refiere a
+
+<br>
+
+_**el hecho de reconocer como justo que el acceso a bienes y servicios esté determinado por la capacidad de pago individual o familiar**_ [@lane_market_1986].
+
+:::
+
+## Preferencias por mercado
+
+- Las preferencias orientadas al mercado obedecen a una estructuración de creencias conforme a la expansión de políticas privatizadoras [@lindh_public_2015]. 
+
+::: {.incremental}
+
+- En última instancia, la justicia de mercado se relaciona íntimamente con la justificación de las desigualdades 
+
+:::
+
+## Preferencias de mercado en educación: justicia de mercado vs justicia educacional
+
+- La inversión privada en el sistema educativo tiene un impacto cultural significativo en las preferencias distributivas [@busemeyer_education_2013].
+
+- Choque de perspectivas normativas: la educación como un bien accesible por el poder adquisitivo **/** la educación como derecho social [@lane_market_1986; @moyano_justicia_2020].
+
+::: notes
+
+aquí es importante mencionar que la base de la justicia educacional es la justicia distributiva, donde la educación cumple con una "compensación distributiva" que atiende las desigualdades de base. La justicia de mercado imposibilita esto al determinar el acceso a una educación de calidad por el dinero
+
+:::
+
+
+## Meritocracia y la justificación de la desigualdad
+
+- La meritocracia es un sistema de distribución de recompensas en base al esfuerzo y al talento, presenciándose su auge en sociedades orientadas al mercado [@young_rise_2017; @sandel_tyranny_2020]. De la misma manera, ha funcionado como el argumento por excelencia para la legitimación de las disparidades socioeconómicas [@mijs_unfulfillable_2016].
+
+::: {.incremental}
+- En este contexto, las desigualdades generadas por el mercado se atribuyen al esfuerzo individual, obviando las condiciones estructurales [@mau_inequality_2015]. 
+
+- Esto se evidencia como una *paradoja de la desigualdad*: El crecimiento de la desigualdad se asocia con un fortalecimiento de las creencias meritocráticas [@mijs_paradox_2021].
+
+:::
+
+
+## Medición
+
+- La meritocracia se ha medido como una variable unidimensional, fallando en capturar la complejidad no-lineal del concepto [@zhu_meritocratic_2025]. 
+
+- Dando cuenta de esto, [@castillo_multidimensional_2023] propusieron un modelo conceptual que operacionaliza meritocracia como un constructo multidimensional. 
+
+- A partir de este modelo, se pueden revelar ciertas creencias contradictorias en torno a la meritocracia [@zhu_meritocratic_2025].
+
+
+## El caso chileno
+
+- A nivel general, se destaca la presencia de alta desigualdad y rígida movilidad social [@flores_top_2020; @espinoza_estratificacion_2013].
+
+- El país cuenta con uno de los sistemas educativos más privatizados del mundo, sumado a una profunda segregación socioeconómica [@bellei_problema_2025; @valenzuela_socioeconomic_2014].
+
+
+# Pregunta de investigación {background-color="#303029"}
+
+##
+
+¿Cuáles son los distintos guiones que movilizan las personas al relacionar preferencias de mercado en la educación con meritocracia? {style="font-size:35px; text-align:center; line-height:1.1; margin-top:10px;"}
+
+## Hipótesis
+
+Una investigación reciente [@zhu_meritocratic_2025] estudió las 
+
+# Estrategia metodológica {background-color="#303029"}
+
+## Análisis en dos pasos
+
+Primer paso: Analizar los distintos perfiles que conjugan meritocracia y preferencias de mercado en la educación desde una **perspectiva comparada**, apuntando a encontrar diferencias significativas entre países
+
+:::{.incremental}
+
+Segundo paso: Analizar los distintos perfiles que conjugan meritocracia y preferencias de mercado en la educación **en Chile**, utilizando una mejor medición de meritocracia, lo cual permitiría explorar perfiles que no se pueden observar a nivel internacional.
+
+:::
+
+## Datos
+
+
+
+## Método
+
+
+
+## Referencias
+
