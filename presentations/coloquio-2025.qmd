@@ -124,7 +124,7 @@ aquí es importante mencionar que la base de la justicia educacional es la justi
 :::
 
 
-## Medición
+## ¿Cómo se ha estudiado la meritocracia?
 
 - La meritocracia se ha medido como una variable unidimensional, fallando en capturar la complejidad no-lineal del concepto [@zhu_meritocratic_2025]. 
 
@@ -147,6 +147,14 @@ aquí es importante mencionar que la base de la justicia educacional es la justi
 - Se cuenta con uno de los sistemas educativos más privatizados del mundo, sumado a una profunda segregación socioeconómica [@bellei_problema_2025; @corvalan_mercado_2016; @valenzuela_socioeconomic_2014].
 
 :::
+
+## Hasta ahora
+
+- Estudios que han vinculado la meritocracia linealmente con preferencias de mercado 
+
+- Perfiles meritocráticos pero sin ser relacionados a preferencias de mercado en la educación
+
+- Esta investigación apunta a llenar ese vacío
 
 # Pregunta de investigación {background-color="#303029"}
 
