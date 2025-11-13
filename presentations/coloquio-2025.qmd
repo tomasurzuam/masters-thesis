@@ -152,9 +152,13 @@ aquí es importante mencionar que la base de la justicia educacional es la justi
 
 - Estudios que han vinculado la meritocracia con desigualdades en educación [@castillo_changes_2025; @mijs_unfulfillable_2016].
 
+:::{.incremental}
+
 - Estimación de clases de meritocracia [@zhu_meritocratic_2025], pero sin ser relacionados a preferencias de mercado en la educación
 
 - Esta investigación busca **vincular y cubrir estos vacíos** al estudiar los distintos perfiles que movilizan las personas en la conjugación de preferencias de mercado en la educación y meritocracia. Además, el estudio apunta a relevar la justicia educacional en un contexto de alta mercantilización. 
+
+:::
 
 # Pregunta de investigación {background-color="#303029"}
 
