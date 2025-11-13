@@ -4,6 +4,6 @@ Este repositorio contiene mi tesis del Magíster en Ciencias Sociales de la Univ
 
 El procesamiento y análisis de los datos, la escritura del proyecto y su publicación serán subidos acá.
 
-Entrega preliminar: https://tomasurzuam.github.io/masters-thesis/masters-thesis/escrito-preliminar.html 
+Primer boceto: [aquí](https://tomasurzuam.github.io/masters-thesis/masters-thesis/escrito-preliminar.html)
 
-Informe final Práctica Profesional: https://tomasurzuam.github.io/masters-thesis/masters-thesis/practica/informe-practica.html 
+Presentación coloquio FACSO 2025: [aquí](https://tomasurzuam.github.io/masters-thesis/presentations/coloquio-2025.html)
