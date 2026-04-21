@@ -166,7 +166,7 @@ aquí es importante mencionar que la base de la justicia educacional es la justi
 
 - Datos: Encuesta ISSP 2019: ~39.000 personas en 29 países
 
-- Objetivo: Analizar los distintos perfiles que conjugan meritocracia y preferencias de mercado en la educación **en Chile**, utilizando una mejor medición de meritocracia, lo cual permitiría explorar perfiles que no se pueden observar a nivel internacional.
+- Objetivo: Analizar los distintos perfiles que conjugan meritocracia y preferencias de mercado en la educación a nivel internacional, permitiendo comprender cómo los factores macroinstitucionales afectan las creencias de las personas.
 
 - Método: Análisis de clases latentes (LCA)
 
