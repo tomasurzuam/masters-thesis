@@ -1,0 +1,176 @@
+---
+bibliography: "thesis.bib"
+csl: "apa6.csl"
+lang: es
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+    R.options:
+      
+      knitr.graphics.auto_pdf: true
+format:
+  revealjs:
+    #logo: images/edumer.png
+    slide-number: true
+    theme: "edumer.scss"
+    auto-stretch: false
+    title-slide-attributes:
+      visibility: false
+    transition: fade
+    transition-speed: slow
+# data-background-image: images/cover.jpg
+# data-background-size: cover
+    auto-play-media: true
+    mathjax: "default"
+editor_options: 
+  chunk_output_type: console
+---
+
+:::: columns
+
+::: {.column width="20%"}
+
+</br></br> </br></br></br></br>
+
+![](jusmer-logo-vert.png)
+
+:::
+
+::: {.column .column-right width="80%"}
+
+# Preferencias de mercado en la educación
+
+ Un análisis de clases latentes sobre creencias meritocráticas en perspectiva comparada {style="font-size:25px; text-align:right; line-height:1.1; margin-top:10px;"}
+------------------------------------------------------------------------ 
+<br>
+
+**Tomás Urzúa Moreno**
+
+Magíster en Ciencias Sociales, Universidad de Chile
+
+### *Taller de tesis* <br> 20 de abril 2026
+
+:::
+
+::::
+
+# Contexto y antecedentes {background-color="#303029"}
+
+## Comodificación de derechos sociales e implicancias culturales
+
+- Históricamente, los estados de bienestar se han comprometido con la mitigación de los riesgos sociales y el desarrollo humano, promoviendo oportunidades que permitieran reducir las desigualdades [@svallfors_bedrock_2011; @mau_social_2007].
+
+::: {.incremental}
+
+- Sin embargo, en los últimos años se ha experimentado la expansión del mercado en el campo de los derechos sociales, emergiendo alternativas privadas en paralelo de la provisión pública [@busemeyer_welfare_2020].
+
+- Estos cambios institucionales no sólo involucran cambios formales, sino que moldean las creencias de las personas: Policy feedback effect [@beland_varieties_2019; @fernandez_positive_2013].
+
+
+
+:::
+
+## Justicia de mercado
+
+- Las políticas orientadas al mercado operan como un proyecto moral, donde las personas movilizan valores de mercado como criterios normativos [@fourcade_moral_2007].
+
+::: {.incremental}
+
+- Estos valores permean el sentido de justicia de los sujetos. En este punto, surge el concepto *justicia de mercado*, que refiere a
+
+<br>
+
+- _**el hecho de reconocer como justo que el acceso a bienes y servicios esté determinado por la capacidad de pago individual o familiar**_ [@lane_market_1986].
+
+:::
+
+## Preferencias por mercado y justificación de desigualdades
+
+- Las preferencias orientadas al mercado obedecen a una estructuración de creencias conforme a la expansión de políticas privatizadoras [@lindh_public_2015]. 
+
+::: {.incremental}
+
+- En la misma línea, la literatura indica que los individuos que ocupan posiciones socioeconómicas más aventajadas tienden a apoyar los principios de mercado [@koos_moral_2019]. 
+
+- En última instancia, la justicia de mercado se relaciona íntimamente con la justificación de las desigualdades al comprenderla como un resultado individual [@kluegel_legitimation_1999].
+
+:::
+
+## Preferencias de mercado en educación: justicia de mercado vs justicia educacional
+
+- Existen mercados que son más propensos a causar impactos estructurales, fomentando relaciones sociales desiguales [@satz_why_2010]. Este es el caso del mercado en la educación. 
+
+:::{.incremental}
+
+- La inversión privada en el sistema educativo ha afectado significativamente la esfera cultural, observándose una disminución de las preferencias distributivas en la sociedad [@busemeyer_education_2013].
+
+- Aquí se genera un choque de perspectivas normativas: la educación como un bien accesible mediante el poder adquisitivo **/** la educación como derecho social [@lane_market_1986; @moyano_justicia_2020].
+
+:::
+
+::: notes
+
+aquí es importante mencionar que la base de la justicia educacional es la justicia distributiva, donde la educación cumple con una "compensación distributiva" que atiende las desigualdades de base. La justicia de mercado imposibilita esto al determinar el acceso a una educación de calidad por el dinero
+
+:::
+
+
+## Meritocracia y la justificación de la desigualdad
+
+- La meritocracia es un sistema de distribución de recompensas en base al esfuerzo y al talento, presenciándose su auge en sociedades orientadas al mercado [@young_rise_2017; @sandel_tyranny_2020]. En esta línea, la meritocracia se ha asociado a la legitimación de las disparidades socioeconómicas [@mijs_unfulfillable_2016; @castillo_perceptions_2025].
+
+::: {.incremental}
+- En este contexto, las desigualdades generadas por el mercado se atribuyen al esfuerzo individual, obviando las condiciones estructurales [@mau_inequality_2015]. 
+
+- A partir de esto, se ha evidenciado una *paradoja de la desigualdad*: El crecimiento de la desigualdad se asocia con un fortalecimiento de las creencias meritocráticas [@mijs_paradox_2021].
+
+:::
+
+
+## ¿Cómo se ha estudiado la meritocracia?
+
+- La meritocracia se ha medido como una variable unidimensional, fallando en capturar la complejidad no-lineal del concepto [@zhu_meritocratic_2025]. 
+
+:::{.incremental}
+
+- Dando cuenta de esto, [@castillo_multidimensional_2023] propusieron un modelo conceptual que operacionaliza meritocracia como un constructo multidimensional. 
+
+- A partir de este modelo, se pueden revelar distintas configuraciones en torno a las creencias meritocráticas de las personas [@zhu_meritocratic_2025], las cuales movilizan para apoyar o rechazar la justicia de mercado en educación.
+
+:::
+
+## Hasta ahora
+
+- Estudios que han vinculado la meritocracia con desigualdades en educación [@castillo_changes_2025; @mijs_unfulfillable_2016].
+
+:::{.incremental}
+
+- Estimación de clases de meritocracia [@zhu_meritocratic_2025], pero sin ser relacionados a preferencias de mercado en la educación
+
+- Esta investigación busca **vincular y cubrir estos vacíos** al estudiar las distintas configuraciones de creencias meritocráticas de las personas y su relación con la preferencia por justicia de mercado en la educación. Además, el estudio apunta a relevar la justicia educacional en un contexto de alta mercantilización. 
+
+:::
+
+# Pregunta de investigación {background-color="#303029"}
+
+## {background-color="#303029"}
+
+::: {.center style="font-size:45px; text-align:center; line-height:1.1; margin-top:45px;"}
+*¿Cuáles son las distintas configuraciones de creencias meritocráticas que movilizan las personas y cómo se relaciona con la preferencia por justicia de mercado en la educación?*
+:::
+
+## Estrategia metodológica
+
+:::{.incremental}
+
+- Datos: Encuesta ISSP 2019: ~39.000 personas en 29 países
+
+- Objetivo: Analizar los distintos perfiles que conjugan meritocracia y preferencias de mercado en la educación **en Chile**, utilizando una mejor medición de meritocracia, lo cual permitiría explorar perfiles que no se pueden observar a nivel internacional.
+
+- Método: Análisis de clases latentes (LCA)
+
+:::
+
+## Referencias
+
