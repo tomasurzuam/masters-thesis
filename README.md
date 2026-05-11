@@ -7,3 +7,5 @@ El procesamiento y análisis de los datos, la escritura del proyecto y su public
 Primer boceto: [aquí](https://tomasurzuam.github.io/masters-thesis/masters-thesis/escrito-preliminar.html)
 
 Presentación coloquio FACSO 2025: [aquí](https://tomasurzuam.github.io/masters-thesis/presentations/coloquio-2025.html)
+
+Documento de tesis: [aquí](https://tomasurzuam.github.io/masters-thesis/paper/docs/index.html)
