@@ -1,0 +1,27 @@
+﻿---
+title: ""
+number-sections: false
+numbered: false
+format:
+  html:
+    title-block-style: none
+    toc: false
+  pdf:
+    title-block-style: none
+---
+
+::: {.content-visible when-format="pdf"}
+\small\textbf{Palabras clave:} Preferencias por justicia de mercado; Educación; Creencias meritocráticas; Comparación internacional; Factores macroestructurales
+\normalsize
+:::
+
+::: {.content-visible when-format="html"}
+<style>
+nav#TOC { display: none !important; }
+div[data-when-format="pdf"] { display: none !important; }
+</style>
+<span class="keywords-line"><strong>Palabras clave: Preferencias por justicia de mercado; Educación; Creencias meritocráticas; Comparación internacional; Factores macroestructurales</strong> </span>
+:::
+
+# Abstract {.unnumbered}
+
