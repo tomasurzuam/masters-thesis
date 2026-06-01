@@ -8,7 +8,7 @@ project:
     - assets/favicon-2025-20251031.svg  # Asegura que el favicon versionado llegue a docs/
 
 book:
-  title: "Justicia de mercado en educación: el rol de las creencias meritocráticas en perspectiva comparada"
+  title: "Preferences for market justice in education: The role of meritocratic beliefs in a comparative perspective"
   subtitle: Tesis de Magíster
   output-file: reportes-facso-plantilla
   repo-url: https://github.com/tomasurzuam/masters-thesis  #URL del repositorio del libro (cambia segun tu repo)
@@ -42,9 +42,6 @@ book:
     - references.qmd
     # Para agregar un nuevo capitulo duplica un archivo .qmd y agregalo aqui:
     # ej: - 07-analisis-cualitativo.qmd
-  appendices:
-    - apendices/A-encuestas.qmd
-    - apendices/B-tablas.qmd
     # Guarda anexos extensos en apendices/ y listalos aqui.
 
 csl: refs/apa.csl                # Estilo de citas (cambia a otro .csl si lo prefieres)

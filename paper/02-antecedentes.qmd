@@ -1,20 +1,7 @@
 ---
-title: "Antecedentes conceptuales y empíricos"
+title: "Theoretical and empirical background"
 ---
 
-# Preferencias por la justicia de mercado
+{{< include market-justice.qmd >}}
 
-
-
-# Educación y legitimación de las desigualdades
-
-
-# Creencias meritocráticas
-
-
-
-# Diseño institucional y comparación entre países
-
-
-
-# Este estudio (hipótesis y contribución)
+{{< include education.qmd >}}
