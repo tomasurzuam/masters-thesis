@@ -4,4 +4,8 @@ title: "Theoretical and empirical background"
 
 {{< include market-justice.qmd >}}
 
-{{< include education.qmd >}}
+{{< include merit.qmd >}}
+
+{{< include level-1-var.qmd >}}
+
+This study aims to contribute to the research on multidimensional meritocracy but in a novel way: by analyzing how different configurations of meritocratic beliefs are associated with market justice preferences in education. More specifically, we seek to provide a detailed understanding of how the interaction of individual and contextual variables can explain the justification of inequality in education differently depending on the country. Thus, this research advances our understanding of how people’s normative judgments regarding the legitimization of inequality in education vary, elucidating the factors that shape them. This can provide an assessment of how people normatively perceive the functioning of education, which may serve as a basis for the development of policies aimed at promoting educational justice.

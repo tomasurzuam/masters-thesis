@@ -66,46 +66,6 @@
 \fi
 \makeatother
 
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{241,243,245}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
-\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
@@ -383,14 +343,14 @@
   \newcommand\listtablename{Listado de Tablas}
 \fi
 \ifdefined\figurename
-  \renewcommand*\figurename{Lista de figuras}
+  \renewcommand*\figurename{Figura}
 \else
-  \newcommand\figurename{Lista de figuras}
+  \newcommand\figurename{Figura}
 \fi
 \ifdefined\tablename
-  \renewcommand*\tablename{Lista de tablas}
+  \renewcommand*\tablename{Tabla}
 \else
-  \newcommand\tablename{Lista de tablas}
+  \newcommand\tablename{Tabla}
 \fi
 }
 \@ifpackageloaded{float}{}{\usepackage{float}}
@@ -409,8 +369,8 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Reportes FACSO - Plantilla Quarto},
-  pdfauthor={Nombre Apellido},
+  pdftitle={Preferences for market justice in education: The role of meritocratic beliefs in a comparative perspective},
+  pdfauthor={Tomás Urzúa Moreno},
   pdflang={es},
   colorlinks=true,
   linkcolor={Maroon},
@@ -420,16 +380,17 @@
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{Reportes FACSO - Plantilla Quarto}
+\title{Preferences for market justice in education: The role of
+meritocratic beliefs in a comparative perspective}
 \usepackage{etoolbox}
 \makeatletter
 \providecommand{\subtitle}[1]{% add subtitle to \maketitle
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{Tesis, informes e investigaciones}
-\author{Nombre Apellido}
-\date{17 de noviembre de 2025}
+\subtitle{Tesis de Magíster}
+\author{Tomás Urzúa Moreno}
+\date{16 de junio de 2026}
 \begin{document}
 \frontmatter
 \maketitle
@@ -535,344 +496,571 @@
 
 \markboth{Abstract}{Abstract}
 
-\small\textbf{Palabras clave:} Sociologia, educacion, Chile \normalsize
-
-Resumen en español (200-300). Expón propósito, método, resultados clave
-y conclusiones. Puede incluir citas como Xie
-(\citeproc{ref-xie2017bookdown}{2017}) y se actualizarán
-automáticamente.
+\small\textbf{Palabras clave:} Market justice preferences; Education;
+Meritocratic beliefs; Cross-country; Macrostructural factors \normalsize
 
 \bookmarksetup{startatroot}
 
-\chapter*{Prefacio}\label{prefacio}
-\addcontentsline{toc}{chapter}{Prefacio}
+\chapter{Introduction}\label{introduction}
 
-\markboth{Prefacio}{Prefacio}
+The commodification of education has been one of the most significant
+transformations in the organization of welfare states over the past few
+decades. Although education has traditionally been a social service
+guaranteed by the state, many countries have undergone a process of
+commodification that has led to a relative decline in public funding and
+an expansion of private education provision
+(\citeproc{ref-busemeyer_welfare_2020}{Busemeyer \& Iversen, 2020};
+\citeproc{ref-esping-andersen_politics_1985}{Esping-Andersen, 1985};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015};
+\citeproc{ref-oecd_education_2025}{OECD, 2025}). This shift toward
+market logic has not only transformed the institutional functioning of
+education systems but also people's beliefs and preferences regarding
+how educational opportunities should be distributed, demonstrating the
+impact of economic organization on micro-level dynamics
+(\citeproc{ref-busemeyer_inequality_2012}{Busemeyer, 2012};
+\citeproc{ref-busemeyer_investing_2018}{Busemeyer et~al., 2018};
+\citeproc{ref-koos_moral_2019}{Koos \& Sachweh, 2019}). In some cases,
+these beliefs have led to the legitimization of educational inequality
+(\citeproc{ref-castillo_changes_2025}{Castillo, Iturra, et~al., 2025};
+\citeproc{ref-piketty_equality_2025}{Piketty \& Sandel, 2025})
 
-Agradecimientos opcionales, dedicatorias, notas sobre financiamiento,
-etc.
+Meritocracy holds that social rewards should be distributed on the basis
+of individual effort and talent, making it one of the main normative
+principles associated with both education and distributional preferences
+(\citeproc{ref-sandel_tyranny_2020}{Sandel, 2020}). Various studies have
+shown that meritocratic beliefs are linked to higher acceptance of
+inequality, as they attribute success and failure primarily to
+individual responsibility, functioning as a cultural mechanism that
+justifies social hierarchies and diminishes perceptions of structural
+factors that shape individual trajectories
+(\citeproc{ref-darnon_belief_2018}{Darnon et~al., 2018};
+\citeproc{ref-heuer_legitimizing_2020}{Heuer et~al., 2020};
+\citeproc{ref-mau_inequality_2015}{Mau, 2015};
+\citeproc{ref-mijs_unfulfillable_2016}{Mijs, 2016};
+\citeproc{ref-mijs_paradox_2021}{Mijs, 2021}). However, the
+understanding of meritocratic beliefs has evolved in recent years, no
+longer being viewed as a one-dimensional phenomenon, but rather as
+capable of coexisting with other beliefs that acknowledge structural
+conditions and privilege, thereby overcoming a methodological and
+theoretical limitation
+(\citeproc{ref-castillo_multidimensional_2023}{Castillo et~al., 2023};
+\citeproc{ref-zhu_meritocratic_2025}{Zhu, 2025}). Within the
+multidimensional framework of meritocracy, some studies have proposed a
+distinction between meritocratic perceptions and structural perceptions
+(\citeproc{ref-zhu_meritocratic_2025}{Zhu, 2025}); others have focused
+on descriptive and ascriptive dimensions of effort, talent, and
+privilege (\citeproc{ref-castillo_multidimensional_2023}{Castillo
+et~al., 2023}; \citeproc{ref-duru-bellat_whos_2012}{Duru-Bellat \&
+Tenret, 2012}; \citeproc{ref-sin_they_2026}{Sin et~al., 2026}).
 
-\mainmatter
+Several studies have examined the effect of education on the
+justification of inequalities (\citeproc{ref-liu_does_2026}{Liu \& Wang,
+2026}; \citeproc{ref-nye_education_2026}{Nye et~al., 2026}), or the
+relationship between meritocracy and perceptions of inequality
+(\citeproc{ref-bartram_does_2023}{Bartram, 2023};
+\citeproc{ref-castillo_changes_2025}{Castillo, Iturra, et~al., 2025};
+\citeproc{ref-mijs_paradox_2021}{Mijs, 2021}), but to our knowledge, no
+research has examined market preferences in education and their
+relationship to meritocratic beliefs from a multidimensional and
+comparative perspective. To fill this gap, this study aims to analyze
+the role of meritocratic beliefs in preferences for market justice in
+education and their interaction with institutional contexts. The concept
+of market justice refers to the belief that access to and the quality of
+social services should be determined by individual or family ability to
+pay, and is thus associated with the legitimization of inequalities from
+a market-oriented perspective. (\citeproc{ref-lane_market_1986}{Lane,
+1986}; \citeproc{ref-lindh_public_2015}{Lindh, 2015}).
 
-\bookmarksetup{startatroot}
+This study aims to answer three questions: (1) To what extent do
+meritocratic beliefs influence preferences for market justice in
+education? (2) How do institutional designs and preferences for market
+justice in education interact? (3) Are there significant differences
+across countries? We argue that preferences for market justice in
+education are closely related to two factors: meritocratic beliefs and a
+country's institutional designs. On the one hand, meritocratic beliefs
+have been shown to be a determinant of distributional preferences and
+perceptions of inequality, where those who perceive more meritocracy are
+likely to be more inclined to prefer market justice in education {[};
+Castillo et~al. (\citeproc{ref-castillo_justification_2026}{2026});
+Castillo, Laffert, et~al.
+(\citeproc{ref-castillo_perceptions_2025}{2025}); Castillo et~al.
+(\citeproc{ref-castillo_socialization_2024}{2024}); Darnon et~al.
+(\citeproc{ref-darnon_belief_2018}{2018}); Heuer et~al.
+(\citeproc{ref-heuer_legitimizing_2020}{2020}); Mijs
+(\citeproc{ref-mijs_paradox_2021}{2021}){]}. On the other hand,
+countries' institutional designs appear to be an important factor in
+shaping people's beliefs
+(\citeproc{ref-busemeyer_education_2013}{Busemeyer, 2013};
+\citeproc{ref-liu_does_2026}{Liu \& Wang, 2026}), and we hypothesize
+that countries with higher levels of economic inequality, as well as
+those with greater public investment in education, will exhibit an
+aversion to market justice in education.
 
-\chapter{Introducción}\label{introducciuxf3n}
-
-Motivación, preguntas de investigación, Objetivo general y específicos,
-contribución esperada, estructura del documento.
-
-\bookmarksetup{startatroot}
-
-\chapter{Antecedentes conceptuales y
-empíricos}\label{antecedentes-conceptuales-y-empuxedricos}
-
-Sintetiza la literatura relevante. Usa referencias como Desmond \&
-Wilmers (\citeproc{ref-desmond2019poverty}{2019}).
-
-\section{Marco conceptual}\label{marco-conceptual}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at
-nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae
-efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur
-adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum
-hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor
-sit amet, consectetur adipiscing elit. Integer at nulla a ligula
-volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl
-hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue,
-vitae efficitur nisl hendrerit nec.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at
-nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae
-efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur
-adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum
-hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor
-sit amet, consectetur adipiscing elit. Integer at nulla a ligula
-volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl
-hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue,
-vitae efficitur nisl hendrerit nec.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at
-nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae
-efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur
-adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum
-hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor
-sit amet, consectetur adipiscing elit. Integer at nulla a ligula
-volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl
-hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue,
-vitae efficitur nisl hendrerit nec.
-
-\subsection{Ejemplos APA 7}\label{ejemplos-apa-7}
-
-Según Desmond \& Wilmers (\citeproc{ref-desmond2019poverty}{2019}), los
-patrones de segregación residencial configuran los límites de
-oportunidad urbana y permiten introducir la sintaxis de cita narrativa
-dentro del flujo del texto.
-
-Los matices culturales del gusto pueden reforzar desigualdades cuando se
-institucionalizan en jerarquías de prestigio académico
-(\citeproc{ref-bourdieu2012}{Bourdieu, 2012, p. 35}), lo que ilustra la
-cita parentética con número de página.
-
-Para contrastar hallazgos se pueden reunir múltiples referencias en un
-mismo paréntesis analítico (\citeproc{ref-desmond2019poverty}{Desmond \&
-Wilmers, 2019}; \citeproc{ref-xie2017bookdown}{Xie, 2017}), destacando
-cómo distintos diseños metodológicos convergen en un mecanismo causal
-compartido.
-
-\begin{quote}
-Las aspiraciones colectivas se negocian constantemente en espacios
-cotidianos que traducen capital cultural en prácticas concretas,
-reescribiendo así el mapa de posibilidades percibidas por cada agente
-social en contextos urbanos desiguales. Este entramado simbólico orienta
-aspiraciones futuras y limita adaptaciones comunitarias.
-(\citeproc{ref-bourdieu2012}{Bourdieu, 2012, p. 87})
-\end{quote}
-
-\section{Resumen del capítulo}\label{resumen-del-capuxedtulo}
-
-\begin{quote}
-Este capítulo ofreció una revisión breve de los conceptos fundamentales
-y estableció proposiciones para guiar el análisis empírico posterior.
-\end{quote}
-
-\bookmarksetup{startatroot}
-
-\chapter{Metodología}\label{metodologuxeda}
-
-\section{Datos}\label{datos}
-
-Texto de muestra para describir las fuentes de datos utilizadas.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Carga paquetes de ejemplo}
-\FunctionTok{library}\NormalTok{(tidyverse)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-      mpg             cyl             disp             hp       
- Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
- 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
- Median :19.20   Median :6.000   Median :196.3   Median :123.0  
- Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
- 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
- Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
-      drat             wt             qsec             vs        
- Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
- 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
- Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
- Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
- 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
- Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
-       am              gear            carb      
- Min.   :0.0000   Min.   :3.000   Min.   :1.000  
- 1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
- Median :0.0000   Median :4.000   Median :2.000  
- Mean   :0.4062   Mean   :3.688   Mean   :2.812  
- 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
- Max.   :1.0000   Max.   :5.000   Max.   :8.000  
-\end{verbatim}
-
-\section{Variables}\label{variables}
-
-Detalle de las variables incluidas en el análisis, así como escalas de
-medición.
-
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.4085}}
-  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0563}}
-  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1268}}
-  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1690}}
-  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1127}}
-  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1268}}@{}}
-\caption{Estadísticas descriptivas por variable
-(ejemplo)}\tabularnewline
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Variable
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-N
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Media
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Desv. Est.
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Min
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Max
-\end{minipage} \\
-\midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Variable
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-N
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Media
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Desv. Est.
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Min
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Max
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Ingreso per cápita (mensual) & 32 & 20.091 & 6.027 & 10.400 & 33.900 \\
-Capital social barrial & 32 & 3.217 & 0.978 & 1.513 & 5.424 \\
-Precariedad laboral & 32 & 146.688 & 68.563 & 52.000 & 335.000 \\
-Capital institucional & 32 & 3.597 & 0.535 & 2.760 & 4.930 \\
-Participación comunitaria & 32 & 17.849 & 1.787 & 14.500 & 22.900 \\
-\end{longtable}
-
-\section{Métodos}\label{muxe9todos}
-
-Breve descripción de los procedimientos aplicados para procesar y
-analizar la información.
+To address these issues, we use data from the 2019 International Social
+Survey Program (ISSP), the World Inequality Database (WID), and UNESCO.
+First, we apply latent class analysis to identify profiles of
+meritocratic beliefs, and then conduct multinomial logistic regression
+to examine the relationship between these profiles and preferences for
+market justice in education, while incorporating sociodemographic and
+institutional factors. In doing so, this research aims to contribute to
+the literature on the relationship between perceptions of inequality and
+meritocracy, placing special emphasis on micro-level foundations and
+their interaction with institutional contexts to understand how beliefs
+about educational inequality are formed.
 
 \bookmarksetup{startatroot}
 
-\chapter{Resultados}\label{resultados}
+\chapter{Theoretical and empirical
+background}\label{theoretical-and-empirical-background}
 
-\section{Analisis descriptivo}\label{analisis-descriptivo}
+\section{Market justice preferences}\label{market-justice-preferences}
 
-Resumen de las estadisticas descriptivas clave y visualizaciones de
-apoyo.
+Welfare states have undergone several institutional transformations in
+recent years, with private expansion strongly penetrating the field of
+social services alongside public provision
+(\citeproc{ref-busemeyer_welfare_2020}{Busemeyer \& Iversen, 2020}).
+Such processes have led to changes in the architecture of the
+institutions responsible for social welfare. On the one hand, private
+companies operate as service administrators of benefits based on the
+user's ability to pay, whereas on the other hand, public providers have
+reorganized to compete as quasi-markets
+(\citeproc{ref-lindh_it_2017}{Lindh, 2017}). Besides changes at the
+formal level, the commodification of social services shapes cultural
+norms and beliefs, where markets operate as moral projects
+(\citeproc{ref-fourcade_moral_2007}{Fourcade \& Healy, 2007};
+\citeproc{ref-koos_moral_2019}{Koos \& Sachweh, 2019}).
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\ControlFlowTok{if}\NormalTok{ (}\FunctionTok{requireNamespace}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{)) \{}
-  \FunctionTok{library}\NormalTok{(ggplot2)}
-  \FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(wt, mpg)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{()}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
+The field of distributive justice has gradually incorporated market
+preferences into attitudinal research on redistribution. Since Kluegel's
+seminal work (\citeproc{ref-kluegel_beliefs_1981}{1981}) on the
+normative foundations of beliefs about social stratification, the
+concept of market justice preferences has been developed, understood as
+the normative principle that legitimizes access to goods and services
+according to an individual's or family's ability to pay
+(\citeproc{ref-lane_market_1986}{Lane, 1986}). This principle is closely
+linked to the justification of inequalities: by conceiving the market as
+a space of equal opportunities, economic success is interpreted as an
+individual achievement (\citeproc{ref-kluegel_legitimation_1999}{J. R.
+Kluegel et~al., 1999}), disregarding the structural conditions that
+produce such disparities. In this way, market justice operates
+simultaneously as an economic and moral principle that legitimizes
+socioeconomic inequalities.
 
-\begin{figure}[H]
+Most research in this field relies on survey data, in which questions
+about market justice directly probe support for the provision of social
+services---education, pensions, and health care---based on individual
+ability to pay (e.g., ``Is it fair that high-income individuals receive
+better education than low-income individuals?'')
+(\citeproc{ref-busemeyer_education_2013}{Busemeyer, 2013};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015}). Within this framework,
+ISSP has been the primary source for advancing this agenda. Also, recent
+research has employed both indices constructed from relevant items
+(\citeproc{ref-castillo_perceptions_2025}{Castillo, Laffert, et~al.,
+2025}) and a separate analysis of each item.
 
-\caption{Relacion X\^{}2}
+Education is one of the key dimensions in the study of market justice,
+given the commodification processes educational systems have undergone
+in recent decades. The growing prominence of the private sector in
+education, coupled with the implementation of market-driven logic, has
+transformed the structure of educational systems, where students and
+their families are viewed as consumers of a service
+(\citeproc{ref-brancaleone_educational_2011}{Brancaleone \& O'Brien,
+2011}; \citeproc{ref-lindh_public_2015}{Lindh, 2015}). These changes
+have ethical consequences, as education loses its intrinsic value and
+becomes a means of generating monetary value, and its quality is often
+determined by the type of funding, thereby reinforcing socioeconomic
+inequalities (\citeproc{ref-abowitz_public_2018}{Abowitz \& Stitzlein,
+2018}; \citeproc{ref-ball_education_2004}{Ball, 2004};
+\citeproc{ref-piketty_equality_2025}{Piketty \& Sandel, 2025};
+\citeproc{ref-satz_why_2010}{Satz, 2010}). In this sense, market justice
+in education conflicts with educational justice by denying equity in
+quality and universal access to education.
 
-{\centering \pandocbounded{\includegraphics[keepaspectratio]{04-resultados_files/figure-pdf/grafico-ejemplo-1.pdf}}
+Recent literature on market preferences has identified significant
+associations at both the individual and contextual levels. At the
+individual level, socioeconomic status emerges as a consistent
+predictor; those in more advantaged positions tend to exhibit greater
+preferences for market justice (\citeproc{ref-koos_moral_2019}{Koos \&
+Sachweh, 2019}; \citeproc{ref-lindh_public_2015}{Lindh, 2015}), a
+pattern reflecting a moral economy oriented toward justifying status for
+those who benefit from the market order. In this regard, political
+ideology shows a clear association, with right-leaning individuals
+tending to favor market-oriented distributional principles
+(\citeproc{ref-castillo_socialization_2024}{Castillo et~al., 2024};
+\citeproc{ref-lee_fairness_2024}{Lee \& Stacey, 2024}). At the
+contextual level, the relative weight of private and public service
+provision emerges as a structuring factor in preferences; in countries
+where private investment predominates, individuals tend to internalize
+the market order as a criterion of justice and, consequently, to reduce
+their redistributive preferences; whereas the opposite trend is observed
+where public provision prevails
+(\citeproc{ref-busemeyer_education_2013}{Busemeyer, 2013};
+\citeproc{ref-immergut_it_2020}{Immergut \& Schneider, 2020};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015}).
 
-}
+\section{Education and legitimization of
+inequalities}\label{education-and-legitimization-of-inequalities}
 
-\end{figure}%
+Education is one of the core pillars of societal structure, but the role
+it plays has been the subject of an unresolved debate. From a
+theoretical perspective, education plays an ambivalent role: on the one
+hand, it has been argued that it promotes access to opportunities, skill
+development, and the reduction of social inequalities. This perspective
+is supported by various mechanisms, such as human capital development
+and/or the development of critical awareness of structural problems
+(\citeproc{ref-becker_human_1993}{Becker, 1993};
+\citeproc{ref-freire_pedagogia_2015}{Freire, 2015};
+\citeproc{ref-schultz_investment_1961}{Schultz, 1961}). On the other
+hand, education has been understood as a source of social inequalities,
+as it reproduces individuals' living conditions, preventing
+opportunities for intergenerational social mobility and, consequently,
+perpetuating the stratified order. These approaches have developed
+primarily through theories that draw on symbolic violence and social
+reproduction as mechanisms for legitimizing inequalities
+(\citeproc{ref-bourdieu_reproduccion_2019}{Bourdieu, 2019};
+\citeproc{ref-bowles_schooling_2011}{Bowles \& Gintis, 2011}). Thus,
+education can be understood through its enlightening role in social
+life, but also as a cog in the reproduction of inequalities in society.
 
-\section{Modelos}\label{modelos}
+Recent literature provides empirical support for these two theoretical
+approaches to education. For example, research by Bubak
+(\citeproc{ref-bubak_perceptions_2019}{2019}) found that higher levels
+of education are negatively associated with support for meritocracy,
+acknowledging that structural conditions determine individual outcomes.
+Along the same lines, using the 2009 ISSP survey, Zhu
+(\citeproc{ref-zhu_meritocratic_2025}{2025}) found that in Finland, the
+enlightening effect of education was present, unlike in the United
+States and China. In contrast, the research by Diwan \& Vartanova
+(\citeproc{ref-diwan_does_2020}{2020}) concluded that states
+deliberately use education to shape students' political attitudes in
+order to reproduce national identity. Likewise, Van Noord et~al.
+(\citeproc{ref-vannoord_educationbased_2019}{2019}) used data from 31
+countries to show that education is widely understood as the basis for
+social stratification. However, the results from Liu \& Wang
+(\citeproc{ref-liu_does_2026}{2026}) suggest that education does not
+fulfill a generalized function; rather, both the enlightening and the
+reproductionist roles exist but depend on the macro context, where the
+enlightening role is present in countries with low levels of inequality,
+while the legitimizing role is observed in countries with high levels of
+inequality.
 
-Presentacion de los resultados de los modelos propuestos, con
-interpretacion y conclusiones.
+Besides to the functional role of education, a vast body of literature
+has situated education within the framework of redistributive
+preferences. In a cross-country study, Busemeyer et~al.
+(\citeproc{ref-busemeyer_investing_2018}{2018}) found that education is
+the policy field with the highest level of support for spending;
+however, when distinguishing between types of spending, higher levels of
+investment in private education are negatively associated with
+preferences for redistribution
+(\citeproc{ref-busemeyer_education_2013}{Busemeyer, 2013}). In
+country-specific studies such as those in Australia and Chile, most
+respondents stated that they consider it unfair for the quality of
+education to depend on parents' ability to pay
+(\citeproc{ref-castillo_changes_2025}{Castillo, Iturra, et~al., 2025};
+\citeproc{ref-lee_fairness_2024}{Lee \& Stacey, 2024}). Furthermore,
+based on correlational and experimental evidence, Soler‐Martínez et~al.
+(\citeproc{ref-soler-martinez_income_2025}{2025}) found that perceived
+educational inequality is associated with greater intolerance of
+inequality.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.2738}}
-  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0952}}
-  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1310}}
-  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1071}}
-  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1071}}
-  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0714}}
-  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.2143}}@{}}
-\caption{Resumen comparativo de modelos}\tabularnewline
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Predictor
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Coef.
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Std. Err.
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-t-valor
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-p-valor
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Sig.
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-IC 95 \%
-\end{minipage} \\
-\midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Predictor
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Coef.
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Std. Err.
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-t-valor
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-p-valor
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Sig.
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-IC 95 \%
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Constante & 37.227 & 1.599 & 23.28 & \textless0.001 & *** & {[}33.957,
-40.497{]} \\
-Capital social barrial & -3.878 & 0.633 & -6.13 & \textless0.001 & *** &
-{[}-5.172, -2.584{]} \\
-Precariedad laboral & -0.032 & 0.009 & -3.52 & 0.001 & ** & {[}-0.050,
--0.013{]} \\
-N & 32 & & & & & \\
-R\^{}2 & 0.827 & & & & & \\
-R\^{}2 ajustado & 0.815 & & & & & \\
-\end{longtable}
+Surveys have been the primary tool for studying educational
+inequalities, measuring the concept through individuals' perceptions. In
+this frame, ISSP, as one of the most globally recognized surveys for
+measuring inequality, poses the question: \emph{``Is it fair that
+high-income individuals have better education than lower-income
+individuals?''}. Some studies have incorporated this operationalization
+into national surveys (\citeproc{ref-castillo_changes_2025}{Castillo,
+Iturra, et~al., 2025}). Other studies have developed questions aimed at
+measuring the perceived gap in educational inequality (\emph{i.e., ``In
+your judgment, how large or small are the differences in education
+between the rich and poor in Spain?''})
+(\citeproc{ref-soler-martinez_income_2025}{Soler‐Martínez et~al.,
+2025}). Busemeyer et~al. (\citeproc{ref-busemeyer_investing_2018}{2018})
+conducted a survey in which the focus of the question was on the
+distribution of education spending, rather than on the judgment of
+inequality: \emph{Let's talk about the distribution of public spending
+in the education sector. Please tell me whether you would like to see
+more or less government spending in each of the following areas. Keep in
+mind that `more' or `much more' might require a tax increase}. All
+operationalizations share the general objective of measuring educational
+inequalities, but each employs a different strategy and focuses on a
+distinct dimension of the concept.
 
 \bookmarksetup{startatroot}
 
-\chapter{Discusión}\label{discusiuxf3n}
-
-Interpreta resultados, limitaciones y aportes.
+\chapter{Methods}\label{methods}
 
 \bookmarksetup{startatroot}
 
-\chapter{Conclusiones}\label{conclusiones}
-
-Síntesis y proyecciones futuras.
+\chapter{Results}\label{results}
 
 \bookmarksetup{startatroot}
 
-\chapter{Referencias}\label{referencias}
+\chapter{Discussion}\label{discussion}
+
+\bookmarksetup{startatroot}
+
+\chapter{Conclusions}\label{conclusions}
+
+\bookmarksetup{startatroot}
+
+\chapter{References}\label{references}
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
-\bibitem[\citeproctext]{ref-bourdieu2012}
-Bourdieu, P. (2012). \emph{La distinci{ó}n: Criterio y bases sociales
-del gusto}. Taurus.
+\bibitem[\citeproctext]{ref-abowitz_public_2018}
+Abowitz, K. K., \& Stitzlein, S. M. (2018). Public Schools, Public
+Goods, and Public Work. \emph{Phi Delta Kappan}, \emph{100}(3), 33-37.
+\url{https://doi.org/10.1177/0031721718808262}
 
-\bibitem[\citeproctext]{ref-desmond2019poverty}
-Desmond, M., \& Wilmers, N. (2019). The Racialized Geography of Housing.
-\emph{American Journal of Sociology}.
+\bibitem[\citeproctext]{ref-ball_education_2004}
+Ball, S. (2004). \emph{Education for Sale! The Commodification of
+Everything?}
+\url{https://nepc.colorado.edu/publication/education-sale-the-commodification-everything}
 
-\bibitem[\citeproctext]{ref-xie2017bookdown}
-Xie, Y. (2017). \emph{bookdown: Authoring Books and Technical Documents
-with R Markdown}. Chapman; Hall/CRC.
+\bibitem[\citeproctext]{ref-bartram_does_2023}
+Bartram, D. (2023). Does Belief in Meritocracy Increase with Inequality?
+A Reconsideration for European Countries. \emph{The British Journal of
+Sociology}, \emph{74}(5), 763-780.
+\url{https://doi.org/10.1111/1468-4446.13042}
+
+\bibitem[\citeproctext]{ref-becker_human_1993}
+Becker, G. S. (1993). \emph{Human Capital: A Theoretical and Empirical
+Analysis, with Special Reference to Education} (3rd ed). The University
+of Chicago Press.
+
+\bibitem[\citeproctext]{ref-bourdieu_reproduccion_2019}
+Bourdieu, P. (2019). \emph{La Reproducción: Elementos para una Teoría
+Del Sistema Educativo}. Siglo XXI Editores.
+
+\bibitem[\citeproctext]{ref-bowles_schooling_2011}
+Bowles, S., \& Gintis, H. (2011). \emph{Schooling in Capitalist America:
+Educational Reform and the Contradictions of Economic Life}. Haymarket
+Books.
+
+\bibitem[\citeproctext]{ref-brancaleone_educational_2011}
+Brancaleone, D., \& O'Brien, S. (2011). Educational Commodification and
+the (Economic) Sign Value of Learning Outcomes. \emph{British Journal of
+Sociology of Education}, \emph{32}(4), 501-519.
+\url{https://doi.org/10.1080/01425692.2011.578435}
+
+\bibitem[\citeproctext]{ref-bubak_perceptions_2019}
+Bubak, O. (2019). Perceptions of Meritocracy: A Note on China.
+\emph{Asian Journal of Comparative Politics}, \emph{4}(2), 192-209.
+\url{https://doi.org/10.1177/2057891118806065}
+
+\bibitem[\citeproctext]{ref-busemeyer_inequality_2012}
+Busemeyer, M. R. (2012). Inequality and the Political Economy of
+Education: An Analysis of Individual Preferences in OECD Countries.
+\emph{Journal of European Social Policy}, \emph{22}(3), 219-240.
+\url{https://doi.org/10.1177/0958928712440200}
+
+\bibitem[\citeproctext]{ref-busemeyer_education_2013}
+Busemeyer, M. R. (2013). Education Funding and Individual Preferences
+for Redistribution. \emph{European Sociological Review}, \emph{29}(6),
+1122-1133. \url{https://doi.org/10.1093/esr/jcs085}
+
+\bibitem[\citeproctext]{ref-busemeyer_investing_2018}
+Busemeyer, M. R., Garritzmann, J. L., Neimanns, E., \& Nezi, R. (2018).
+Investing in Education in Europe: Evidence from a New Survey of Public
+Opinion. \emph{Journal of European Social Policy}, \emph{28}(1), 34-54.
+\url{https://doi.org/10.1177/0958928717700562}
+
+\bibitem[\citeproctext]{ref-busemeyer_welfare_2020}
+Busemeyer, M. R., \& Iversen, T. (2020). The Welfare State with Private
+Alternatives: The Transformation of Popular Support for Social
+Insurance. \emph{The Journal of Politics}, \emph{82}(2), 671-686.
+\url{https://doi.org/10.1086/706980}
+
+\bibitem[\citeproctext]{ref-castillo_justification_2026}
+Castillo, J. C., Canales-Sellés, R., Laffert, A., \& Urzúa, T. (2026).
+Justification Trajectories for Pension Inequality in Chile (2016--2023):
+The Role of Social Class and Beliefs in Meritocracy. \emph{Frontiers in
+Sociology}, \emph{11}, 1771856.
+\url{https://doi.org/10.3389/fsoc.2026.1771856}
+
+\bibitem[\citeproctext]{ref-castillo_changes_2025}
+Castillo, J. C., Iturra, J., \& Carrasco, K. (2025). Changes in the
+Justification of Educational Inequalities: The Role of Perceptions of
+Inequality and Meritocracy During the COVID Pandemic. \emph{Social
+Justice Research}, \emph{38}(3), 240-263.
+\url{https://doi.org/10.1007/s11211-025-00458-0}
+
+\bibitem[\citeproctext]{ref-castillo_multidimensional_2023}
+Castillo, J. C., Iturra, J., Maldonado, L., Atria, J., \& Meneses, F.
+(2023). \emph{A Multidimensional Approach for Measuring Meritocratic
+Beliefs: Advantages, Limitations and Alternatives to the ISSP Social
+Inequality Survey}. \emph{53}(6).
+\url{https://www.tandfonline.com/doi/full/10.1080/00207659.2023.2274712}
+
+\bibitem[\citeproctext]{ref-castillo_perceptions_2025}
+Castillo, J. C., Laffert, A., Carrasco, K., \& Iturra-Sanhueza, J.
+(2025). Perceptions of Inequality and Meritocracy: Their Interplay in
+Shaping Preferences for Market Justice in Chile (2016--2023).
+\emph{Frontiers in Sociology}, \emph{10}.
+\url{https://doi.org/10.3389/fsoc.2025.1634219}
+
+\bibitem[\citeproctext]{ref-castillo_socialization_2024}
+Castillo, J. C., Salgado, M., Carrasco, K., \& Laffert, A. (2024). The
+Socialization of Meritocracy and Market Justice Preferences at School.
+\emph{Societies}, \emph{14}(11), 214.
+\url{https://doi.org/10.3390/soc14110214}
+
+\bibitem[\citeproctext]{ref-darnon_belief_2018}
+Darnon, C., Smeding, A., \& Redersdorff, S. (2018). Belief in School
+Meritocracy as an Ideological Barrier to the Promotion of Equality.
+\emph{European Journal of Social Psychology}, \emph{48}(4), 523-534.
+\url{https://doi.org/10.1002/ejsp.2347}
+
+\bibitem[\citeproctext]{ref-diwan_does_2020}
+Diwan, I., \& Vartanova, I. (2020). Does Education Indoctrinate?
+\emph{International Journal of Educational Development}, \emph{78},
+102249. \url{https://doi.org/10.1016/j.ijedudev.2020.102249}
+
+\bibitem[\citeproctext]{ref-duru-bellat_whos_2012}
+Duru-Bellat, M., \& Tenret, E. (2012). Who's for Meritocracy? Individual
+and Contextual Variations in the Faith. \emph{Comparative Education
+Review}, \emph{56}(2), 223-247. \url{https://doi.org/10.1086/661290}
+
+\bibitem[\citeproctext]{ref-esping-andersen_politics_1985}
+Esping-Andersen, G. (1985). \emph{Politics against Markets: The Social
+Democratic Road to Power}. Princeton University Press.
+\url{https://www.jstor.org/stable/j.ctt1m322zp}
+
+\bibitem[\citeproctext]{ref-fourcade_moral_2007}
+Fourcade, M., \& Healy, K. (2007). Moral Views of Market Society.
+\emph{Annual Review of Sociology}, \emph{33}(Volume 33, 2007), 285-311.
+\url{https://doi.org/10.1146/annurev.soc.33.040406.131642}
+
+\bibitem[\citeproctext]{ref-freire_pedagogia_2015}
+Freire, P. (2015). \emph{Pedagogía Del Oprimido} (J. Mellado, Trad.; 4a
+edición argentina, corregida y revisada). Siglo Veintiuno Editores.
+
+\bibitem[\citeproctext]{ref-heuer_legitimizing_2020}
+Heuer, J.-O., Lux, T., Mau, S., \& Zimmermann, K. (2020). Legitimizing
+Inequality: The Moral Repertoires of Meritocracy in Four Countries.
+\emph{Comparative Sociology}, \emph{19}(4-5), 542-584.
+\url{https://doi.org/10.1163/15691330-BJA10017}
+
+\bibitem[\citeproctext]{ref-immergut_it_2020}
+Immergut, E. M., \& Schneider, S. M. (2020). Is It Unfair for the
+Affluent to Be Able to Purchase {«Better»} Healthcare? Existential
+Standards and Institutional Norms in Healthcare Attitudes across 28
+Countries. \emph{Social Science \& Medicine}, \emph{267}, 113146.
+\url{https://doi.org/10.1016/j.socscimed.2020.113146}
+
+\bibitem[\citeproctext]{ref-kluegel_legitimation_1999}
+Kluegel, J. R., Mason, D. S., \& Wegener, B. (1999). The Legitimation of
+Capitalism in the Postcommunist Transition Public Opinion about Market
+Justice, 1991---1996. \emph{European Sociological Review}, \emph{15}(3),
+251-283. \url{https://doi.org/10.1093/oxfordjournals.esr.a018263}
+
+\bibitem[\citeproctext]{ref-kluegel_beliefs_1981}
+Kluegel, J., \& Smith, E. (1981). Beliefs about Stratification.
+\emph{Annual Review of Sociology}, \emph{7}(Volume 7, 1981), 29-56.
+\url{https://doi.org/10.1146/annurev.so.07.080181.000333}
+
+\bibitem[\citeproctext]{ref-koos_moral_2019}
+Koos, S., \& Sachweh, P. (2019). The Moral Economies of Market
+Societies: Popular Attitudes towards Market Competition, Redistribution
+and Reciprocity in Comparative Perspective. \emph{Socio-Economic
+Review}, \emph{17}(4), 793-821. \url{https://doi.org/10.1093/ser/mwx045}
+
+\bibitem[\citeproctext]{ref-lane_market_1986}
+Lane, R. E. (1986). Market Justice, Political Justice. \emph{American
+Political Science Review}, \emph{80}(2), 383-402.
+\url{https://doi.org/10.2307/1958264}
+
+\bibitem[\citeproctext]{ref-lee_fairness_2024}
+Lee, J.-S., \& Stacey, M. (2024). Fairness Perceptions of Educational
+Inequality: The Effects of Self-Interest and Neoliberal Orientations.
+\emph{The Australian Educational Researcher}, \emph{51}(4), 1215-1237.
+\url{https://doi.org/10.1007/s13384-023-00636-6}
+
+\bibitem[\citeproctext]{ref-lindh_public_2015}
+Lindh, A. (2015). Public Opinion against Markets? Attitudes towards
+Market Distribution of Social Services -- A Comparison of 17 Countries.
+\emph{Social Policy \& Administration}, \emph{49}(7), 887-910.
+\url{https://doi.org/10.1111/spol.12105}
+
+\bibitem[\citeproctext]{ref-lindh_it_2017}
+Lindh, A. (2017). Is It Just That People with Higher Incomes Can Buy
+Better Education and Health Care? \emph{57225}, \emph{17}, 69-80.
+
+\bibitem[\citeproctext]{ref-liu_does_2026}
+Liu, C., \& Wang, J. (2026). Does Education Legitimise Inequality?
+Comparative Analysis of Income Inequality, Education, and Meritocratic
+Beliefs. \emph{The British Journal of Sociology}, \emph{77}(1), 5-18.
+\url{https://doi.org/10.1111/1468-4446.70029}
+
+\bibitem[\citeproctext]{ref-mau_inequality_2015}
+Mau, S. (2015). \emph{Inequality, Marketization and the Majority Class:
+Why Did the European Middle Classes Accept Neo-Liberalism?} Springer.
+
+\bibitem[\citeproctext]{ref-mijs_unfulfillable_2016}
+Mijs, J. J. B. (2016). The Unfulfillable Promise of Meritocracy: Three
+Lessons and Their Implications for Justice in Education. \emph{Social
+Justice Research}, \emph{29}(1), 14-34.
+\url{https://doi.org/10.1007/s11211-014-0228-0}
+
+\bibitem[\citeproctext]{ref-mijs_paradox_2021}
+Mijs, J. J. B. (2021). The Paradox of Inequality: Income Inequality and
+Belief in Meritocracy Go Hand in Hand. \emph{Socio-Economic Review},
+\emph{19}(1), 7-35. \url{https://doi.org/10.1093/ser/mwy051}
+
+\bibitem[\citeproctext]{ref-nye_education_2026}
+Nye, J. V., Bryukhanov, M., Litman, C., \& Polyachenko, S. (2026).
+Education and Market Liberal Preferences. \emph{Journal of Economic
+Behavior \& Organization}, \emph{241}, 107387.
+\url{https://doi.org/10.1016/j.jebo.2025.107387}
+
+\bibitem[\citeproctext]{ref-oecd_education_2025}
+OECD. (2025). \emph{Education at a Glance 2025: OECD Indicators}. OECD
+Publishing. \url{https://doi.org/10.1787/1c0d9c79-en}
+
+\bibitem[\citeproctext]{ref-piketty_equality_2025}
+Piketty, T., \& Sandel, M. J. (2025). \emph{Equality: What It Means and
+Why It Matters}. Polity Press.
+
+\bibitem[\citeproctext]{ref-sandel_tyranny_2020}
+Sandel, M. J. (2020). \emph{The Tyranny of Merit: What's Become of the
+Common Good?} Penguin UK.
+
+\bibitem[\citeproctext]{ref-satz_why_2010}
+Satz, D. (2010). \emph{Why Some Things Should Not Be for Sale: The Moral
+Limits of Markets}. Oxford University Press.
+
+\bibitem[\citeproctext]{ref-schultz_investment_1961}
+Schultz, T. W. (1961). Investment in Human Capital. \emph{The American
+Economic Review}, \emph{51}(1), 1-17.
+\url{https://www.jstor.org/stable/1818907}
+
+\bibitem[\citeproctext]{ref-sin_they_2026}
+Sin, P., Son Hing, L. S., Pereira, S., \& Gill, H. (2026). They Work
+Hard for Their Money\ldots or Do They? The Role of Meritocracy Beliefs
+on Evaluations of Pay Dispersion. \emph{Social Justice Research},
+\emph{39}(1), 1-41. \url{https://doi.org/10.1007/s11211-025-00469-x}
+
+\bibitem[\citeproctext]{ref-soler-martinez_income_2025}
+Soler‐Martínez, F. M., García‐Sánchez, E., \& Willis, G. B. (2025).
+Beyond Income Disparities: Perceived Health and Education Inequities
+Drive Actions to Reduce Economic Inequality. \emph{European Journal of
+Social Psychology}, \emph{55}(2), 396-415.
+\url{https://doi.org/10.1002/ejsp.3151}
+
+\bibitem[\citeproctext]{ref-vannoord_educationbased_2019}
+Van Noord, J., Spruyt, B., Kuppens, T., \& Spears, R. (2019).
+Education-Based Status in Comparative Perspective: The Legitimization of
+Education as a Basis for Social Stratification. \emph{Social Forces},
+\emph{98}(2), 649-676. \url{https://doi.org/10.1093/sf/soz012}
+
+\bibitem[\citeproctext]{ref-zhu_meritocratic_2025}
+Zhu, L. (2025). Meritocratic Beliefs in the United States, Finland, and
+China: A Multidimensional Approach Using Latent Class Analysis.
+\emph{The British Journal of Sociology}, \emph{76}(1), 153-172.
+\url{https://doi.org/10.1111/1468-4446.13152}
 
 \end{CSLReferences}
-
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{part}{Apéndices}
-\appendix
-
-\chapter{Instrumentos de
-levantamiento}\label{instrumentos-de-levantamiento}
-
-Incluye cuestionarios, guias de entrevista, etc.
-
-\chapter{Tablas adicionales}\label{tablas-adicionales}
-
-Tablas extendidas, tests de robustez, etc.
 
 
 \backmatter
