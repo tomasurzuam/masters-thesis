@@ -321,6 +321,20 @@
 \renewcommand*{\appendixname}{Anexo}
 \renewcommand*{\appendixtocname}{Anexos}
 \renewcommand*{\appendixpagename}{Anexos}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \makeatletter
 \@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
 \makeatother
@@ -369,7 +383,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Preferences for market justice in education: The role of meritocratic beliefs in a comparative perspective},
+  pdftitle={Preferences for market justice in education: The role of meritocratic beliefs in the Chilean context},
   pdfauthor={Tomás Urzúa Moreno},
   pdflang={es},
   colorlinks=true,
@@ -381,16 +395,16 @@
 
 
 \title{Preferences for market justice in education: The role of
-meritocratic beliefs in a comparative perspective}
+meritocratic beliefs in the Chilean context}
 \usepackage{etoolbox}
 \makeatletter
 \providecommand{\subtitle}[1]{% add subtitle to \maketitle
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{Tesis de Magíster}
+\subtitle{Masters thesis}
 \author{Tomás Urzúa Moreno}
-\date{16 de junio de 2026}
+\date{15 de julio de 2026}
 \begin{document}
 \frontmatter
 \maketitle
@@ -497,116 +511,195 @@ meritocratic beliefs in a comparative perspective}
 \markboth{Abstract}{Abstract}
 
 \small\textbf{Palabras clave:} Market justice preferences; Education;
-Meritocratic beliefs; Cross-country; Macrostructural factors \normalsize
+Meritocratic beliefs; Chile; Latent class analysis \normalsize
+
+The commodification of education has reshaped not only how educational
+systems are organized but also how people evaluate what counts as fair
+in this domain. Market justice---the normative principle that access to
+and quality of education should depend on an individual's or family's
+ability to pay---has been consistently linked to meritocratic beliefs,
+which legitimize inequalities by attributing outcomes to individual
+effort and talent rather than to structural conditions. However, most
+research treats meritocracy as a one-dimensional construct, overlooking
+that meritocratic and privilege-based beliefs can coexist within the
+same individuals. Building on a multidimensional framework that
+distinguishes perceptions from preferences and merit from privilege,
+this study asks how patterns of meritocratic beliefs are configured in
+the population and how these configurations relate to preferences for
+market justice in education. I use representative data from the Chilean
+survey EDUMERCO (N = 3,470), collected in 2025 among adults aged 18 to
+75 in the Santiago Metropolitan Region. I first apply latent class
+analysis to identify configurations groups of meritocratic and
+privilege-based beliefs, and then estimate ordinal logistic regression
+models to examine how membership in these belief classes relates to
+education market justice preferences, net of educational level,
+political identification, and sociodemographic controls, with a
+robustness check on a student subsample. By moving beyond a
+unidimensional view of meritocracy, this study aims to show that
+meritocratic beliefs do not operate as a single, uniform mechanism of
+legitimation but as a multidirectional one whose relationship with
+market justice varies across groups. The findings are expected to inform
+how normative judgments about educational fairness are shaped in a
+highly unequal, market-oriented society such as Chile, offering evidence
+to support policies aimed at advancing educational justice.
+
+\textbf{Preferred journal for submitting the article}: \emph{Social
+Justice Reseach}
 
 \bookmarksetup{startatroot}
 
 \chapter{Introduction}\label{introduction}
 
-The commodification of education has been one of the most significant
-transformations in the organization of welfare states over the past few
-decades. Although education has traditionally been a social service
-guaranteed by the state, many countries have undergone a process of
-commodification that has led to a relative decline in public funding and
-an expansion of private education provision
+Education has historically been a central element in the functioning of
+welfare states by promoting access to opportunities and upward social
+mobility (\citeproc{ref-castles_oxford_2010}{Castles et~al., 2010}).
+However, the commodification of education in recent years has profoundly
+transformed the purpose of educational institutions
+(\citeproc{ref-brancaleone_educational_2011}{Brancaleone \& O'Brien,
+2011}; \citeproc{ref-oecd_education_2025}{OECD, 2025}). In this context,
+the expansion of private education has created a competitive environment
+with the public sector, leading, in some cases, to the perception that
+paying for education is synonymous with quality
 (\citeproc{ref-busemeyer_welfare_2020}{Busemeyer \& Iversen, 2020};
 \citeproc{ref-esping-andersen_politics_1985}{Esping-Andersen, 1985};
-\citeproc{ref-lindh_public_2015}{Lindh, 2015};
-\citeproc{ref-oecd_education_2025}{OECD, 2025}). This shift toward
-market logic has not only transformed the institutional functioning of
-education systems but also people's beliefs and preferences regarding
-how educational opportunities should be distributed, demonstrating the
-impact of economic organization on micro-level dynamics
-(\citeproc{ref-busemeyer_inequality_2012}{Busemeyer, 2012};
-\citeproc{ref-busemeyer_investing_2018}{Busemeyer et~al., 2018};
-\citeproc{ref-koos_moral_2019}{Koos \& Sachweh, 2019}). In some cases,
-these beliefs have led to the legitimization of educational inequality
-(\citeproc{ref-castillo_changes_2025}{Castillo, Iturra, et~al., 2025};
-\citeproc{ref-piketty_equality_2025}{Piketty \& Sandel, 2025})
+\citeproc{ref-lindh_public_2015}{Lindh, 2015}). This phenomenon is
+particularly concerning in countries such as Chile, the United States,
+and Australia, where educational provision is primarily private
+(\citeproc{ref-castles_oxford_2010}{Castles et~al., 2010};
+\citeproc{ref-lee_fairness_2024}{Lee \& Stacey, 2024};
+\citeproc{ref-valenzuela_socioeconomic_2014}{Valenzuela et~al., 2014}).
+Thus, the commodification of education has led to tangible consequences,
+such as school segregation, but it has also changed people's moral
+schemes about what is considered fair in education
+(\citeproc{ref-brancaleone_educational_2011}{Brancaleone \& O'Brien,
+2011}; \citeproc{ref-fourcade_moral_2007}{Fourcade \& Healy, 2007};
+\citeproc{ref-koos_moral_2019}{Koos \& Sachweh, 2019};
+\citeproc{ref-piketty_equality_2025}{Piketty \& Sandel, 2025}).
 
-Meritocracy holds that social rewards should be distributed on the basis
-of individual effort and talent, making it one of the main normative
-principles associated with both education and distributional preferences
-(\citeproc{ref-sandel_tyranny_2020}{Sandel, 2020}). Various studies have
-shown that meritocratic beliefs are linked to higher acceptance of
-inequality, as they attribute success and failure primarily to
-individual responsibility, functioning as a cultural mechanism that
-justifies social hierarchies and diminishes perceptions of structural
-factors that shape individual trajectories
+Although one might expect most people to support the public
+option---especially in countries with greater inequality---various
+studies have shown that some segments of the population support the
+private alternative and may even endorse the inequalities it generates
+(\citeproc{ref-lindh_public_2015}{Lindh, 2015}). This runs counter to
+general notions of redistribution and social justice, which are based on
+the principles of equality and equity
+(\citeproc{ref-walzer_spheres_2010}{Walzer, 2010}). In this sense, the
+private architecture of education has reshaped people's sense of
+justice. The concept of ``market justice'' proposed by Lane
+(\citeproc{ref-lane_market_1986}{1986}) is highly relevant in this
+context; it holds that access to education and its quality should be
+determined by an individual's or a family's ability to pay. By treating
+money as the guiding principle of education provision, this concept
+alludes to a distributive judgment but one focused on legitimizing
+inequalities rather than on the equitable distribution of resources,
+making it an essential element for understanding the cultural and
+institutional transformations brought about by the commodification of
+education.
+
+The literature suggests that meritocracy is among the most significant
+factors in legitimizing inequalities, and particularly in market
+justice. Despite being a distributive system based on effort and talent,
+several studies have shown that meritocratic beliefs are linked to the
+acceptance of inequality, as they attribute responsibility for successes
+and failures primarily to individual agency, which functions as a
+cultural mechanism that justifies social hierarchies and diminishes the
+perception of the structural factors that shape individual trajectories
 (\citeproc{ref-darnon_belief_2018}{Darnon et~al., 2018};
 \citeproc{ref-heuer_legitimizing_2020}{Heuer et~al., 2020};
 \citeproc{ref-mau_inequality_2015}{Mau, 2015};
 \citeproc{ref-mijs_unfulfillable_2016}{Mijs, 2016};
-\citeproc{ref-mijs_paradox_2021}{Mijs, 2021}). However, the
-understanding of meritocratic beliefs has evolved in recent years, no
-longer being viewed as a one-dimensional phenomenon, but rather as
-capable of coexisting with other beliefs that acknowledge structural
-conditions and privilege, thereby overcoming a methodological and
-theoretical limitation
-(\citeproc{ref-castillo_multidimensional_2023}{Castillo et~al., 2023};
-\citeproc{ref-zhu_meritocratic_2025}{Zhu, 2025}). Within the
-multidimensional framework of meritocracy, some studies have proposed a
-distinction between meritocratic perceptions and structural perceptions
-(\citeproc{ref-zhu_meritocratic_2025}{Zhu, 2025}); others have focused
-on descriptive and ascriptive dimensions of effort, talent, and
-privilege (\citeproc{ref-castillo_multidimensional_2023}{Castillo
-et~al., 2023}; \citeproc{ref-duru-bellat_whos_2012}{Duru-Bellat \&
-Tenret, 2012}; \citeproc{ref-sin_they_2026}{Sin et~al., 2026}).
-
-Several studies have examined the effect of education on the
-justification of inequalities (\citeproc{ref-liu_does_2026}{Liu \& Wang,
-2026}; \citeproc{ref-nye_education_2026}{Nye et~al., 2026}), or the
-relationship between meritocracy and perceptions of inequality
-(\citeproc{ref-bartram_does_2023}{Bartram, 2023};
+\citeproc{ref-mijs_paradox_2021}{Mijs, 2021}). Now, in the field of
+market justice, previous research has shown a positive association
+between perception of meritocracy and market justice
+(\citeproc{ref-castillo_socialization_2024}{Castillo et~al., 2024};
 \citeproc{ref-castillo_changes_2025}{Castillo, Iturra, et~al., 2025};
-\citeproc{ref-mijs_paradox_2021}{Mijs, 2021}), but to our knowledge, no
-research has examined market preferences in education and their
-relationship to meritocratic beliefs from a multidimensional and
-comparative perspective. To fill this gap, this study aims to analyze
-the role of meritocratic beliefs in preferences for market justice in
-education and their interaction with institutional contexts. The concept
-of market justice refers to the belief that access to and the quality of
-social services should be determined by individual or family ability to
-pay, and is thus associated with the legitimization of inequalities from
-a market-oriented perspective. (\citeproc{ref-lane_market_1986}{Lane,
-1986}; \citeproc{ref-lindh_public_2015}{Lindh, 2015}).
+\citeproc{ref-castillo_justification_2026}{Castillo et~al., 2026}). More
+specifically, meritocratic effort orientation has been found to be a key
+driver of education market justice preferences among both adults and
+students (\citeproc{ref-castillo_socialization_2024}{Castillo et~al.,
+2024}; \citeproc{ref-castillo_changes_2025}{Castillo, Iturra, et~al.,
+2025}). In this way, meritocratic beliefs serve as auxiliary frames of
+reference for all individuals; however, this raises the questions: Are
+the frames of reference provided by meritocratic beliefs the same for
+everyone? Do these frames share the same type of association with market
+justice in education?
 
-This study aims to answer three questions: (1) To what extent do
-meritocratic beliefs influence preferences for market justice in
-education? (2) How do institutional designs and preferences for market
-justice in education interact? (3) Are there significant differences
-across countries? We argue that preferences for market justice in
-education are closely related to two factors: meritocratic beliefs and a
-country's institutional designs. On the one hand, meritocratic beliefs
-have been shown to be a determinant of distributional preferences and
-perceptions of inequality, where those who perceive more meritocracy are
-likely to be more inclined to prefer market justice in education {[};
-Castillo et~al. (\citeproc{ref-castillo_justification_2026}{2026});
-Castillo, Laffert, et~al.
-(\citeproc{ref-castillo_perceptions_2025}{2025}); Castillo et~al.
-(\citeproc{ref-castillo_socialization_2024}{2024}); Darnon et~al.
-(\citeproc{ref-darnon_belief_2018}{2018}); Heuer et~al.
-(\citeproc{ref-heuer_legitimizing_2020}{2020}); Mijs
-(\citeproc{ref-mijs_paradox_2021}{2021}){]}. On the other hand,
-countries' institutional designs appear to be an important factor in
-shaping people's beliefs
-(\citeproc{ref-busemeyer_education_2013}{Busemeyer, 2013};
-\citeproc{ref-liu_does_2026}{Liu \& Wang, 2026}), and we hypothesize
-that countries with higher levels of economic inequality, as well as
-those with greater public investment in education, will exhibit an
-aversion to market justice in education.
+Although many scholars have shown interest in meritocratic beliefs, most
+adopt a one-dimensional perspective. For example, they often view
+meritocratic beliefs as mutually exclusive with those that acknowledge
+privileges in society, such as social and economic capital. This has
+significant implications for our understanding of social reality, as it
+prevents us from observing the multidimensional nature of meritocracy.
+Recognizing this, various authors have developed conceptual frameworks
+for studying meritocracy
+(\citeproc{ref-duru-bellat_whos_2012}{Duru-Bellat \& Tenret, 2012};
+\citeproc{ref-mijs_inequality_2018}{Mijs, 2018}); for example, Castillo
+et~al. (\citeproc{ref-castillo_multidimensional_2023}{2023}) proposes a
+novel conceptual framework that distinguishes between meritocratic
+factors---such as effort and talent---and factors of privilege---such as
+social networks and a wealthy family. Furthermore, this framework
+distinguishes between perceptions and preferences, allowing us to
+understand that meritocratic beliefs and beliefs about privilege are
+neither opposites nor mutually exclusive; they can coexist. However,
+there are caveats regarding how these meritocratic beliefs take shape
+and operate differently in people's minds. Concretely, although we
+already know that meritocratic beliefs are compatible with structuralist
+or privilege-based beliefs, there is a lack of clarity about the
+different configurations of beliefs in people's minds and how these
+groups of individuals are characterized by similar belief patterns.
 
-To address these issues, we use data from the 2019 International Social
-Survey Program (ISSP), the World Inequality Database (WID), and UNESCO.
-First, we apply latent class analysis to identify profiles of
-meritocratic beliefs, and then conduct multinomial logistic regression
-to examine the relationship between these profiles and preferences for
-market justice in education, while incorporating sociodemographic and
-institutional factors. In doing so, this research aims to contribute to
-the literature on the relationship between perceptions of inequality and
-meritocracy, placing special emphasis on micro-level foundations and
-their interaction with institutional contexts to understand how beliefs
-about educational inequality are formed.
+Some studies have sought to understand the diversity of meritocratic
+beliefs in person-centered approaches
+(\citeproc{ref-vanhootegem_worlds_2022}{Van Hootegem, 2022};
+\citeproc{ref-zhu_meritocratic_2025}{Zhu, 2025}), but their
+operationalizations of meritocracy do not distinguish between
+perceptions and preferences, limiting the scope of interpretations based
+on these measurements. We see there is also research that has already
+examined the link between meritocracy and market-oriented preferences in
+education, but without outlining a typology of beliefs that would allow
+for an appreciation of variations across groups in the relationship
+between these two variables
+(\citeproc{ref-castillo_socialization_2024}{Castillo et~al., 2024};
+\citeproc{ref-castillo_changes_2025}{Castillo, Iturra, et~al., 2025};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015}) In light of the above, I
+aim to contribute to this line of research based on two developments:
+(1) To identify different patterns of meritocratic beliefs using the
+conceptual framework proposed by Castillo et~al.
+(\citeproc{ref-castillo_multidimensional_2023}{2023}). (2) To analyze
+how these patterns of meritocratic beliefs relate to the preference for
+market justice in education.
+
+The study of the relationship between meritocratic beliefs and market
+justice in education is particularly relevant in Chile, a country that
+has internalized market-based structures into its social services since
+the military dictatorship, during which education was one of the sectors
+that underwent extensive privatization---the foundations of which remain
+in place to this day (\citeproc{ref-bellei_problema_2025}{Bellei, 2025};
+\citeproc{ref-corvalan_mercado_2016}{Corvalán et~al., 2016};
+\citeproc{ref-valenzuela_socioeconomic_2014}{Valenzuela et~al., 2014}).
+Furthermore, the country's high levels of inequality are striking given
+its strong adherence to meritocracy, especially regarding the value
+placed on effort (\citeproc{ref-castillo_changes_2025}{Castillo, Iturra,
+et~al., 2025}). Thus, this study aims to respond to two questions: (1)
+How do patterns of meritocratic beliefs manifest in terms of the number
+of identifiable groups and their sizes? (2) To what extent do
+meritocratic belief patterns influence preferences for market-based
+justice in education?.
+
+To address these issues, I use representative data from the Chilean
+survey EDUMERCO (N = 3470), a 2025 study that examined attitudes,
+emotions, and behaviors among adults aged 18 to 75 regarding
+inequalities and meritocracy. First, I applied latent class analysis to
+identify configurations of meritocratic beliefs, and then conducted
+ordinal logistic regression to examine the relationship between these
+profiles and preferences for market justice in education, while
+incorporating sociodemographic and socioeconomic factors. Thus, this
+research expands our understanding of how people's normative judgments
+vary and, above all, attempts to clarify that meritocracy does not
+function as a one-way mechanism for legitimizing educational
+inequalities. This can provide an assessment of how people normatively
+perceive the functioning of education, which may serve as a basis for
+developing policies to promote educational justice.
 
 \bookmarksetup{startatroot}
 
@@ -616,8 +709,8 @@ background}\label{theoretical-and-empirical-background}
 \section{Market justice preferences}\label{market-justice-preferences}
 
 Welfare states have undergone several institutional transformations in
-recent years, with private expansion strongly penetrating the field of
-social services alongside public provision
+recent years, with private expansion strongly penetrating social
+services alongside public provision
 (\citeproc{ref-busemeyer_welfare_2020}{Busemeyer \& Iversen, 2020}).
 Such processes have led to changes in the architecture of the
 institutions responsible for social welfare. On the one hand, private
@@ -662,7 +755,7 @@ Education is one of the key dimensions in the study of market justice,
 given the commodification processes educational systems have undergone
 in recent decades. The growing prominence of the private sector in
 education, coupled with the implementation of market-driven logic, has
-transformed the structure of educational systems, where students and
+transformed the structure of educational systems where students and
 their families are viewed as consumers of a service
 (\citeproc{ref-brancaleone_educational_2011}{Brancaleone \& O'Brien,
 2011}; \citeproc{ref-lindh_public_2015}{Lindh, 2015}). These changes
@@ -682,10 +775,10 @@ individual level, socioeconomic status emerges as a consistent
 predictor; those in more advantaged positions tend to exhibit greater
 preferences for market justice (\citeproc{ref-koos_moral_2019}{Koos \&
 Sachweh, 2019}; \citeproc{ref-lindh_public_2015}{Lindh, 2015}), a
-pattern reflecting a moral economy oriented toward justifying status for
-those who benefit from the market order. In this regard, political
-ideology shows a clear association, with right-leaning individuals
-tending to favor market-oriented distributional principles
+pattern reflecting a moral economy that justifies status for those who
+benefit from the market order. In this regard, political ideology shows
+a clear association, with right-leaning individuals tending to favor
+market-oriented distributional principles
 (\citeproc{ref-castillo_socialization_2024}{Castillo et~al., 2024};
 \citeproc{ref-lee_fairness_2024}{Lee \& Stacey, 2024}). At the
 contextual level, the relative weight of private and public service
@@ -698,97 +791,586 @@ where public provision prevails
 \citeproc{ref-immergut_it_2020}{Immergut \& Schneider, 2020};
 \citeproc{ref-lindh_public_2015}{Lindh, 2015}).
 
-\section{Education and legitimization of
-inequalities}\label{education-and-legitimization-of-inequalities}
+\section{Meritocratic beliefs}\label{meritocratic-beliefs}
 
-Education is one of the core pillars of societal structure, but the role
-it plays has been the subject of an unresolved debate. From a
-theoretical perspective, education plays an ambivalent role: on the one
-hand, it has been argued that it promotes access to opportunities, skill
-development, and the reduction of social inequalities. This perspective
-is supported by various mechanisms, such as human capital development
-and/or the development of critical awareness of structural problems
-(\citeproc{ref-becker_human_1993}{Becker, 1993};
+When discussing education, it is difficult not to encounter the concept
+of meritocracy. Based on Michael Young's work \emph{The Rise of
+Meritocracy} (1962) (\citeproc{ref-young_rise_2017}{2017}), this concept
+is understood as the distribution of rewards based on effort and talent.
+For their part, schools award credentials that reflect students'
+performance in various subjects. In this sense, meritocracy is a
+fundamental element of every educational institution, as it is one of
+the principles governing the awarding of credentials. Thus, beliefs
+about the educational system are often closely tied to meritocracy
+(\citeproc{ref-clycq_meritocracy_2014}{Clycq et~al., 2014};
+\citeproc{ref-darnon_belief_2018}{Darnon et~al., 2018}).
+
+In the field of education, meritocracy has been used as a distributive
+principle, but within this framework, it has also been linked to the
+justification of inequalities. Starting from Adams' theory of equity
+(\citeproc{ref-adams_understanding_1963}{1963}), meritocracy operates as
+a universal equality principle, where rewards should be commensurate
+with effort. Several studies have shown that meritocratic beliefs are
+associated with individualistic beliefs, such as an aversion to
+redistribution and a preference for market justice
+(\citeproc{ref-bartram_does_2023}{Bartram, 2023};
+\citeproc{ref-castillo_socialization_2024}{Castillo et~al., 2024};
+\citeproc{ref-castillo_changes_2025}{Castillo, Iturra, et~al., 2025};
+\citeproc{ref-mijs_paradox_2021}{Mijs, 2021};
+\citeproc{ref-sin_they_2026}{Sin et~al., 2026}), and are characteristic
+of those in more privileged social positions
+(\citeproc{ref-heuer_legitimizing_2020}{Heuer et~al., 2020}). In these
+cases, meritocracy is used to legitimize positions, with those who
+benefit from the system often justifying their success on the basis of
+their own merit, overlooking the structural conditions that shape
+reality. Thus, the merit narrative is used to support the idea that
+money should determine the quality and access to education. This
+normative judgment runs counter to educational justice, as it hinders
+equal opportunities and, ultimately, determines students' educational
+trajectories (\citeproc{ref-moyano_justicia_2020}{Moyano, 2020};
+\citeproc{ref-walzer_spheres_2010}{Walzer, 2010}).
+
+In the meritocracy research framework, most studies have used survey
+items, with the International Social Survey Program as the main
+instrument for measuring and analyzing meritocratic beliefs in both
+national and international contexts. These items show the relevance of
+meritocratic and privilege factors for getting ahead in life, like
+effort and contacts, respectively. Following this conceptual model,
+there is a tradition of studying meritocratic beliefs from a
+unidimensional perspective
+(\citeproc{ref-garcia-sanchez_vicious_2019}{García-Sánchez et~al.,
+2019}; \citeproc{ref-mijs_paradox_2021}{Mijs, 2021}). The fundamental
+assumption of this perspective is that the factors are negatively
+correlated; for example, if one expresses a higher degree of
+meritocratic beliefs, then, consequently, beliefs that account for
+structural factors decrease. The problem with this approach is that it
+has serious implications for understanding social reality, since
+people's beliefs cannot be assumed to follow a rational logic where, if
+one goes up, the other must go down. To address this, in recent years,
+some authors have proposed a multidimensional perspective on
+meritocracy, constructing frameworks that allow for distinguishing the
+dimension of merit from that of privilege, on the one hand, and
+differentiating perceptions from preferences on the other
+(\citeproc{ref-castillo_multidimensional_2023}{Castillo et~al., 2023};
+\citeproc{ref-duru-bellat_whos_2012}{Duru-Bellat \& Tenret, 2012};
+\citeproc{ref-zhu_meritocratic_2025}{Zhu, 2025}). These advances have
+led to two key contributions: (1) to capture the coexistence of beliefs
+that may be considered contradictory and, consequently, (2) to
+demonstrate that people can hold different sets of meritocratic beliefs.
+
+While the multidimensional perspective on meritocracy allows for a more
+detailed examination of people's beliefs, a caveat remains about the
+individuals who hold them. So far, we do not know how different
+combinations of these dimensions operate in people's minds or how
+prevalent they are in populations. Several methods have addressed these
+issues by estimating how variables can group into persons, with Latent
+Class Analysis (LCA) among the most promising approaches. LCA is a
+person-centered approach that allows us to identify the heterogeneity of
+individuals' beliefs by clustering them, going beyond the scope of
+variable-centered methods, which assume that the association between two
+or more variables in the population behaves uniformly
+(\citeproc{ref-cech_perceiving_2010}{Cech \& Blair-Loy, 2010}). In our
+context, one advantage of this approach is that it accommodates the
+possibility that individuals may hold both meritocratic and
+structuralist beliefs, allowing for a theoretical and methodological
+examination of multidimensional meritocracy
+(\citeproc{ref-nylund-gibson_ten_2018}{Nylund-Gibson \& Choi, 2018};
+\citeproc{ref-zhu_meritocratic_2025}{Zhu, 2025}).
+
+Although LCA allows us to identify different configurations of
+meritocratic beliefs, it is not possible to define in advance the types
+of patterns that will be found. In this regard, the evidence suggests
+that one of the most common patterns is pure meritocratic beliefs, in
+which individuals consider merit important and structural factors
+unimportant (\citeproc{ref-heuer_legitimizing_2020}{Heuer et~al., 2020};
+\citeproc{ref-xian_bootstraps_2017}{Xian \& Reynolds, 2017};
+\citeproc{ref-zhu_meritocratic_2025}{Zhu, 2025}). On the other hand, a
+pattern has also been identified in which success is attributed to
+family and background conditions rather than effort
+(\citeproc{ref-c.palomino_wealth_2026}{C. Palomino \& Sebastian, 2026}).
+Finally, a pattern of dual consciousness has been identified, in which
+individuals consider merit, family connections, and wealth to be
+important (\citeproc{ref-zhu_meritocratic_2025}{Zhu, 2025}). Therefore,
+based on previous studies, this research hypothesizes three types of
+groups based on meritocratic beliefs:
+
+\(H_{1}\): \textbf{(1) purely meritocratic beliefs, viewing merits as
+important while deeming privilege factors as irrelevant; (2) aware of
+privilege beliefs, viewing privilege factors as important while deeming
+merits as unimportant; (3) dual consciousness, viewing merits and
+privilege factors as important simultaneously}.
+
+Each pattern of meritocratic beliefs can be situated within a framework
+of meaning related to a preference for market justice in education. As
+the literature suggests, the perception of meritocracy is widely
+associated with the legitimization of inequalities---and specifically
+with market justice---so it is to be expected that the first group would
+adhere to this pattern
+(\citeproc{ref-castillo_perceptions_2025}{Castillo, Laffert, et~al.,
+2025}; \citeproc{ref-castillo_changes_2025}{Castillo, Iturra, et~al.,
+2025}). With regard to the second group, the prevalence of privilege
+could be directly associated with disagreement over education-market
+justice preferences, since observing that society distributes rewards
+based on factors unrelated to merit might seem unfair
+(\citeproc{ref-alesina_preferences_2005}{Alesina \& La Ferrara, 2005}).
+Finally, the pattern of dual consciousness may demonstrate that the
+recognition of merit and privilege in the functioning of society could
+imply an understanding that structural conditions play an important role
+in individual outcomes, leading to opposition to the idea that access to
+and the quality of a service such as education should be based on
+economic conditions (\citeproc{ref-xian_bootstraps_2017}{Xian \&
+Reynolds, 2017}; \citeproc{ref-zhu_meritocratic_2025}{Zhu, 2025}). Based
+on the above, the following hypotheses emerge:
+
+\(H_{2}\): \textbf{Purely meritocratic beliefs class shows a positive
+association with education market justice preferences}
+
+\(H_{3}\): \textbf{Aware of privilege beliefs class shows a negative
+association with education market justice preferences}
+
+\(H_{4}\): \textbf{Dual consciousness beliefs class shows a negative
+association with education market justice preferences}
+
+\section{Associated factors}\label{associated-factors}
+
+There are various theories regarding how educational attainment affects
+people's redistributive preferences. On the one hand, there are theories
+that view education as a resource that enhances the development of
+technical skills and/or critical thinking, leading individuals to become
+aware of structural problems and, as a result, to support the reduction
+of inequality (\citeproc{ref-becker_human_1993}{Becker, 1993};
 \citeproc{ref-freire_pedagogia_2015}{Freire, 2015};
 \citeproc{ref-schultz_investment_1961}{Schultz, 1961}). On the other
-hand, education has been understood as a source of social inequalities,
-as it reproduces individuals' living conditions, preventing
-opportunities for intergenerational social mobility and, consequently,
-perpetuating the stratified order. These approaches have developed
-primarily through theories that draw on symbolic violence and social
-reproduction as mechanisms for legitimizing inequalities
+hand, in cultural reproduction theories, education has been understood
+as a source of social inequalities, as it reproduces individuals' living
+conditions, preventing opportunities for intergenerational social
+mobility and, consequently, perpetuating the stratified social order
 (\citeproc{ref-bourdieu_reproduccion_2019}{Bourdieu, 2019};
-\citeproc{ref-bowles_schooling_2011}{Bowles \& Gintis, 2011}). Thus,
-education can be understood through its enlightening role in social
-life, but also as a cog in the reproduction of inequalities in society.
+\citeproc{ref-bowles_schooling_2011}{Bowles \& Gintis, 2011}). Within
+the framework of redistributive preferences, reproductionist notions are
+grounded in self-interest theory, whereby those with higher levels of
+education tend to exhibit attitudes that reflect a desire to protect
+their privileged social positions, which could be understood as an
+aversion to redistribution or support for market-based justice. Thus,
+education can be understood not only as an enlightening force in social
+life but also as a cog in the reproduction of inequalities.
 
 Recent literature provides empirical support for these two theoretical
-approaches to education. For example, research by Bubak
-(\citeproc{ref-bubak_perceptions_2019}{2019}) found that higher levels
-of education are negatively associated with support for meritocracy,
-acknowledging that structural conditions determine individual outcomes.
-Along the same lines, using the 2009 ISSP survey, Zhu
-(\citeproc{ref-zhu_meritocratic_2025}{2025}) found that in Finland, the
-enlightening effect of education was present, unlike in the United
-States and China. In contrast, the research by Diwan \& Vartanova
-(\citeproc{ref-diwan_does_2020}{2020}) concluded that states
-deliberately use education to shape students' political attitudes in
-order to reproduce national identity. Likewise, Van Noord et~al.
+approaches to education. For example, research by Nye et~al.
+(\citeproc{ref-nye_education_2026}{2026}) found, in an analysis of 282
+country-year combinations from various international surveys, that in
+95\% of cases, education was positively associated with market-oriented
+attitudes. Likewise, Van Noord et~al.
 (\citeproc{ref-vannoord_educationbased_2019}{2019}) used data from 31
 countries to show that education is widely understood as the basis for
-social stratification. However, the results from Liu \& Wang
-(\citeproc{ref-liu_does_2026}{2026}) suggest that education does not
-fulfill a generalized function; rather, both the enlightening and the
-reproductionist roles exist but depend on the macro context, where the
-enlightening role is present in countries with low levels of inequality,
-while the legitimizing role is observed in countries with high levels of
-inequality.
+social stratification. Other studies have found that higher levels of
+education are associated with a greater preference for public investment
+(\citeproc{ref-busemeyer_inequality_2012}{Busemeyer, 2012}) However, the
+results from Liu \& Wang (\citeproc{ref-liu_does_2026}{2026}) suggest
+that education does not fulfill a generalized function; rather, both the
+enlightening and the reproductionist roles exist but depend on the level
+of education, where in countries with low inequality, basic education is
+associated with reproductionist positions, while in secondary and
+tertiary education, the enlightening role stands out.
 
-Besides to the functional role of education, a vast body of literature
-has situated education within the framework of redistributive
-preferences. In a cross-country study, Busemeyer et~al.
-(\citeproc{ref-busemeyer_investing_2018}{2018}) found that education is
-the policy field with the highest level of support for spending;
-however, when distinguishing between types of spending, higher levels of
-investment in private education are negatively associated with
-preferences for redistribution
-(\citeproc{ref-busemeyer_education_2013}{Busemeyer, 2013}). In
-country-specific studies such as those in Australia and Chile, most
-respondents stated that they consider it unfair for the quality of
-education to depend on parents' ability to pay
-(\citeproc{ref-castillo_changes_2025}{Castillo, Iturra, et~al., 2025};
-\citeproc{ref-lee_fairness_2024}{Lee \& Stacey, 2024}). Furthermore,
-based on correlational and experimental evidence, Soler‐Martínez et~al.
-(\citeproc{ref-soler-martinez_income_2025}{2025}) found that perceived
-educational inequality is associated with greater intolerance of
-inequality.
+Given the important role that education plays in shaping individuals'
+attitudes toward inequality, this study proposes the following
+hypothesis:
 
-Surveys have been the primary tool for studying educational
-inequalities, measuring the concept through individuals' perceptions. In
-this frame, ISSP, as one of the most globally recognized surveys for
-measuring inequality, poses the question: \emph{``Is it fair that
-high-income individuals have better education than lower-income
-individuals?''}. Some studies have incorporated this operationalization
-into national surveys (\citeproc{ref-castillo_changes_2025}{Castillo,
-Iturra, et~al., 2025}). Other studies have developed questions aimed at
-measuring the perceived gap in educational inequality (\emph{i.e., ``In
-your judgment, how large or small are the differences in education
-between the rich and poor in Spain?''})
-(\citeproc{ref-soler-martinez_income_2025}{Soler‐Martínez et~al.,
-2025}). Busemeyer et~al. (\citeproc{ref-busemeyer_investing_2018}{2018})
-conducted a survey in which the focus of the question was on the
-distribution of education spending, rather than on the judgment of
-inequality: \emph{Let's talk about the distribution of public spending
-in the education sector. Please tell me whether you would like to see
-more or less government spending in each of the following areas. Keep in
-mind that `more' or `much more' might require a tax increase}. All
-operationalizations share the general objective of measuring educational
-inequalities, but each employs a different strategy and focuses on a
-distinct dimension of the concept.
+\(H_{5}\): \textbf{Individuals with higher levels of education show
+higher education market justice preferences}
+
+In addition to educational level, the literature has shown that income
+is also an important factor in the study of attitudes toward inequality
+(\citeproc{ref-heuer_legitimizing_2020}{Heuer et~al., 2020};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015}). The evidence shows that
+higher-income individuals tend to support market-based distributive
+principles (\citeproc{ref-immergut_it_2020}{Immergut \& Schneider,
+2020}; \citeproc{ref-lindh_public_2015}{Lindh, 2015};
+\citeproc{ref-nye_education_2026}{Nye et~al., 2026}). In this context,
+among higher-status social groups, there is congruence between their
+attitudes and their individual outcomes---that is, a legitimization of
+the market as a distributor of rewards, serving as a justification for
+social status. Although the link between income and market justice can
+be tied to self-interest theories, Langsæther \& Evans
+(\citeproc{ref-langsaether_more_2020}{2020}) argues that social status
+does not always provide a rational explanation for attitudes toward
+inequality, making it necessary to test this relationship. Based on the
+literature, the corresponding hypothesis is:
+
+\(H_{6}\): \textbf{Individuals with higher incomes show higher education
+market justice preferences}
+
+Political ideology also influences people's attitudes toward inequality.
+In this regard, the scientific literature has shown that people with
+right-wing political ideologies tend to support a market-based
+distribution of welfare (\citeproc{ref-lee_fairness_2024}{Lee \& Stacey,
+2024}). Meanwhile, (\citeproc{ref-vanhootegem_worlds_2022}{Van Hootegem,
+2022}) found that right-wing individuals are less likely to adopt
+positions that support equity and equality. This finding is consistent
+with the study by Castillo, Iturra, et~al.
+(\citeproc{ref-castillo_changes_2025}{2025}), which found that only
+individuals identifying with right-wing ideologies showed a positive
+correlation with a preference for market justice in education. In this
+context, the following hypothesis is proposed:
+
+\(H_{7}\): \textbf{Right-wing individuals show higher education market
+justice preferences than those belonging to the left-wing}
+
+Finally, I examine the moderating role of education in the relationship
+between meritocratic belief patterns and preferences for education
+market justice. Given that education can play either an enlightenment or
+a reproductionist role, it would be interesting to observe how
+educational level can amplify or attenuate the relationship between each
+latent class and education market justice preferences. Since I do not
+have sufficient evidence to support this hypothesis, this analysis is
+exploratory. Thus, the following hypothesis emerges:
+
+\(H_{8}\): \textbf{Classes that are positively associated with education
+market justice preferences show an amplified effect when moderated by
+educational level}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=6.4in,height=\textheight,keepaspectratio]{input/images/h-reg.png}
+
+}
+
+\caption{\label{fig-h2}Conceptual map for hypotheses.}
+
+\end{figure}%
+
+\section{This study}\label{this-study}
+
+Considering the hypotheses, this study argues that implementing a
+private social services architecture has consequences for the
+population's normative judgments, with meritocracy emerging as a driving
+force shaping people's conceptions of justice in the educational sphere.
+Specifically, this research posits that meritocracy is a
+multidimensional concept, and based on this premise, it advances two
+main arguments: (1) Meritocratic beliefs are not subject to a rational
+or continuous logic; their multidimensional nature explains why such
+beliefs are organized into diverse patterns in people's minds. (2) Based
+on these different configurations of beliefs, meritocracy can be
+understood as a multidirectional mechanism for legitimizing inequalities
+based on ability to pay, thereby expanding the current framework of
+understanding regarding this issue. The aim is to highlight the
+importance of studying the link between education and meritocracy in a
+global context of commodification, where this relationship addresses the
+convergence of familial, cultural, and academic elements in shaping a
+sense of justice. In a broader sense, this research could inform
+policymakers' prioritization of public policies that promote educational
+justice.
+
+In light of the foregoing, it is worth analyzing this phenomenon in
+Chile, a country that offers an interesting case for examining how
+public attitudes toward the distribution of social services. Chile is
+one of the most unequal countries in the OECD, with a high concentration
+of income and wealth in the top decile
+(\citeproc{ref-chancel_world_2026}{Chancel et~al., 2026};
+\citeproc{ref-flores_top_2020}{Flores et~al., 2020}). This inequality is
+largely attributable to the neoliberal reforms of the civil-military
+dictatorship (1973--1989), subsequently expanded by democratic
+governments, which privatized and commodified key spheres of social
+reproduction through concessions and regulatory frameworks favorable to
+private provision (\citeproc{ref-madariaga_three_2020}{Madariaga, 2020};
+\citeproc{ref-pnud_desiguales_2017}{PNUD, 2017}). This model has
+produced structurally segmented systems in health care, education, and
+pensions, where access and quality depend on the ability to pay,
+benefiting higher-income sectors and relegating the poorest to limited,
+underfunded public alternatives
+(\citeproc{ref-boccardo_30_2020}{Boccardo, 2020};
+\citeproc{ref-castillo_perceptions_2025}{Castillo, Laffert, et~al.,
+2025}). The education system is characterized as one of the most
+privatized in the world, where the quality of private education
+surpasses that of public education due to the limited regulation of the
+education market, and where high levels of private-sector investment
+coexist with a lack of public funding, which is reflected in high levels
+of school segregation and a low regard for public education
+(\citeproc{ref-bellei_problema_2025}{Bellei, 2025};
+\citeproc{ref-ramos_educacion_2022}{Ramos, 2022};
+\citeproc{ref-valenzuela_socioeconomic_2014}{Valenzuela et~al., 2014}).
+Thus, in a context marked by high and durable inequalities, deep
+marketization of education, and the entrenchment of meritocratic
+beliefs, it becomes relevant to examine the link between meritocratic
+beliefs and preferences for education market justice
+(\citeproc{ref-castillo_perceptions_2025}{Castillo, Laffert, et~al.,
+2025}).
 
 \bookmarksetup{startatroot}
 
-\chapter{Methods}\label{methods}
+\chapter{Data, Variables and Methods}\label{data-variables-and-methods}
+
+\section{Data}\label{data}
+
+The data come from the EDUMERCO dataset, a survey conducted as part of
+the EDUMER-funded project that focused on beliefs and attitudes toward
+meritocracy and inequality. The survey was conducted in 2025 via
+Computer-Assisted Web Interviewing (CAWI) among adults aged 18 to 75 in
+the Santiago Metropolitan Region of Chile. The sampling design was a
+quota-based non-probability sample, with quotas for age, sex,
+educational level, and socioeconomic status that approximated the
+population parameters. The total sample consisted of 3,470 respondents.
+
+\section{Variables}\label{variables}
+
+The dependent variable of this study is the preference for market
+justice in education. This construct is measured using the following
+statement: ``It is just that high-income people have a better education
+for their children than people with lower incomes'' (``Es justo que las
+personas de altos ingresos tengan una mejor educación para sus hijos que
+las personas con ingresos más bajos'' in Spanish). The responses
+cathegories are based on a Likert scale from (1) ``strongly disagree''
+to (5) ``strongly agree''.
+
+The main independent variable in this study is meritocratic beliefs. To
+this end, two dimensions are distinguished: (1) meritocratic perceptions
+and preferences, and (2) perceptions and acceptance of privilege.
+Meritocratic and privilege-based perceptions and preferences were
+measured using the same items proposed in the original scale
+(\citeproc{ref-castillo_multidimensional_2023}{Castillo et~al., 2023}).
+The items are as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  Meritocratic perceptions: the extent to which effort and ability are
+  rewarded in Chile,
+\item
+  Meritocratic preferences: agreement with that those who work harder or
+  are more talented should be better rewarded,
+\item
+  Privilege perceptions: the extent to which success is perceived as
+  linked to connections and family wealth,
+\item
+  Privilege acceptance: agreement that it is acceptable for individuals
+  with better connections or wealthy parents to achieve greater success.
+\end{itemize}
+
+Each item is rated on a four-point Likert scale ranging from ``strongly
+disagree'' (1) to ``strongly agree'' (4), higher scores indicate
+stronger endorsement of the corresponding perception or preference.
+
+In addition, other independent variables considered are educational
+level and political identification. Educational level is measured using
+the question: ``What is the most recent course or level of study you
+completed?'' (``¿Cuál es el último curso o nivel de estudios que
+completó?'' in Spanish). The response categories range from 1 to 9,
+where higher values indicate a higher level of education among
+respondents. Political identification, meanwhile, is measured along a
+left-right axis using a 6-category scale, where 1 indicates right, 5
+indicates left, and 6 indicates independent.
+
+\begin{table}
+
+\caption{\label{tbl-desc}Descriptive statistics of variables}
+
+\centering{
+
+\centering\begingroup\fontsize{13}{15}\selectfont
+
+\begin{tabular}[t]{llr}
+\toprule
+Variable & Category & Valid N\\
+\midrule
+\addlinespace[0.3em]
+\multicolumn{3}{l}{\textbf{Dependent variable}}\\
+\hspace{1em}\cellcolor{gray!10}{Education market justice preferences} & \cellcolor{gray!10}{Agree} & \cellcolor{gray!10}{533}\\
+\cmidrule{1-3}
+\hspace{1em}Education market justice preferences & Desagree & 1308\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Education market justice preferences} & \cellcolor{gray!10}{Strongly agree} & \cellcolor{gray!10}{188}\\
+\cmidrule{1-3}
+\hspace{1em}Education market justice preferences & Strongly desagree & 1243\\
+\cmidrule{1-3}
+\addlinespace[0.3em]
+\multicolumn{3}{l}{\textbf{Independent variables}}\\
+\hspace{1em}\cellcolor{gray!10}{Effort perception} & \cellcolor{gray!10}{Agree} & \cellcolor{gray!10}{814}\\
+\cmidrule{1-3}
+\hspace{1em}Effort perception & Desagree & 1712\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Effort perception} & \cellcolor{gray!10}{Strongly agree} & \cellcolor{gray!10}{123}\\
+\cmidrule{1-3}
+\hspace{1em}Effort perception & Strongly desagree & 663\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Talent perception} & \cellcolor{gray!10}{Agree} & \cellcolor{gray!10}{1101}\\
+\cmidrule{1-3}
+\hspace{1em}Talent perception & Desagree & 1557\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Talent perception} & \cellcolor{gray!10}{Strongly agree} & \cellcolor{gray!10}{144}\\
+\cmidrule{1-3}
+\hspace{1em}Talent perception & Strongly desagree & 509\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Rich parents perception} & \cellcolor{gray!10}{Agree} & \cellcolor{gray!10}{1135}\\
+\cmidrule{1-3}
+\hspace{1em}Rich parents perception & Desagree & 299\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Rich parents perception} & \cellcolor{gray!10}{Strongly agree} & \cellcolor{gray!10}{1797}\\
+\cmidrule{1-3}
+\hspace{1em}Rich parents perception & Strongly desagree & 125\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Contact perception} & \cellcolor{gray!10}{Agree} & \cellcolor{gray!10}{1216}\\
+\cmidrule{1-3}
+\hspace{1em}Contact perception & Desagree & 113\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Contact perception} & \cellcolor{gray!10}{Strongly agree} & \cellcolor{gray!10}{1973}\\
+\cmidrule{1-3}
+\hspace{1em}Contact perception & Strongly desagree & 87\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Effort preference} & \cellcolor{gray!10}{Agree} & \cellcolor{gray!10}{1236}\\
+\cmidrule{1-3}
+\hspace{1em}Effort preference & Desagree & 181\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Effort preference} & \cellcolor{gray!10}{Strongly agree} & \cellcolor{gray!10}{1839}\\
+\cmidrule{1-3}
+\hspace{1em}Effort preference & Strongly desagree & 85\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Talent preference} & \cellcolor{gray!10}{Agree} & \cellcolor{gray!10}{1408}\\
+\cmidrule{1-3}
+\hspace{1em}Talent preference & Desagree & 739\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Talent preference} & \cellcolor{gray!10}{Strongly agree} & \cellcolor{gray!10}{942}\\
+\cmidrule{1-3}
+\hspace{1em}Talent preference & Strongly desagree & 118\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Rich parents preference} & \cellcolor{gray!10}{Agree} & \cellcolor{gray!10}{1322}\\
+\cmidrule{1-3}
+\hspace{1em}Rich parents preference & Desagree & 1072\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Rich parents preference} & \cellcolor{gray!10}{Strongly agree} & \cellcolor{gray!10}{228}\\
+\cmidrule{1-3}
+\hspace{1em}Rich parents preference & Strongly desagree & 470\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Contact preference} & \cellcolor{gray!10}{Agree} & \cellcolor{gray!10}{1168}\\
+\cmidrule{1-3}
+\hspace{1em}Contact preference & Desagree & 1280\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Contact preference} & \cellcolor{gray!10}{Strongly agree} & \cellcolor{gray!10}{239}\\
+\cmidrule{1-3}
+\hspace{1em}Contact preference & Strongly desagree & 492\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Educational level} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{12}\\
+\cmidrule{1-3}
+\hspace{1em}Educational level & 2 & 52\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Educational level} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{125}\\
+\cmidrule{1-3}
+\hspace{1em}Educational level & 4 & 992\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Educational level} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{298}\\
+\cmidrule{1-3}
+\hspace{1em}Educational level & 6 & 726\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Educational level} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{395}\\
+\cmidrule{1-3}
+\hspace{1em}Educational level & 8 & 693\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Educational level} & \cellcolor{gray!10}{9} & \cellcolor{gray!10}{177}\\
+\cmidrule{1-3}
+\hspace{1em}Political identification & Center & 234\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Political identification} & \cellcolor{gray!10}{Does not identify} & \cellcolor{gray!10}{1436}\\
+\cmidrule{1-3}
+\hspace{1em}Political identification & Left & 805\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Political identification} & \cellcolor{gray!10}{Right} & \cellcolor{gray!10}{846}\\
+\cmidrule{1-3}
+\hspace{1em}Income & De \$1.100.001 a \$2.700.000 mensuales liquidos & 660\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Income} & \cellcolor{gray!10}{De \$2.700.001 a \$4.100.000 mensuales liquidos} & \cellcolor{gray!10}{184}\\
+\cmidrule{1-3}
+\hspace{1em}Income & De \$280.001 a \$380.000 mensuales liquidos & 252\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Income} & \cellcolor{gray!10}{De \$380.001 a \$470.000 mensuales liquidos} & \cellcolor{gray!10}{324}\\
+\cmidrule{1-3}
+\hspace{1em}Income & De \$470.001 a \$610.000 mensuales liquidos & 528\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Income} & \cellcolor{gray!10}{De \$610.001 a \$730.000 mensuales liquidos} & \cellcolor{gray!10}{332}\\
+\cmidrule{1-3}
+\hspace{1em}Income & De \$730.001 a \$890.000 mensuales liquidos & 327\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Income} & \cellcolor{gray!10}{De \$890.001 a \$1.100.000 mensuales liquidos} & \cellcolor{gray!10}{513}\\
+\cmidrule{1-3}
+\hspace{1em}Income & Mas de \$4.100.001 mensuales liquidos & 88\\
+\cmidrule{1-3}
+\hspace{1em}\cellcolor{gray!10}{Income} & \cellcolor{gray!10}{Menos de \$280.000 mensuales liquidos} & \cellcolor{gray!10}{262}\\
+\bottomrule
+\end{tabular}
+\endgroup{}
+
+}
+
+\end{table}%
+
+Based on previous research
+(\citeproc{ref-castillo_perceptions_2025}{Castillo, Laffert, et~al.,
+2025}), the statistical models include sociodemographic controls to
+account for potential compositional effects in the population. The
+control variables are age (en años) and sex (0 = male; 1 = women).
+
+\section{Analytical strategy}\label{analytical-strategy}
+
+First, a latent class analysis (LCA) is conducted to identify the latent
+classes (C) that represent meritocratic belief patterns. Second, once
+the optimal model has been determined, each individual is assigned the
+latent class to which they are most likely to belong. Third, a
+multinomial logistic regression is performed to examine the relationship
+between membership in latent classes and a preference for market justice
+in education, while also considering the effects of education and
+political identification on the dependent variable.
+
+\subsection{Latent class analysis}\label{latent-class-analysis}
+
+LCA is conducted using the poLCA package in R
+(\citeproc{ref-linzer_polca_2011}{Linzer \& Lewis, 2011}), with
+meritocratic and privilege-based indicators as dichotomized variables.
+The model is estimated using the Expectation-Maximization (EM) and
+Newton-Raphson algorithms, which iteratively estimate the model's
+parameters until convergence. The optimal number of latent classes is
+determined based on a combination of statistical criteria, including the
+Akaike Information Criterion (AIC), Bayesian Information Criterion
+(BIC), and entropy. Lower AIC and BIC values indicate better model fit,
+while higher entropy values indicate better classification accuracy.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=6.4in,height=\textheight,keepaspectratio]{input/images/h-lca.png}
+
+}
+
+\caption{\label{fig-h1}Conceptual map for latent class analysis (LCA).
+``C'' represents latent class memberships. ``M1-M4'' represents four
+meritocratic intems used as LCA indicators, and ``P1-P4'' represents
+four privileged items used as LCA indicators.}
+
+\end{figure}%
+
+\subsection{Ordinal logistic
+regression}\label{ordinal-logistic-regression}
+
+After determining the optimal number of latent classes, individuals are
+assigned to their most likely latent class memberships based on their
+posterior probabilities. An ordinal logistic regression is then
+conducted to examine the relationship between latent class memberships
+and the preference for market justice in education. The ordinal logistic
+regression model is also estimated in R, with the preference for market
+justice in education as the dependent variable and latent class
+memberships, educational level, and political identification as
+independent variables.
+
+\subsection{Robustness analysis}\label{robustness-analysis}
+
+To ensure the robustness of the research findings, I decided to
+replicate the procedure with a student population from the same country.
+This was possible because I had access to a dataset generated by the
+same project from the main database. As a result, the same variables
+were available to conduct a complete replication of the study. The
+analyses in this section will be performed using the same software and
+the same code libraries.
 
 \bookmarksetup{startatroot}
 
@@ -813,6 +1395,17 @@ Abowitz, K. K., \& Stitzlein, S. M. (2018). Public Schools, Public
 Goods, and Public Work. \emph{Phi Delta Kappan}, \emph{100}(3), 33-37.
 \url{https://doi.org/10.1177/0031721718808262}
 
+\bibitem[\citeproctext]{ref-adams_understanding_1963}
+Adams, J. S. (1963). Towards an Understanding of Inequity. \emph{The
+Journal of Abnormal and Social Psychology}, \emph{67}(5), 422-436.
+\url{https://doi.org/10.1037/h0040968}
+
+\bibitem[\citeproctext]{ref-alesina_preferences_2005}
+Alesina, A., \& La Ferrara, E. (2005). Preferences for Redistribution in
+the Land of Opportunities. \emph{Journal of Public Economics},
+\emph{89}(5-6), 897-931.
+\url{https://doi.org/10.1016/j.jpubeco.2004.05.009}
+
 \bibitem[\citeproctext]{ref-ball_education_2004}
 Ball, S. (2004). \emph{Education for Sale! The Commodification of
 Everything?}
@@ -829,6 +1422,14 @@ Becker, G. S. (1993). \emph{Human Capital: A Theoretical and Empirical
 Analysis, with Special Reference to Education} (3rd ed). The University
 of Chicago Press.
 
+\bibitem[\citeproctext]{ref-bellei_problema_2025}
+Bellei, C. (2025). \emph{El problema de la educación en Chile}. Debate.
+\url{https://aldebaranlibros.cl/tienda/el-problema-de-la-educacion-en-chile/}
+
+\bibitem[\citeproctext]{ref-boccardo_30_2020}
+Boccardo, G. (2020). \emph{30 Años de Privatizaciones En Chile: Lo Que
+La Pandemia Reveló}. Nodo XXI.
+
 \bibitem[\citeproctext]{ref-bourdieu_reproduccion_2019}
 Bourdieu, P. (2019). \emph{La Reproducción: Elementos para una Teoría
 Del Sistema Educativo}. Siglo XXI Editores.
@@ -844,11 +1445,6 @@ the (Economic) Sign Value of Learning Outcomes. \emph{British Journal of
 Sociology of Education}, \emph{32}(4), 501-519.
 \url{https://doi.org/10.1080/01425692.2011.578435}
 
-\bibitem[\citeproctext]{ref-bubak_perceptions_2019}
-Bubak, O. (2019). Perceptions of Meritocracy: A Note on China.
-\emph{Asian Journal of Comparative Politics}, \emph{4}(2), 192-209.
-\url{https://doi.org/10.1177/2057891118806065}
-
 \bibitem[\citeproctext]{ref-busemeyer_inequality_2012}
 Busemeyer, M. R. (2012). Inequality and the Political Economy of
 Education: An Analysis of Individual Preferences in OECD Countries.
@@ -860,17 +1456,17 @@ Busemeyer, M. R. (2013). Education Funding and Individual Preferences
 for Redistribution. \emph{European Sociological Review}, \emph{29}(6),
 1122-1133. \url{https://doi.org/10.1093/esr/jcs085}
 
-\bibitem[\citeproctext]{ref-busemeyer_investing_2018}
-Busemeyer, M. R., Garritzmann, J. L., Neimanns, E., \& Nezi, R. (2018).
-Investing in Education in Europe: Evidence from a New Survey of Public
-Opinion. \emph{Journal of European Social Policy}, \emph{28}(1), 34-54.
-\url{https://doi.org/10.1177/0958928717700562}
-
 \bibitem[\citeproctext]{ref-busemeyer_welfare_2020}
 Busemeyer, M. R., \& Iversen, T. (2020). The Welfare State with Private
 Alternatives: The Transformation of Popular Support for Social
 Insurance. \emph{The Journal of Politics}, \emph{82}(2), 671-686.
 \url{https://doi.org/10.1086/706980}
+
+\bibitem[\citeproctext]{ref-c.palomino_wealth_2026}
+C. Palomino, J., \& Sebastian, R. (2026). Wealth Inequality and
+Preferences in the Design of a Wealth Tax: An Information-Provision
+Experiment in the UK and Spain. \emph{INET Oxford Working Papers},
+\emph{2026-16}. \url{https://ideas.repec.org//p/amz/wpaper/2026-16.html}
 
 \bibitem[\citeproctext]{ref-castillo_justification_2026}
 Castillo, J. C., Canales-Sellés, R., Laffert, A., \& Urzúa, T. (2026).
@@ -906,16 +1502,39 @@ Socialization of Meritocracy and Market Justice Preferences at School.
 \emph{Societies}, \emph{14}(11), 214.
 \url{https://doi.org/10.3390/soc14110214}
 
+\bibitem[\citeproctext]{ref-castles_oxford_2010}
+Castles, F. G., Leibfried, S., Lewis, J., Obinger, H., \& Pierson, C.
+(Eds.). (2010). \emph{The Oxford Handbook of the Welfare State} (1.ª
+ed.). Oxford University Press.
+\url{https://doi.org/10.1093/oxfordhb/9780199579396.001.0001}
+
+\bibitem[\citeproctext]{ref-cech_perceiving_2010}
+Cech, E. A., \& Blair-Loy, M. (2010). Perceiving Glass Ceilings?
+Meritocratic versus Structural Explanations of Gender Inequality among
+Women in Science and Technology. \emph{Social Problems}, \emph{57}(3),
+371-397. \url{https://doi.org/10.1525/sp.2010.57.3.371}
+
+\bibitem[\citeproctext]{ref-chancel_world_2026}
+Chancel, L., Gómez-Carrera, R., Moshrif, R., \& Piketty, T. (Eds.).
+(2026). \emph{World Inequality Report 2026}. World Inequality Lab.
+\url{https://wir2026.wid.world/}
+
+\bibitem[\citeproctext]{ref-clycq_meritocracy_2014}
+Clycq, N., Ward Nouwen, M. A., \& Vandenbroucke, A. (2014). Meritocracy,
+Deficit Thinking and the Invisibility of the System: Discourses on
+Educational Success and Failure. \emph{British Educational Research
+Journal}, \emph{40}(5), 796-819. \url{https://doi.org/10.1002/berj.3109}
+
+\bibitem[\citeproctext]{ref-corvalan_mercado_2016}
+Corvalán, J., Carrasco, A., \& García-Huidobro, J. E. (2016).
+\emph{Mercado escolar: Libertad, diversidad y desigualdad}. Ediciones
+UC.
+
 \bibitem[\citeproctext]{ref-darnon_belief_2018}
 Darnon, C., Smeding, A., \& Redersdorff, S. (2018). Belief in School
 Meritocracy as an Ideological Barrier to the Promotion of Equality.
 \emph{European Journal of Social Psychology}, \emph{48}(4), 523-534.
 \url{https://doi.org/10.1002/ejsp.2347}
-
-\bibitem[\citeproctext]{ref-diwan_does_2020}
-Diwan, I., \& Vartanova, I. (2020). Does Education Indoctrinate?
-\emph{International Journal of Educational Development}, \emph{78},
-102249. \url{https://doi.org/10.1016/j.ijedudev.2020.102249}
 
 \bibitem[\citeproctext]{ref-duru-bellat_whos_2012}
 Duru-Bellat, M., \& Tenret, E. (2012). Who's for Meritocracy? Individual
@@ -927,6 +1546,12 @@ Esping-Andersen, G. (1985). \emph{Politics against Markets: The Social
 Democratic Road to Power}. Princeton University Press.
 \url{https://www.jstor.org/stable/j.ctt1m322zp}
 
+\bibitem[\citeproctext]{ref-flores_top_2020}
+Flores, I., Sanhueza, C., Atria, J., \& Mayer, R. (2020). Top Incomes in
+Chile: A Historical Perspective on Income Inequality, 1964--2017.
+\emph{Review of Income and Wealth}, \emph{66}(4), 850-874.
+\url{https://doi.org/10.1111/roiw.12441}
+
 \bibitem[\citeproctext]{ref-fourcade_moral_2007}
 Fourcade, M., \& Healy, K. (2007). Moral Views of Market Society.
 \emph{Annual Review of Sociology}, \emph{33}(Volume 33, 2007), 285-311.
@@ -935,6 +1560,14 @@ Fourcade, M., \& Healy, K. (2007). Moral Views of Market Society.
 \bibitem[\citeproctext]{ref-freire_pedagogia_2015}
 Freire, P. (2015). \emph{Pedagogía Del Oprimido} (J. Mellado, Trad.; 4a
 edición argentina, corregida y revisada). Siglo Veintiuno Editores.
+
+\bibitem[\citeproctext]{ref-garcia-sanchez_vicious_2019}
+García-Sánchez, E., Van der Toorn, J., Rodríguez-Bailón, R., \& Willis,
+G. B. (2019). The Vicious Cycle of Economic Inequality: The Role of
+Ideology in Shaping the Relationship Between {«What Is»} and {«What
+Ought to Be»} in 41 Countries. \emph{Social Psychological and
+Personality Science}, \emph{10}(8), 991-1001.
+\url{https://doi.org/10.1177/1948550618811500}
 
 \bibitem[\citeproctext]{ref-heuer_legitimizing_2020}
 Heuer, J.-O., Lux, T., Mau, S., \& Zimmermann, K. (2020). Legitimizing
@@ -971,6 +1604,12 @@ Lane, R. E. (1986). Market Justice, Political Justice. \emph{American
 Political Science Review}, \emph{80}(2), 383-402.
 \url{https://doi.org/10.2307/1958264}
 
+\bibitem[\citeproctext]{ref-langsaether_more_2020}
+Langsæther, P. E., \& Evans, G. (2020). More than Self‐interest: Why
+Different Classes Have Different Attitudes to Income Inequality.
+\emph{The British Journal of Sociology}, \emph{71}(4), 594-607.
+\url{https://doi.org/10.1111/1468-4446.12747}
+
 \bibitem[\citeproctext]{ref-lee_fairness_2024}
 Lee, J.-S., \& Stacey, M. (2024). Fairness Perceptions of Educational
 Inequality: The Effects of Self-Interest and Neoliberal Orientations.
@@ -987,11 +1626,22 @@ Market Distribution of Social Services -- A Comparison of 17 Countries.
 Lindh, A. (2017). Is It Just That People with Higher Incomes Can Buy
 Better Education and Health Care? \emph{57225}, \emph{17}, 69-80.
 
+\bibitem[\citeproctext]{ref-linzer_polca_2011}
+Linzer, D. A., \& Lewis, J. B. (2011). poLCA: An R Package for
+Polytomous Variable Latent Class Analysis. \emph{Journal of Statistical
+Software}, \emph{42}, 1-29. \url{https://doi.org/10.18637/jss.v042.i10}
+
 \bibitem[\citeproctext]{ref-liu_does_2026}
 Liu, C., \& Wang, J. (2026). Does Education Legitimise Inequality?
 Comparative Analysis of Income Inequality, Education, and Meritocratic
 Beliefs. \emph{The British Journal of Sociology}, \emph{77}(1), 5-18.
 \url{https://doi.org/10.1111/1468-4446.70029}
+
+\bibitem[\citeproctext]{ref-madariaga_three_2020}
+Madariaga, A. (2020). The Three Pillars of Neoliberalism: Chile's
+Economic Policy Trajectory in Comparative Perspective.
+\emph{Contemporary Politics}, \emph{26}(3), 308-329.
+\url{https://doi.org/10.1080/13569775.2020.1735021}
 
 \bibitem[\citeproctext]{ref-mau_inequality_2015}
 Mau, S. (2015). \emph{Inequality, Marketization and the Majority Class:
@@ -1003,16 +1653,31 @@ Lessons and Their Implications for Justice in Education. \emph{Social
 Justice Research}, \emph{29}(1), 14-34.
 \url{https://doi.org/10.1007/s11211-014-0228-0}
 
+\bibitem[\citeproctext]{ref-mijs_inequality_2018}
+Mijs, J. J. B. (2018). Inequality Is a Problem of Inference: How People
+Solve the Social Puzzle of Unequal Outcomes. \emph{Societies},
+\emph{8}(3), 64. \url{https://doi.org/10.3390/soc8030064}
+
 \bibitem[\citeproctext]{ref-mijs_paradox_2021}
 Mijs, J. J. B. (2021). The Paradox of Inequality: Income Inequality and
 Belief in Meritocracy Go Hand in Hand. \emph{Socio-Economic Review},
 \emph{19}(1), 7-35. \url{https://doi.org/10.1093/ser/mwy051}
+
+\bibitem[\citeproctext]{ref-moyano_justicia_2020}
+Moyano, C. (2020). \emph{Justicia educacional : desafíos para las ideas,
+las instituciones y las prácticas en la educación chilena.}
+\url{https://www.torrossa.com/it/resources/an/5498882}
 
 \bibitem[\citeproctext]{ref-nye_education_2026}
 Nye, J. V., Bryukhanov, M., Litman, C., \& Polyachenko, S. (2026).
 Education and Market Liberal Preferences. \emph{Journal of Economic
 Behavior \& Organization}, \emph{241}, 107387.
 \url{https://doi.org/10.1016/j.jebo.2025.107387}
+
+\bibitem[\citeproctext]{ref-nylund-gibson_ten_2018}
+Nylund-Gibson, K., \& Choi, A. Y. (2018). Ten Frequently Asked Questions
+about Latent Class Analysis. \emph{Translational Issues in Psychological
+Science}, \emph{4}(4), 440-461. \url{https://doi.org/10.1037/tps0000176}
 
 \bibitem[\citeproctext]{ref-oecd_education_2025}
 OECD. (2025). \emph{Education at a Glance 2025: OECD Indicators}. OECD
@@ -1022,9 +1687,13 @@ Publishing. \url{https://doi.org/10.1787/1c0d9c79-en}
 Piketty, T., \& Sandel, M. J. (2025). \emph{Equality: What It Means and
 Why It Matters}. Polity Press.
 
-\bibitem[\citeproctext]{ref-sandel_tyranny_2020}
-Sandel, M. J. (2020). \emph{The Tyranny of Merit: What's Become of the
-Common Good?} Penguin UK.
+\bibitem[\citeproctext]{ref-pnud_desiguales_2017}
+PNUD. (2017). \emph{Desiguales: Origenes, Cambios y Desafíos de La
+Brecha Social En Chile}.
+
+\bibitem[\citeproctext]{ref-ramos_educacion_2022}
+Ramos, M. (Ed.). (2022). \emph{Educación: La Promesa Incumplida}.
+Catalonia.
 
 \bibitem[\citeproctext]{ref-satz_why_2010}
 Satz, D. (2010). \emph{Why Some Things Should Not Be for Sale: The Moral
@@ -1041,18 +1710,37 @@ Hard for Their Money\ldots or Do They? The Role of Meritocracy Beliefs
 on Evaluations of Pay Dispersion. \emph{Social Justice Research},
 \emph{39}(1), 1-41. \url{https://doi.org/10.1007/s11211-025-00469-x}
 
-\bibitem[\citeproctext]{ref-soler-martinez_income_2025}
-Soler‐Martínez, F. M., García‐Sánchez, E., \& Willis, G. B. (2025).
-Beyond Income Disparities: Perceived Health and Education Inequities
-Drive Actions to Reduce Economic Inequality. \emph{European Journal of
-Social Psychology}, \emph{55}(2), 396-415.
-\url{https://doi.org/10.1002/ejsp.3151}
+\bibitem[\citeproctext]{ref-valenzuela_socioeconomic_2014}
+Valenzuela, J. P., Bellei, C., \& Ríos, D. de los. (2014). Socioeconomic
+School Segregation in a Market-Oriented Educational System. The Case of
+Chile. \emph{Journal of Education Policy}, \emph{29}(2), 217-241.
+\url{https://doi.org/10.1080/02680939.2013.806995}
+
+\bibitem[\citeproctext]{ref-vanhootegem_worlds_2022}
+Van Hootegem, A. (2022). Worlds of Distributive Justice Preferences:
+Individual- and Country-Level Profiles of Support for Equality, Equity
+and Need. \emph{Social Science Research}, \emph{106}, 102721.
+\url{https://doi.org/10.1016/j.ssresearch.2022.102721}
 
 \bibitem[\citeproctext]{ref-vannoord_educationbased_2019}
 Van Noord, J., Spruyt, B., Kuppens, T., \& Spears, R. (2019).
 Education-Based Status in Comparative Perspective: The Legitimization of
 Education as a Basis for Social Stratification. \emph{Social Forces},
 \emph{98}(2), 649-676. \url{https://doi.org/10.1093/sf/soz012}
+
+\bibitem[\citeproctext]{ref-walzer_spheres_2010}
+Walzer, M. (2010). \emph{Spheres of Justice: A Defense of Pluralism and
+Equality} (Nachdr.). Basic Books.
+
+\bibitem[\citeproctext]{ref-xian_bootstraps_2017}
+Xian, H., \& Reynolds, J. (2017). Bootstraps, Buddies, and Bribes:
+Perceived Meritocracy in the United States and China. \emph{The
+Sociological Quarterly}, \emph{58}(4), 622-647.
+\url{https://doi.org/10.1080/00380253.2017.1331719}
+
+\bibitem[\citeproctext]{ref-young_rise_2017}
+Young, M. (2017). \emph{The Rise of the Meritocracy} (2.ª ed.).
+Routledge. \url{https://doi.org/10.4324/9781315134642}
 
 \bibitem[\citeproctext]{ref-zhu_meritocratic_2025}
 Zhu, L. (2025). Meritocratic Beliefs in the United States, Finland, and

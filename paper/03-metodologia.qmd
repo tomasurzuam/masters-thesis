@@ -200,12 +200,16 @@ group_index <- desc_tbl %>%
   count(group) %>%
   tibble::deframe()
 
+out_format <- if (knitr::is_latex_output()) "latex" else "html"
+
 tab_desc <- desc_tbl %>%
   dplyr::select(-group) %>%
   rename(Variable = variable, Category = category, `Valid N` = n) %>%
-  kbl(format = "html",
-      align = "llr") %>%
+  kbl(format = out_format,
+      align = "llr",
+      booktabs = TRUE) %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                latex_options = c("striped", "hold_position"),
                 full_width = FALSE,
                 font_size = 13) %>%
   collapse_rows(columns = 1, valign = "top") %>%

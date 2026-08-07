@@ -7,3 +7,5 @@ La escritura completa del proyecto, junto con el procesamiento y análisis de lo
 Presentación coloquio FACSO 2025: [aquí](https://tomasurzuam.github.io/masters-thesis/presentations/coloquio-2025.html)
 
 Documento de tesis: [aquí](https://tomasurzuam.github.io/masters-thesis/paper/docs/index.html)
+
+[Presentación coloquio Magíster 2026](https://tomasurzuam.github.io/masters-thesis/presentations/coloquio-mg-2026/coloquio-2026.html)
