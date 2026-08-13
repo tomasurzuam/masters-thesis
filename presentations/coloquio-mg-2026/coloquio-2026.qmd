@@ -31,9 +31,11 @@ editor_options:
 
 ::: {.column width="30%"}
 
-</br></br> </br></br></br></br>
+
 
 ![](facso.jpg)
+
+![](jusmer.png)
 
 :::
 
@@ -54,88 +56,83 @@ editor_options:
 
 ::::
 
-# Motivación {background-color="#303029"}
-
-
-##
-::: {.columns}
-
-::: {.column width="20%"}
-
-![](jusmer-logo-vert.png)
-
-:::
-
-::: {.column width="80%" font-size="40px;"}
-
-- Tesis enmarcada en proyecto FONDECYT Regular
-
-- Alineada con los objetivos de investigación del proyecto enfocado en el área de educación
-
-- Más información: [jus-mer.com](https://jus-mer.com/)
-:::
-:::
-
 # Contexto y antecedentes {background-color="#303029"}
+
+## Desigualdades en educación
+
+:::{.incremental .highlight-last style="font-size: 110%"}
+
+- La educación ha sido un pilar fundamental en el funcionamiento de las sociedades al ser **propulsora** de la igualdad de oportunidades y la movilidad social
+
+- Sin embargo, existen desigualdades importantes en el ámbito educativo, donde gran parte de ellas se han relacionado a los **procesos de comodificación** que ha protagonizado la educación los últimos años [@ball_education_2004; @castles_oxford_2010; @waslander_markets_2010; @busemeyer_education_2013].
+
+- La desigualdad en educación puede observarse en distintos grados dependiendo el contexto, pero en **Chile** es especialmente alta [@castles_oxford_2010; @boccardo_30_2020; @valenzuela_socioeconomic_2014; @bellei_problema_2025]
+  
+  - La educación chilena opera bajo lógicas de mercado, donde su acceso y calidad está **determinado por el dinero** [@corvalan_mercado_2016; @valenzuela_socioeconomic_2014; @ramos_educacion_2022; @bellei_gran_2016], 
+:::
 
 ## Educación y mercado
 
-- Las últimas décadas, la educación ha sido atravesada por procesos de comodificación que han configurado su fundamentos valóricos, así como el funcionamiento de sus instituciones [@ball_education_2004; @castles_oxford_2010; @waslander_markets_2010; @busemeyer_education_2013].
+:::{.incremental .highlight-last style="font-size: 110%"}
 
-- La expansión del área privada ha entrado en una lógica de competencia con la provisión pública, generando un mercado educativo que ha afectado la distribución de oportunidades y calidad de la educación [@busemeyer_welfare_2020; @corvalan_mercado_2016].
+- Existen distintas agendas que se han dedicado a estudiar las desigualdades en educación, desde la infraestructura o la calidad docente [@ramos_educacion_2022; @bellei_problema_2025; @corvalan_mercado_2016; @contreras_private_2024]. Ahora bien, también hay una vertiente que se ha dedicado a estudiar las **actitudes respecto a la desigualdad** en educación [@busemeyer_education_2013; @busemeyer_investing_2018; @castillo_changes_2025]. 
 
-- La comodificación de la educación no sólo ha provocado cambios a nivel institucional, sino que también ha moldeado los criterios normativos de las personas sobre qué es lo que consideran justo en el ámbito educativo.
+- **El problema**: a pesar de la demanda por equidad, o mayor inversión pública en educación, existe parte de la población que **legitima la desigualdad en educación**. 
 
-## Justicia de mercado en la educación
+- Concepto central: **justicia de mercado en educación**
 
-- Las políticas orientadas al mercado operan no sólo como diseños institucionales, sino también como un proyecto moral, donde las personas movilizan valores de mercado como criterios normativos [@fourcade_moral_2007; @koos_moral_2019].
+  - Creencias normativas que **legitiman** la idea de que el acceso a los servicios sociales esenciales -como la educación- debe determinarse según **criterios basados en el mercado** [@lane_market_1986]
+:::
 
-- Así, la expansión del mercado en áreas de reproducción social ha impactado los criterios de justicia que movilizan las personas para evaluar la distribución de oportunidades y recursos [@lindh_public_2015; @castillo_socialization_2024].
-
-- En este marco, @lane_market_1986 propone el concepto *justicia de mercado*, el cual refiere a:
-
-  - Creencias normativas que legitiman la idea de que el acceso a los servicios sociales esenciales -como la educación- debe determinarse según criterios basados en el mercado [@lane_market_1986]
-
-::: {.notes}
+:::{.notes}
 
 La justicia de mercado se comprende como parte de la justicia distributiva, pero enfocada en la justificación de desigualdades mediante mecanismos de mercado más que en el apoyo a la redistribución.
 
+- Esto genera una serie de interrogantes como: 
+
+  - ¿por qué se estaría dispuesto a apoyar la desigualdad en este ámbito?
+  - ¿qué caracteriza a estas personas?
 :::
 
-## Meritocracia
- 
-- La meritocracia es un elemento que se encuentra en el corazón de las instituciones educativas al considerarse como el determinante para el éxito académico y, posteriormente, la movilidad social [@clycq_meritocracy_2014; @mijs_unfulfillable_2016; @darnon_belief_2018].
+## Meritocracia      
 
-- Sin embargo, también persiste una relación entre la meritocracia y la legitimación de desigualdades.
+:::{.incremental .highlight-last style="font-size: 120%"}
+- Michael Young [1953][-@young_rise_2017]: Mérito = esfuerzo + talento
 
-  - Se recurre al mérito para explicar el éxito individual y el fracaso de los otros, obviando las condiciones estructurales que definen la realidad social [@mijs_paradox_2021; @heuer_legitimizing_2020; @clycq_meritocracy_2014; @morris_paradox_2022].
+- Agenda de investigación se divide en dos líneas principales: meritocracia como **factor asociado** a fenómenos sociales (1) y **medición** de meritocracia (2)
 
-- Así, la meritocracia opera como un factor clave en la comprensión de la justicia de mercado en educación. 
+- Principales hallazgos: 
 
-## Marcos de creencias meritocráticas
+  - (1) Relación entre la meritocracia y la legitimación de desigualdades. [@mijs_paradox_2021; @heuer_legitimizing_2020; @clycq_meritocracy_2014; @morris_paradox_2022; @castillo_justification_2026]
 
-- Las creencias meritocráticas constituyen esquemas mentales que las personas movilizan para discernir entre lo que consideran justo e injusto.  
+  - (2) La meritocracia **no es unidimensional** ni sigue una lógica continua -> **meritocracia multidimensional** [@castillo_multidimensional_2023; @zhu_meritocratic_2025]
+:::
 
-- Enfoques unidimensionales vs multidimensionales: un avance hacia la coexistencia de creencias [@mijs_paradox_2021; @castillo_multidimensional_2023; @duru-bellat_whos_2012]
 
-- Dependiendo de las creencias que prevalezcan en las personas, se pueden observar distintas combinaciones de creencias meritocráticas, las cuales tienen diversos niveles de representación en la población en cuanto a cantidad y tamaño [@zhu_meritocratic_2025].
+:::{.notes}
+la meritocracia opera como un factor clave en la comprensión de la justicia de mercado en educación. 
+:::
 
-## El contexto chileno
+##
 
-- País reconocido por su desigualdad socioeconómica, con una movilidad social rígida y alta estratificación social [@flores_top_2020; @espinoza_estratificacion_2013; @chancel_world_2026].
+![](items-merit.png)
 
-- Independientemente de las condiciones estructurales que determinan la desigualdad, se observa un fuerte arraigo de creencias meritocráticas en la población [@castillo_perceptions_2025; @pnud_desiguales_2017].
+## Creencias meritocráticas
 
-- En materia de educación, Chile ha trazado una trayectoria de más de 50 años de políticas neoliberales, caracterizándose por ser una de las más privatizadas y con mayor segregación escolar en el mundo [@castles_oxford_2010; @boccardo_30_2020; @valenzuela_socioeconomic_2014; @bellei_problema_2025].
+:::{.incremental .highlight-last style="font-size: 130%"}
+- Las creencias pueden parecer contradictorias, pero pueden **coexistir** dentro de los sistemas de creencias de las personas
 
-  - Esto ha conformado un mercado educativo que traspasa la responsabilidad del éxito a los individuos, reflejando la narrativa del mérito en la legitimación de las desigualdades en educación[ @corvalan_mercado_2016; @valenzuela_socioeconomic_2014; @ramos_educacion_2022; @bellei_gran_2016].
+- Sin embargo, a primera vista no es posible determinar en qué medida **varían** las creencias meritocráticas de las personas, y cómo representan a la sociedad en términos de **cantidad y tamaño** [@zhu_meritocratic_2025]
+
+- Para ello, recurriremos a **Análisis de Clases Latentes (LCA)**, un método que permite observar la **heterogeneidad de creencias** en la población mediante la clasificación de subgrupos
+:::
 
 # Preguntas de investigación {background-color="#303029"}
 
 
 ## {background-color="#303029"}
 
-::: {.box-inv-5 .fragment .sp-after style="font-size: 110%;"}
+::: {.box-inv-5 .fragment .sp-after style="font-size: 130%;"}
 ¿Cómo se manifiestan los patrones de creencias meritocráticas en cuanto al número de grupos identificables y su tamaño?
 :::
 
@@ -143,24 +140,31 @@ La justicia de mercado se comprende como parte de la justicia distributiva, pero
 
 <br>
 
-::: {.box-inv-5 .fragment .sp-after style="font-size: 110%;"}
+::: {.box-inv-5 .fragment .sp-after style="font-size: 130%;"}
 ¿En qué medida influyen los patrones de creencias meritocráticas en las preferencias por la justicia de mercado en educación?
 :::
 
 ## Esta investigación
 
+:::{.incremental .highlight-last style="font-size: 100%"}
 - Contribuir en la línea de investigación sobre justicia de mercado y meritocracia [@castillo_socialization_2024; @castillo_perceptions_2025; @castillo_justification_2026; @lindh_public_2015] a partir de dos innovaciones:
 
-  - Descubrir patrones de creencias meritocráticas en la población chilena mediante métodos centrados en las personas
+  - Explorar patrones de creencias meritocráticas en la población chilena mediante métodos centrados en las personas
 
   - Analizar la relación entre preferencias por justicia de mercado en educación y los distintos grupos de personas definidos por sus patrones de creencias
 
-- Con ello, esta investigación espera: 
+- Así, esta investigación: 
 
-  - Demostrar que la meritocracia no opera como un mecanismo uniforme en la justificación de la desigualdad, sino que juega un rol multidimensional que solamente se puede observar al estudiar la heterogeneidad de creencias
+  - A partir de las diferentes relaciones entre las clases y la preferencia por justicia de mercado en educación, pretende demostrar que la **meritocracia opera de manera distinta** como mecanismo para la justificación de las desigualdades, y estas diferencias solamente son notables al observar la **heterogeneidad de creencias** de las personas
+:::
 
-  - Relevar el rol del mercado en los juicios normativos de las personas, con tal de entregar evidencia que permita avanzar en la reivindicación de la educación pública en materia cultural y política
+## 
 
+![](h-lca.png)
+
+##
+
+![](classes.png)
 
 ## Hipótesis
 
@@ -170,23 +174,38 @@ La justicia de mercado se comprende como parte de la justicia distributiva, pero
 
 ## Datos
 
+:::{.incremental .highlight-last style="font-size: 140%"}
 - Encuesta *Educación, Meritocracia y Cohesión Social* realizada por el FONDECYT N°1210847 en el año 2025
 
-- N = 3470
+- N total = 3470
 
 - Aplicada mediante CAWI (Computer-Assisted Web Interviewing)
 
 - Diseño muestral no probabilístico; cuotas de edad, sexo y nivel educacional
+:::
+
+## Variable dependiente
+
+:::{.incremental .highlight-last style="font-size: 130%"}
+- Preferencias por la justicia de mercado en educación: **_¿Es justo que las personas de altos ingresos tengan una mejor educación para sus hijos que las personas con ingresos más bajos?_**
+
+<br>
+
+- Escala likert: Muy en desacuerdo (1) a Muy de acuerdo (5)
+:::
 
 ## Estrategia analítica
 
 ### 3 pasos
 
-- Análisis de clases latentes para identificar patrones de creencias meritocráticas, y luego asignar a cada individuo a un grupo (clase latente)
+:::{.incremental .highlight-last style="font-size: 120%"}
+- Análisis de clases latentes para identificar patrones de creencias meritocráticas, y luego asignar a cada individuo a un grupo (clase latente) [@scottorosato_latent_2012; @zhu_meritocratic_2025]
 
-- Los grupos observados son considerados como variables independientes en un modelo de regresión logística, con el objetivo de examinar la relación entre cada grupo con la preferencia por justicia de mercado en educación
+- Luego, los grupos observados son considerados como **variables independientes** en un modelo de regresión logística, con el objetivo de **examinar** la relación entre cada grupo con la preferencia por justicia de mercado en educación
 
 - Replicación del análisis utilizando datos de población estudiantil a modo de análisis de robustez
+:::
 
 ## Referencias
+
 
