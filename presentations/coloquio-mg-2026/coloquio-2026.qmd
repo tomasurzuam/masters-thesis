@@ -62,7 +62,7 @@ editor_options:
 
 :::{.incremental .highlight-last style="font-size: 110%"}
 
-- La educación ha sido un pilar fundamental en el funcionamiento de las sociedades al ser **propulsora** de la igualdad de oportunidades y la movilidad social
+- La educación ha sido un pilar fundamental en el funcionamiento de las sociedades al ser **propulsora** de la igualdad de oportunidades y la movilidad social [@castles_oxford_2010]
 
 - Sin embargo, existen desigualdades importantes en el ámbito educativo, donde gran parte de ellas se han relacionado a los **procesos de comodificación** que ha protagonizado la educación los últimos años [@ball_education_2004; @castles_oxford_2010; @waslander_markets_2010; @busemeyer_education_2013].
 
@@ -156,6 +156,10 @@ la meritocracia opera como un factor clave en la comprensión de la justicia de 
 - Así, esta investigación: 
 
   - A partir de las diferentes relaciones entre las clases y la preferencia por justicia de mercado en educación, pretende demostrar que la **meritocracia opera de manera distinta** como mecanismo para la justificación de las desigualdades, y estas diferencias solamente son notables al observar la **heterogeneidad de creencias** de las personas
+:::
+
+:::{.notes}
+A nivel global, busca relevar el rol del mercado en los juicios normativos de las personas, con tal de entregar evidencia que permita avanzar en la reivindicación de la educación pública en materia cultural y política
 :::
 
 ## 
