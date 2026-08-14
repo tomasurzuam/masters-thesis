@@ -50,6 +50,8 @@ editor_options:
 
 **Tomás Urzúa Moreno**
 
+Profesor guía: **Juan Carlos Castillo**
+
 ### *Coloquio de tesistas, Magíster Ciencias Sociales - UCH* <br> 14 agosto 2026
 
 :::
@@ -254,7 +256,7 @@ Esta investigación pretende avanzar por este lado
 :::{.incremental .highlight-last style="font-size: 120%"}
 - Análisis de clases latentes para identificar patrones de creencias meritocráticas, y luego asignar a cada individuo a un grupo (clase latente) [@collins_latent_2013; @scottorosato_latent_2012; @zhu_meritocratic_2025]
 
-- Luego, los grupos observados son considerados como **variables independientes** en un modelo de regresión logística, con el objetivo de **examinar** la relación entre cada grupo con la preferencia por justicia de mercado en educación
+- Luego, los grupos observados son considerados como **variables independientes** en un modelo de regresión logística ordinal, con el objetivo de **examinar** la relación entre cada grupo con la preferencia por justicia de mercado en educación
 
 - Replicación del análisis utilizando datos de población estudiantil a modo de análisis de robustez
 :::
