@@ -2,24 +2,32 @@
 bibliography: refs/thesis.bib
 ---
 
-## Associated factors
+## Estatus, political ideology and moderation
+
+### Education
 
 There are various theories regarding how educational attainment affects people’s redistributive preferences. On the one hand, there are theories that view education as a resource that enhances the development of technical skills and/or critical thinking, leading individuals to become aware of structural problems and, as a result, to support the reduction of inequality [@becker_human_1993; @freire_pedagogia_2015; @schultz_investment_1961]. On the other hand, in cultural reproduction theories, education has been understood as a source of social inequalities, as it reproduces individuals’ living conditions, preventing opportunities for intergenerational social mobility and, consequently, perpetuating the stratified social order [@bourdieu_reproduccion_2019; @bowles_schooling_2011]. Within the framework of redistributive preferences, reproductionist notions are grounded in self-interest theory, whereby those with higher levels of education tend to exhibit attitudes that reflect a desire to protect their privileged social positions, which could be understood as an aversion to redistribution or support for market-based justice. Thus, education can be understood not only as an enlightening force in social life but also as a cog in the reproduction of inequalities.
 
-Recent literature provides empirical support for these two theoretical approaches to education. For example, research by @nye_education_2026 found, in an analysis of 282 country-year combinations from various international surveys, that in 95% of cases, education was positively associated with market-oriented attitudes. Likewise, @vannoord_educationbased_2019 used data from 31 countries to show that education is widely understood as the basis for social stratification. Other studies have found that higher levels of education are associated with a greater preference for public investment [@busemeyer_inequality_2012] However, the results from @liu_does_2026 suggest that education does not fulfill a generalized function; rather, both the enlightening and the reproductionist roles exist but depend on the level of education, where in countries with low inequality, basic education is associated with reproductionist positions, while in secondary and tertiary education, the enlightening role stands out. 
+Recent literature provides empirical support for both reproductionist and enlightenment approaches to education. In support of the reproductionist approach, research by @nye_education_2026 found, in an analysis of 282 country-year combinations from various international surveys, that in 95% of cases, individual educational level was positively associated with market-oriented attitudes. Likewise, @vannoord_educationbased_2019 used data from 31 countries to show that education is widely understood as the basis for social stratification. In support of the enlightenment approach, @busemeyer_inequality_2012 found that higher levels of education are associated with a greater preference for public investment. However, the results from @liu_does_2026 suggest that education does not fulfill a generalized function; rather, both the enlightening and the reproductionist roles coexist but depend on the level of education. In countries with low inequality, basic education is associated with reproductionist positions, while secondary and tertiary education highlight the enlightening role.
 
 Given the important role that education plays in shaping individuals’ attitudes toward inequality, this study proposes the following hypothesis: 
 
 $H_{5}$: **Individuals with higher levels of education show higher education market justice preferences**
 
+### Income
+
 In addition to educational level, the literature has shown that income is also an important factor in the study of attitudes toward inequality [@heuer_legitimizing_2020; @lindh_public_2015]. The evidence shows that higher-income individuals tend to support market-based distributive principles [@lindh_public_2015; @immergut_it_2020; @nye_education_2026]. In this context, among higher-status social groups, there is congruence between their attitudes and their individual outcomes—that is, a legitimization of the market as a distributor of rewards, serving as a justification for social status. Although the link between income and market justice can be tied to self-interest theories, @langsaether_more_2020 argues that social status does not always provide a rational explanation for attitudes toward inequality, making it necessary to test this relationship. Based on the literature, the corresponding hypothesis is:
 
 $H_{6}$: **Individuals with higher incomes show higher education market justice preferences**
+
+### Political ideology
 
 Political ideology also influences people’s attitudes toward inequality. In this regard, the scientific literature has shown that people with right-wing political ideologies tend to support a market-based distribution of welfare [@lee_fairness_2024]. Meanwhile, [@vanhootegem_worlds_2022] found that right-wing individuals are less likely to adopt positions that support equity and equality. This finding is consistent with the study by @castillo_changes_2025, which found that only individuals identifying with right-wing ideologies showed a positive correlation with a preference for market justice in education. In this context, the following hypothesis is proposed:
 
 $H_{7}$: **Right-wing individuals show higher education market justice preferences than those belonging to the left-wing**
 
-Finally, I examine the moderating role of education in the relationship between meritocratic belief patterns and preferences for education market justice. Given that education can play either an enlightenment or a reproductionist role, it would be interesting to observe how educational level can amplify or attenuate the relationship between each latent class and education market justice preferences. Since I do not have sufficient evidence to support this hypothesis, this analysis is exploratory. Thus, the following hypothesis emerges:
+### Moderation
+
+Finally, I examine the moderating role of education in the relationship between meritocratic belief patterns and preferences for education market justice. Given that is expected education may play a reproductionist role, it would be interesting to observe how educational level can amplify the relationship between each latent class and education market justice preferences. Since I do not have sufficient evidence to support this hypothesis, this analysis is exploratory. Thus, the following hypothesis emerges:
 
 $H_{8}$: **Classes that are positively associated with education market justice preferences show an amplified effect when moderated by educational level**
