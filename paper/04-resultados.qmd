@@ -140,12 +140,16 @@ db_careless <- db_careless %>%
   mutate(longstring = ls_res$longstr,
          avgstring  = ls_res$avgstr)
 
-ggplot(db_careless, aes(x = longstring)) +
-  geom_bar(fill = "#6a1718") +
-  scale_x_continuous(breaks = 1:8) +
-  labs(x = "Longstring index", y = "N respondents",
-       caption = paste0("Source: own elaboration based on Survey EDUMERCO (n = ", nrow(db_careless), ")"))
+# ggplot(db_careless, aes(x = longstring)) +
+#   geom_bar(fill = "#6a1718") +
+#   scale_x_continuous(breaks = 1:8) +
+#   labs(x = "Longstring index", y = "N respondents",
+#        caption = paste0("Source: own elaboration based on Survey EDUMERCO (n = ", nrow(db_careless), ")"))
+
+knitr::include_graphics("input/images/fig-longstring-1.png")
 ```
+
+
 
 @fig-longstring shows, as a bar chart, how many respondents reached each possible value of the index, from 1 up to 8 (the maximum, since the battery has eight items). Most respondents cluster at the low end (1 to 3 identical answers in a row): this is the expected pattern, since it means their answer changed as they moved from one item to the next, consistent with actually reading and evaluating each statement. The right side of the distribution is where straightlining shows up. It is also worth noting that, because the eight items are organized in two four-item blocks (perceptions, then preferences), a run of six or more identical responses necessarily crosses from one block into the other — so it cannot be a coincidence tied to one particular question, but reflects the same answer being carried across two conceptually different sets of items. With an eight-item battery the longstring index ranges from 1 to 8. `r sum(db_careless$longstring >= 6)` respondents (`r round(100*mean(db_careless$longstring >= 6),1)`%) gave the same response to at least six of the eight items in a row, and `r sum(db_careless$longstring == 8)` (`r round(100*mean(db_careless$longstring == 8),1)`%) answered identically to all eight, consistent with straightlining.
 
@@ -165,15 +169,17 @@ db_careless <- db_careless %>%
          irv_perc  = irv_res$irv1,
          irv_pref  = irv_res$irv2)
 
-db_careless %>%
-  dplyr::select(id, `Overall (8 items)` = irv_total,
-                `Perceptions block` = irv_perc,
-                `Preferences block` = irv_pref) %>%
-  pivot_longer(-id, names_to = "block", values_to = "irv") %>%
-  ggplot(aes(x = irv)) +
-  geom_histogram(bins = 20, fill = "#6a1718") +
-  facet_wrap(~block, scales = "free_y") +
-  labs(x = "IRV", y = "N respondents")
+# db_careless %>%
+#   dplyr::select(id, `Overall (8 items)` = irv_total,
+#                 `Perceptions block` = irv_perc,
+#                 `Preferences block` = irv_pref) %>%
+#   pivot_longer(-id, names_to = "block", values_to = "irv") %>%
+#   ggplot(aes(x = irv)) +
+#   geom_histogram(bins = 20, fill = "#6a1718") +
+#   facet_wrap(~block, scales = "free_y") +
+#   labs(x = "IRV", y = "N respondents")
+
+knitr::include_graphics("input/images/fig-irv-1.png")
 ```
 
 The IRV summarizes, for each respondent, how much their own answers moved across the eight items: someone who marks the same option (or nearly so) throughout the battery gets a low IRV, while someone who uses different points of the scale gets a higher one. In the histograms above, respondents piling up near zero (left side) are those whose answers were essentially flat — the pattern expected from careless or straightlined responding — while respondents further to the right made more use of the response scale, as most people do. Because the items are ordered in two conceptual blocks (perceptions, then preferences), splitting the IRV in two (`num.split = 2`) shows this same left-to-right pattern separately for each block, which also reveals whether flat responding is concentrated in only one part of the questionnaire rather than spread across the whole battery. Following @dunn_intraindividual_2018, we flag *low* IRV as a marker of straightlining: `r sum(db_careless$irv_total <= quantile(db_careless$irv_total, .05, na.rm = TRUE), na.rm = TRUE)` respondents (`r round(100*mean(db_careless$irv_total <= quantile(db_careless$irv_total, .05, na.rm = TRUE), na.rm = TRUE),1)`%) fall at or below the 5th percentile of the overall IRV distribution — i.e., the flattest 5% of the sample.
@@ -193,10 +199,12 @@ db_careless <- db_careless %>%
   mutate(mahad_d = mahad_res$d_sq,
          mahad_flag = mahad_res$flagged)
 
-ggplot(db_careless, aes(x = mahad_d, fill = mahad_flag)) +
-  geom_histogram(bins = 40) +
-  scale_fill_manual(values = c("FALSE" = "grey70", "TRUE" = "#6a1718"), name = "Flagged (99% CI)") +
-  labs(x = expression(paste("Mahalanobis ", D^2)), y = "N respondents")
+# ggplot(db_careless, aes(x = mahad_d, fill = mahad_flag)) +
+#   geom_histogram(bins = 40) +
+#   scale_fill_manual(values = c("FALSE" = "grey70", "TRUE" = "#6a1718"), name = "Flagged (99% CI)") +
+#   labs(x = expression(paste("Mahalanobis ", D^2)), y = "N respondents")
+
+knitr::include_graphics("input/images/fig-mahad-1.png")
 ```
 
 The Mahalanobis distance takes a different approach from the previous two indices: instead of looking at a respondent's answers on their own, it compares each respondent's whole pattern of answers against the pattern that is typical for the sample as a whole — taking into account how the eight items normally relate to one another (e.g., that seeing wealthy parents as an advantage tends to go together with seeing personal contacts as one). A person can therefore give variable, non-repetitive answers and still get a high Mahalanobis distance if the *combination* of their answers is unusual given how the items normally move together in the rest of the sample; this is why the index is described as multivariate rather than item-by-item. In the histogram, respondents piled up on the left have D² values close to zero, meaning their overall response pattern is unremarkable, while the tail stretching to the right holds respondents whose combined pattern departs the most from what is typical. Bars are colored to mark which of these are flagged as outliers under a 99% confidence threshold (grey = within the expected range, red = flagged) — a deliberately conservative cutoff, so only the most extreme patterns are marked. At this conservative 99% confidence level, `r sum(db_careless$mahad_flag, na.rm = TRUE)` respondents (`r round(100*mean(db_careless$mahad_flag, na.rm = TRUE),1)`%) are flagged as multivariate outliers relative to the response distribution of the other eight items.
@@ -504,8 +512,6 @@ We can see in @tbl-fit that the incremental improvement in fit became substantia
 I therefore retained the four-class solution as the final model. This choice was guided by both statistical and substantive criteria: the four-class model achieved a strong balance between goodness of fit, parsimony, and interpretability, whereas the five-class solution did not yield enough additional differentiation to justify the increase in complexity.
 
 ### Four latent class model
-
-The @tbl-prevalence shows the conditional probabilities of each item associated with a latent class and their respective sizes. The four-class solution suggests that respondents are not primarily differentiated along a simple continuum from “more meritocratic” to “less meritocratic.” Instead, the latent classes are organized by distinct combinations of: (1) perceptions of meritocracy, (2) perceptions of non-meritocratic advantage, and (3) normative preferences regarding whether merit or privilege should determine success. As such, the results reveal heterogeneity not only in empirical diagnoses of how society works, but also in normative evaluations of whether these mechanisms are considered acceptable. This interpretation is consistent with the item-response profiles across classes.
 
 ```{r}
 #| label: fig-prob
