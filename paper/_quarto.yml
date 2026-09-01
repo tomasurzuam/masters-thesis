@@ -46,6 +46,7 @@ book:
 
 csl: refs/apa.csl                # Estilo de citas (cambia a otro .csl si lo prefieres)
 bibliography: refs/thesis.bib
+
 link-citations: true             # Enlaces desde el texto hacia la bibliografia
 reference-location: section      # Citas agrupadas al final de cada seccion
 
@@ -58,6 +59,7 @@ format:
     toc-location: right
     number-sections: true
     code-copy: true              # Boton copiar codigo
+    code-fold: true              # Colapsa los chunks de codigo por defecto (se despliegan al hacer clic)
     code-tools: true             # Menu con toggles para mostrar/ocultar codigo
     df-print: paged              # Usa "kable" o "default" si prefieres otra salida
     css: assets/styles.scss      # Punto central para tus estilos personalizados
@@ -104,7 +106,7 @@ execute:
   freeze: auto                  # Usa true para congelar resultados, false para ejecutar siempre
   fig-path: "docs/figures/"
 
-lang: es
+lang: en
 
 crossref:
   appendix-title: Anexo
