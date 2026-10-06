@@ -2,8 +2,6 @@
 title: "Results"
 ---
 
-This section contains the initial analyses related to latent class estimation. The analysis is divided into three main parts: first, a process is carried out to identify careless respondents in order to verify the quality of the data we are working with. Based on these analyses, cases that introduce noise into the sample are removed, and latent classes are then estimated using dichotomized items. Afterward, another latent class analysis is conducted without dichotomizing the variables, with the aim of determining whether there are substantial changes in the composition of each group. Finally, preliminary conclusions from the analyses are presented.
-
 ```{r}
 #| label: packages
 #| echo: false
@@ -23,17 +21,19 @@ pacman::p_load(tidyverse,
                poLCA,
                reshape,
                summarytools,
-               careless)
+               careless,
+               tidySEM,
+               semPlot,
+               lavaanPlot)
 
 options(scipen=999)
 rm(list = ls())
 ```
 
-## Data
 
 ```{r}
 #| label: data
-#| echo: true
+#| echo: false
 
 here::i_am("paper/04-resultados.qmd")
 load(here::here("paper", "input/data/proc/db_proc.RData"))
@@ -89,6 +89,27 @@ db <- db %>%
 
 db$income_4 <- sjlabelled::set_label(db$income_4, "Income")
 
+# income quintiles (approximate, since income is collected in 10 ordered brackets)
+income_levels <- c(
+  "Menos de $280.000 mensuales liquidos",
+  "De $280.001 a $380.000 mensuales liquidos",
+  "De $380.001 a $470.000 mensuales liquidos",
+  "De $470.001 a $610.000 mensuales liquidos",
+  "De $610.001 a $730.000 mensuales liquidos",
+  "De $730.001 a $890.000 mensuales liquidos",
+  "De $890.001 a $1.100.000 mensuales liquidos",
+  "De $1.100.001 a $2.700.000 mensuales liquidos",
+  "De $2.700.001 a $4.100.000 mensuales liquidos",
+  "Mas de $4.100.001 mensuales liquidos"
+)
+
+income_code <- as.integer(factor(db$income, levels = income_levels))
+income_breaks <- unique(quantile(income_code, seq(0, 1, .2), type = 1, na.rm = TRUE))
+
+db$income_5 <- cut(income_code, breaks = income_breaks, include.lowest = TRUE,
+                   labels = paste0("Q", seq_len(length(income_breaks) - 1))) |>
+  sjlabelled::set_label("Income quintile")
+
 db$age <- sjlabelled::set_label(db$age, "Age")
 
 db$sex <- if_else(db$sex == 1, "Male", "Female")
@@ -97,7 +118,12 @@ db$sex <- factor(db$sex, levels = c("Male", "Female"))
 
 db$sex <- sjlabelled::set_label(db$sex, "Sex")
 
-db$educ <- sjlabelled::set_label(db$educ, "Educational level")
+# educ is coded 1-9 (1-4 = up to complete secondary or less, 5-6 = higher technical,
+# 7-9 = university or more; grouping checked against screen_education in the survey
+# repository). Dichotomized: 0 = no university education, 1 = university education.
+db$educ <- if_else(db$educ >= 7, 1, 0)
+
+db$educ <- sjlabelled::set_label(db$educ, "University education")
 
 
 db$pol <- sjlabelled::set_label(db$pol, "Political identification")
@@ -109,12 +135,9 @@ db$pol <- sjlabelled::set_label(db$pol, "Political identification")
 ## Analysis
 
 
-### Patterns responses {#sec-patterns-responses}
-
-Before estimating the latent class models, I screened the eight meritocratic scale items for careless or insufficient-effort responding (IER), following the diagnostic framework proposed by @curran_methods_2016. I used the `careless` package to compute three indicator families, each capturing a different signature of low-quality responding: (a) the **longstring** index, the longest run of identical consecutive responses; (b) the **intra-individual response variability** (IRV), the within-person standard deviation across items and (c) the **Mahalanobis distance** (D²) of each response vector relative to the sample centroid, which flags multivariate outliers. Each index was estimated separately, as they are sensitive to different response patterns (straightlining, random responding, and inconsistency, respectively) and are not expected to fully overlap.
-
 ```{r}
 #| label: careless-prep
+#| include: false
 
 vars_careless <- vars_m
 
@@ -125,14 +148,10 @@ db_careless <- db %>%
 x_careless <- db_careless %>% dplyr::select(-id)
 ```
 
-#### Longstring index
 
 ```{r}
 #| label: fig-longstring
-#| out-width: '70%'
-#| fig-asp: 0.6
-#| fig-cap: "Longstring index: longest run of identical consecutive responses (max = 8 items)"
-#| fig-cap-location: top
+#| include: false
 
 ls_res <- careless::longstring(x_careless, avg = TRUE)
 
@@ -145,22 +164,12 @@ db_careless <- db_careless %>%
 #   scale_x_continuous(breaks = 1:8) +
 #   labs(x = "Longstring index", y = "N respondents",
 #        caption = paste0("Source: own elaboration based on Survey EDUMERCO (n = ", nrow(db_careless), ")"))
-
-knitr::include_graphics("input/images/fig-longstring-1.png")
 ```
 
 
-
-@fig-longstring shows, as a bar chart, how many respondents reached each possible value of the index, from 1 up to 8 (the maximum, since the battery has eight items). Most respondents cluster at the low end (1 to 3 identical answers in a row): this is the expected pattern, since it means their answer changed as they moved from one item to the next, consistent with actually reading and evaluating each statement. The right side of the distribution is where straightlining shows up. It is also worth noting that, because the eight items are organized in two four-item blocks (perceptions, then preferences), a run of six or more identical responses necessarily crosses from one block into the other — so it cannot be a coincidence tied to one particular question, but reflects the same answer being carried across two conceptually different sets of items. With an eight-item battery the longstring index ranges from 1 to 8. `r sum(db_careless$longstring >= 6)` respondents (`r round(100*mean(db_careless$longstring >= 6),1)`%) gave the same response to at least six of the eight items in a row, and `r sum(db_careless$longstring == 8)` (`r round(100*mean(db_careless$longstring == 8),1)`%) answered identically to all eight, consistent with straightlining.
-
-#### Intra-individual response variability (IRV)
-
 ```{r}
 #| label: fig-irv
-#| out-width: '80%'
-#| fig-asp: 0.6
-#| fig-cap: "Intra-individual response variability (IRV), overall and by item block"
-#| fig-cap-location: top
+#| include: false
 
 irv_res <- careless::irv(x_careless, na.rm = TRUE, split = TRUE, num.split = 2)
 
@@ -179,19 +188,12 @@ db_careless <- db_careless %>%
 #   facet_wrap(~block, scales = "free_y") +
 #   labs(x = "IRV", y = "N respondents")
 
-knitr::include_graphics("input/images/fig-irv-1.png")
 ```
 
-The IRV summarizes, for each respondent, how much their own answers moved across the eight items: someone who marks the same option (or nearly so) throughout the battery gets a low IRV, while someone who uses different points of the scale gets a higher one. In the histograms above, respondents piling up near zero (left side) are those whose answers were essentially flat — the pattern expected from careless or straightlined responding — while respondents further to the right made more use of the response scale, as most people do. Because the items are ordered in two conceptual blocks (perceptions, then preferences), splitting the IRV in two (`num.split = 2`) shows this same left-to-right pattern separately for each block, which also reveals whether flat responding is concentrated in only one part of the questionnaire rather than spread across the whole battery. Following @dunn_intraindividual_2018, we flag *low* IRV as a marker of straightlining: `r sum(db_careless$irv_total <= quantile(db_careless$irv_total, .05, na.rm = TRUE), na.rm = TRUE)` respondents (`r round(100*mean(db_careless$irv_total <= quantile(db_careless$irv_total, .05, na.rm = TRUE), na.rm = TRUE),1)`%) fall at or below the 5th percentile of the overall IRV distribution — i.e., the flattest 5% of the sample.
-
-#### Mahalanobis distance
 
 ```{r}
 #| label: fig-mahad
-#| out-width: '70%'
-#| fig-asp: 0.6
-#| fig-cap: "Mahalanobis D² of item-response vectors, flagged at the 99% confidence level"
-#| fig-cap-location: top
+#| include: false
 
 mahad_res <- careless::mahad(x_careless, plot = FALSE, flag = TRUE, confidence = 0.99, na.rm = TRUE)
 
@@ -204,17 +206,12 @@ db_careless <- db_careless %>%
 #   scale_fill_manual(values = c("FALSE" = "grey70", "TRUE" = "#6a1718"), name = "Flagged (99% CI)") +
 #   labs(x = expression(paste("Mahalanobis ", D^2)), y = "N respondents")
 
-knitr::include_graphics("input/images/fig-mahad-1.png")
 ```
 
-The Mahalanobis distance takes a different approach from the previous two indices: instead of looking at a respondent's answers on their own, it compares each respondent's whole pattern of answers against the pattern that is typical for the sample as a whole — taking into account how the eight items normally relate to one another (e.g., that seeing wealthy parents as an advantage tends to go together with seeing personal contacts as one). A person can therefore give variable, non-repetitive answers and still get a high Mahalanobis distance if the *combination* of their answers is unusual given how the items normally move together in the rest of the sample; this is why the index is described as multivariate rather than item-by-item. In the histogram, respondents piled up on the left have D² values close to zero, meaning their overall response pattern is unremarkable, while the tail stretching to the right holds respondents whose combined pattern departs the most from what is typical. Bars are colored to mark which of these are flagged as outliers under a 99% confidence threshold (grey = within the expected range, red = flagged) — a deliberately conservative cutoff, so only the most extreme patterns are marked. At this conservative 99% confidence level, `r sum(db_careless$mahad_flag, na.rm = TRUE)` respondents (`r round(100*mean(db_careless$mahad_flag, na.rm = TRUE),1)`%) are flagged as multivariate outliers relative to the response distribution of the other eight items.
-
-#### Combined diagnosis
 
 ```{r}
 #| label: tbl-careless-flags
-#| tbl-cap: "Overlap between careless-responding flags (longstring ≥ 6, IRV ≤ p5, Mahalanobis 99% CI)"
-#| tbl-cap-location: top
+#| include: false
 
 careless_flags <- db_careless %>%
   mutate(
@@ -225,18 +222,11 @@ careless_flags <- db_careless %>%
     careless_2of3   = n_flags >= 2
   )
 
-careless_flags %>%
-  count(n_flags) %>%
-  mutate(pct = round(100 * n / sum(n), 1)) %>%
-  kableExtra::kable(format = "html", align = "c",
-                    col.names = c("N indices flagging", "N respondents", "%"),
-                    caption = NULL) %>%
-  kableExtra::kable_styling(full_width = TRUE,
-                            bootstrap_options = c("striped", "bordered", "condensed"))
 ```
 
 ```{r}
 #| label: careless-merge
+#| include: false
 
 db <- db %>%
   left_join(
@@ -247,12 +237,268 @@ db <- db %>%
   )
 ```
 
-@tbl-careless-flags shows that the three usable indices agree only partially: `r sum(careless_flags$n_flags == 0, na.rm = TRUE)` respondents (`r round(100*mean(careless_flags$n_flags == 0, na.rm = TRUE),1)`%) are not flagged by any index, `r sum(careless_flags$n_flags == 1, na.rm = TRUE)` (`r round(100*mean(careless_flags$n_flags == 1, na.rm = TRUE),1)`%) are flagged by exactly one, `r sum(careless_flags$n_flags == 2, na.rm = TRUE)` (`r round(100*mean(careless_flags$n_flags == 2, na.rm = TRUE),1)`%) by exactly two, and only `r sum(careless_flags$n_flags == 3, na.rm = TRUE)` (`r round(100*mean(careless_flags$n_flags == 3, na.rm = TRUE),1)`%) by all three. Summing the last two rows of the table, `r sum(careless_flags$n_flags >= 2, na.rm = TRUE)` respondents (`r round(100*mean(careless_flags$n_flags >= 2, na.rm = TRUE),1)`%) are flagged by two or more indices — the threshold used below to define likely careless respondents. This limited overlap is expected — longstring targets straightlining, low IRV targets low variability more generally, and Mahalanobis D² targets multivariate inconsistency — and is itself evidence against relying on any single index [@curran_methods_2016].
+### Descriptives
 
-Considering the results of patterns responses analysis, I decided to remove the cases that could be considered careless respondents and, after doing so, re-estimate the latent classes.
+```{r}
+#| label: fig-likert-just-educ
+#| fig-cap: "Market justice in education (diverging Likert plot)"
+#| fig-height: 2.2
 
+item_lab <- "Market justice\nin education"
 
-### Latent class analysis with dichotomized items {#sec-lca-dichotomized}
+# proportions by response category
+db_likert1 <- db %>%
+  filter(!is.na(just_educ)) %>%
+  count(cat = just_educ) %>%
+  mutate(p = n / sum(n),
+         item = item_lab,
+         # disagreement goes left (negative), agreement goes right (positive)
+         s = if_else(as.integer(cat) <= 2, -p, p))
+
+# stacking order: categories ordered outward from the zero line
+db_likert1 <- db_likert1 %>%
+  mutate(cat = factor(cat, levels = c("Strongly desagree", "Desagree",
+                                      "Agree", "Strongly agree")))
+
+# percentage inside each segment
+lab_seg <- db_likert1 %>%
+  mutate(side = sign(s)) %>%
+  group_by(side) %>%
+  arrange(abs(as.integer(cat) - 2.5), .by_group = TRUE) %>%  # category next to zero first
+  mutate(x1 = side * (cumsum(p) - p),
+         x2 = side * cumsum(p),
+         x  = (x1 + x2) / 2,
+         lab = scales::percent(p, accuracy = 1)) %>%
+  ungroup()
+
+cols <- c("Strongly desagree" = "#6a1718",
+          "Desagree"          = "#d08c8c",
+          "Agree"             = "#8fb3cf",
+          "Strongly agree"    = "#1f4e79")
+
+ggplot(lab_seg, aes(y = item, fill = cat)) +
+  geom_tile(aes(x = x, width = p), height = .5) +
+  geom_vline(xintercept = 0, linewidth = .35) +
+  geom_text(data = lab_seg, aes(x = x, y = item, label = lab),
+            inherit.aes = FALSE, size = 3, colour = "white") +
+  scale_fill_manual(values = cols, breaks = names(cols)) +
+  scale_x_continuous(labels = \(z) scales::percent(abs(z)), limits = c(-1.1, 1.1)) +
+  coord_cartesian(clip = "off") +
+  labs(x = NULL, y = NULL, fill = NULL) +
+  theme_minimal() +
+  theme(legend.position = "bottom", panel.grid.major.y = element_blank(),
+        plot.margin = margin(5, 4, 5, 10))
+```
+
+@fig-likert-just-educ shows the distribution of responses on market justice in education. Rejection clearly predominates: 78% of respondents disagree with the statement (38% strongly disagree and 40% disagree), whereas only 22% agree (16% agree and 6% strongly agree). Responses are evenly split between the two disagreement categories, while strong agreement is marginal. Although this suggests that the idea that access to better education should depend on the ability to pay has little legitimacy, we must not overlook the fact that more than one-fifth of the sample supports the commodification of education, which could have significant consequences for the legitimization of educational inequality.
+
+```{r}
+#| label: fig-corr
+#| fig-cap: "Polychoric correlations between meritocracy indicators and market justice in education (* p < .05, ** p < .01, *** p < .001)"
+#| fig-height: 6
+
+db_corr <- db %>%
+  dplyr::select(all_of(vars_m), just_educ) %>%
+  mutate(across(everything(), as.numeric)) %>%
+  na.omit()
+
+# ordinal items -> polychoric correlations (with p-values, via lavaan)
+fit_corr <- lavaan::lavCor(db_corr, ordered = names(db_corr),
+                           estimator = "DWLS", se = "standard", output = "fit")
+corr_mat <- lavaan::lavInspect(fit_corr, "cor.ov")
+
+pe <- lavaan::parameterEstimates(fit_corr) %>%
+  dplyr::filter(op == "~~", lhs != rhs)
+p_mat <- matrix(0, nrow(corr_mat), ncol(corr_mat), dimnames = dimnames(corr_mat))
+for (k in seq_len(nrow(pe))) {
+  p_mat[pe$lhs[k], pe$rhs[k]] <- p_mat[pe$rhs[k], pe$lhs[k]] <- pe$pvalue[k]
+}
+
+corr_labels <- c(perc_effort       = "Perc. effort",
+                 perc_talent       = "Perc. talent",
+                 perc_rich_parents = "Perc. rich parents",
+                 perc_contact      = "Perc. contacts",
+                 pref_effort       = "Pref. effort",
+                 pref_talent       = "Pref. talent",
+                 pref_rich_parents = "Pref. rich parents",
+                 pref_contact      = "Pref. contacts",
+                 just_educ         = "Market justice\neducation")
+dimnames(corr_mat) <- list(corr_labels[rownames(corr_mat)],
+                           corr_labels[colnames(corr_mat)])
+
+stars <- function(p) {
+  dplyr::case_when(p < .001 ~ "***", p < .01 ~ "**", p < .05 ~ "*", TRUE ~ "")
+}
+
+corrplot::corrplot(corr_mat, method = "color", type = "lower",
+                   tl.col = "black", tl.cex = .8, tl.srt = 45,
+                   col = colorRampPalette(c("#6a1718", "white", "#1f4e79"))(200),
+                   cl.cex = .7, diag = FALSE)
+
+# coefficient + significance stars in each lower-triangle cell
+n_v <- nrow(corr_mat)
+for (i in 2:n_v) {
+  for (j in 1:(i - 1)) {
+    text(j, n_v - i + 1,
+         paste0(formatC(corr_mat[i, j], format = "f", digits = 2), stars(p_mat[i, j])),
+         cex = .7, font = 2, xpd = NA)
+  }
+}
+```
+
+@fig-corr shows the polychoric correlations between the meritocracy indicators and market justice in education. Regarding market justice in education, the strongest associations are with the preference for parental wealth (*r* = .33) and for contacts (*r* = .33), indicating that those who consider these privilege factors legitimate are more likely to justify a market-based education. The perception that parental wealth (*r* = −.19) and contacts (*r* = −.21) matter in Chile shows a weaker association with market justice in education in the opposite direction. The correlations with merit indicators are small (|*r*| ≤ .17). Among the indicators, the strongest correlations are those within each dimension: effort and talent (perceived *r* = .70; preferred *r* = .47), and parental wealth and contacts (perceived *r* = .74; preferred *r* = .72), which supports the distinction between merit and privilege dimensions. Across the results, the only moderate correlations are between perceived non-merit factors and preferred effort (.38 for parental wealth and .43 for contacts). 
+
+### SEM and market justice education
+
+```{r}
+db_sem2 <- db %>% 
+  dplyr::select(just_educ, all_of(vars_m), age, sex, educ, income_5, pol) |> 
+  na.omit()
+
+db_sem2$just_educ <- as.numeric(db_sem2$just_educ)
+
+db_sem2 <- db_sem2 %>% 
+  mutate(
+    across(
+      .cols = all_of(vars_m),
+      .fns = ~as.numeric(.)
+    ))
+
+# asegurar referencias
+db_sem2$income_5 <- relevel(db_sem2$income_5, ref = "Q1")
+db_sem2$pol <- relevel(db_sem2$pol, ref = "Left")
+
+# crear dummies
+X_income <- model.matrix(~ income_5, data = db_sem2)[, -1, drop = FALSE]
+X_pol    <- model.matrix(~ pol, data = db_sem2)[, -1, drop = FALSE]
+
+# unir
+db_sem2 <- cbind(db_sem2, as.data.frame(X_income), as.data.frame(X_pol))
+
+# limpiar nombres
+names(db_sem2) <- make.names(names(db_sem2))
+
+db_sem2$sex_female <- ifelse(db_sem2$sex == "Female", 1, 0)
+
+model <- c('
+  perc_merit =~ perc_effort + perc_talent
+  perc_nmerit =~ perc_rich_parents + perc_contact
+  pref_merit =~ pref_effort + pref_talent
+  pref_nmerit =~ pref_rich_parents + pref_contact
+
+  just_educ ~ perc_merit + perc_nmerit + pref_merit + pref_nmerit +
+                 age + educ + sex_female +
+                 income_5Q2 + income_5Q3 + income_5Q4 + income_5Q5 +
+                 polCenter + polRight + polDoes.not.identify
+')
+
+ord_vars <- c(
+  "just_educ",
+  "perc_effort", "perc_talent",
+  "perc_rich_parents", "perc_contact",
+  "pref_effort", "pref_talent",
+  "pref_rich_parents", "pref_contact"
+)
+
+fit_sem2 <- lavaan::sem(
+  model,
+  data = db_sem2,
+  estimator = "WLSMV",
+  ordered = ord_vars
+)
+
+#summary(fit_sem2, fit.measures = TRUE, standardized = TRUE, rsquare = TRUE)
+
+#fitmeasures(fit_sem2, c("chisq", "pvalue", "df", "cfi", "tli", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+
+```
+
+```{r}
+#| label: fig-sem2
+#| echo: false
+#| fig-cap: "SEM: perceptions and preferences of merit and non-merit factors predicting market justice in education (standardized estimates, WLSMV; controls omitted)"
+#| fig-cap-location: top
+#| fig-width: 11
+#| fig-height: 5.5
+
+pe <- lavaan::standardizedSolution(fit_sem2) |>
+  dplyr::filter(op %in% c("=~", "~")) |>
+  dplyr::mutate(sig = dplyr::case_when(pvalue < .001 ~ "***", pvalue < .01 ~ "**",
+                                       pvalue < .05 ~ "*", TRUE ~ ""),
+                lab = sprintf("%.2f%s", est.std, sig),
+                sig_flag = pvalue < .05)
+
+ind <- c("perc_effort", "perc_talent", "perc_rich_parents", "perc_contact",
+         "pref_effort", "pref_talent", "pref_rich_parents", "pref_contact")
+ind_lab <- rep(c("Effort", "Talent", "Rich parents", "Contacts"), 2)
+lat <- c("perc_merit", "perc_nmerit", "pref_merit", "pref_nmerit")
+lat_lab <- c("Perceived\nmerit", "Perceived\nprivilege", "Preferred\nmerit", "Preferred\nprivilege")
+ctl <- c("age", "educ", "sex_female", "income_5Q2", "income_5Q3", "income_5Q4",
+         "income_5Q5", "polCenter", "polRight", "polDoes.not.identify")
+ctl_lab <- c("Age", "Education", "Female", "Income Q2", "Income Q3", "Income Q4",
+             "Income Q5", "Pol.: Center", "Pol.: Right", "Pol.: No identif.")
+
+ind_y <- setNames(8:1, ind)
+lat_y <- setNames(c(7.5, 5.5, 3.5, 1.5), lat)
+X_IND <- 0; X_LAT <- 4.2; X_OUT <- 9; Y_OUT <- 4.5
+
+# loadings (latent -> indicator)
+load_df <- pe |>
+  dplyr::filter(op == "=~") |>
+  dplyr::mutate(xs = X_LAT - .7, ys = lat_y[lhs], xe = X_IND + .75, ye = ind_y[rhs],
+                lx = (xs + xe) / 2, ly = (ys + ye) / 2)
+# structural paths (latent -> outcome)
+str_df <- pe |>
+  dplyr::filter(op == "~", rhs %in% lat) |>
+  dplyr::mutate(xs = X_LAT + .7, ys = lat_y[rhs], xe = X_OUT - 1.2, ye = Y_OUT,
+                lx = xs + (xe - xs) * .5, ly = ys + (ye - ys) * .5)
+ggplot2::ggplot() +
+  ggplot2::geom_segment(data = load_df,
+    ggplot2::aes(x = xs, y = ys, xend = xe, yend = ye),
+    colour = "grey45", linewidth = .4,
+    arrow = ggplot2::arrow(length = grid::unit(2, "mm"), type = "closed")) +
+  ggplot2::geom_label(data = load_df, ggplot2::aes(lx, ly, label = lab),
+    size = 3, label.size = 0, fill = "white", label.padding = grid::unit(.5, "mm")) +
+  ggplot2::geom_segment(data = str_df,
+    ggplot2::aes(x = xs, y = ys, xend = xe, yend = ye,
+                 colour = est.std > 0, linetype = sig_flag),
+    linewidth = 1,
+    arrow = ggplot2::arrow(length = grid::unit(3, "mm"), type = "closed")) +
+  ggplot2::geom_label(data = str_df,
+    ggplot2::aes(lx, ly, label = lab, colour = est.std > 0),
+    size = 3.4, fontface = "bold", label.size = 0, fill = "white",
+    label.padding = grid::unit(.6, "mm"), show.legend = FALSE) +
+  # nodes
+  ggplot2::annotate("tile", x = X_IND, y = unname(ind_y), width = 1.5, height = .7,
+                    fill = "white", colour = "grey30") +
+  ggplot2::annotate("text", x = X_IND, y = unname(ind_y), label = ind_lab, size = 3) +
+  ggplot2::annotate("point", x = X_LAT, y = unname(lat_y), shape = 21, size = 24,
+                    fill = "#e8c9c9", colour = "#6a1718") +
+  ggplot2::annotate("text", x = X_LAT, y = unname(lat_y), label = lat_lab,
+                    size = 3.2, lineheight = .85) +
+  ggplot2::annotate("tile", x = X_OUT, y = Y_OUT, width = 2.4, height = 1.1,
+                    fill = "white", colour = "black", linewidth = .8) +
+  ggplot2::annotate("text", x = X_OUT, y = Y_OUT, label = "Market justice\nin education",
+                    size = 3.4, lineheight = .85) +
+  ggplot2::annotate("text", x = c(X_IND, X_LAT), y = 9, size = 3.3, fontface = "bold",
+                    label = c("Indicators", "Latent factors")) +
+  ggplot2::scale_colour_manual(values = c(`TRUE` = "#6a1718", `FALSE` = "#2c5f8a"),
+                               labels = c(`TRUE` = "Positive", `FALSE` = "Negative"),
+                               name = NULL) +
+  ggplot2::scale_linetype_manual(values = c(`TRUE` = "solid", `FALSE` = "dashed"),
+                                 labels = c(`TRUE` = "p < .05", `FALSE` = "n.s."),
+                                 name = NULL) +
+  ggplot2::guides(linetype = ggplot2::guide_legend(override.aes = list(colour = "grey30", arrow = NULL)),
+                  colour = ggplot2::guide_legend(override.aes = list(arrow = NULL, linetype = "solid"))) +
+  ggplot2::coord_fixed(xlim = c(-.9, 10.4), ylim = c(.4, 9.6)) +
+  ggplot2::theme_void() +
+  ggplot2::theme(legend.position = "bottom")
+
+```
+
+@fig-sem2 presents the standardized estimates of the structural equation model, which includes age, education, sex, income quintiles and political orientation as control variables (omitted from the figure for clarity). The model fits the data well (scaled CFI = .959, TLI = .985, RMSEA = .046, 90% CI [.043, .049], SRMR = .037). Also, the measurement model is satisfactory: all standardized loadings are significant and range from .55 to .92, with the privilege factors being particularly well defined (.81 to .90). Regarding the structural paths, preferences for privilege factor show the strongest association with market justice in education ($\beta$ = .32, *p* < .001), indicating that individuals who favor non-meritocratic criteria are more likely to justify a market-based education system. In contrast, perceptions of privilege factors are negatively associated with market justice ($\beta$ = −.20, *p* < .001): those who perceive that parental wealth and contacts shape opportunities in Chile are less likely to endorse a market-based education. Perceived merit has a very small positive effect ($\beta$ = .05, *p* < .05), while preferred merit is not significantly related to the outcome ($\beta$ = .04, *p* = .294). Overall, market justice in education is shaped mainly by beliefs about privilege criteria rather than by meritocratic ones, and perceptions and preferences operate in opposite directions in meritocratic dimension.  
+
+### Latent class analysis
 
 ```{r}
 #| include: false
@@ -382,7 +628,7 @@ fit_tbl <- data.frame(
 fit_tbl
 ```
 
-We estimated latent class models with one to five classes on the sample screened for careless responding (respondents flagged by two or more of the three usable indices in @sec-patterns-responses were excluded beforehand). Model fit improved monotonically as the number of classes increased, as indicated by decreasing AIC and BIC values and statistically significant likelihood-ratio tests at each step (@tbl-fit).
+We estimated latent class models with one to five classes. Model fit improved monotonically as the number of classes increased, as indicated by decreasing AIC and BIC values and statistically significant likelihood-ratio tests at each step (@tbl-fit).
 
 ```{r}
 #| label: tbl-fit
@@ -624,226 +870,147 @@ This profile suggests a belief system in which merit and privilege are understoo
 
 The fourth class is the smallest and least clearly structured. It is characterized by a low perception of meritocracy and a low perception of the influence of privilege, specially the rich parents item. The most significant aspect of this group is that it does not perceive privilege as a factor in the distribution of resources in society, nor does it believe that it should be.
 
-
-
-### Latent class analysis without dichotomized items {#sec-lca-full}
-
-To check whether the four-class solution is an artifact of dichotomizing the items, I re-estimated the latent class models on the eight original 4-category items, keeping the full ordinal response scale instead of collapsing it to a binary indicator. The sample was screened for careless responding in exactly the same way as the dichotomized model, so both models are estimated on the same set of respondents and are directly comparable.
+### Regression model
 
 ```{r}
+#| label: reg-data
 #| include: false
-# 3.4 LCA: ordinal (non-dichotomized) items ----
 
-df_full <- db %>%
-  dplyr::filter(!careless_2of3) %>%
-  dplyr::select(id, all_of(vars_m)) %>%
-  mutate(across(-id, as.numeric)) %>%
-  na.omit()
+# modal class assignment (same relabelling as in fig-prob: 4->1, 1->4, 2->3, 3->2)
+class_lab <- c("Critical meritocrats", "Privilege advocates",
+               "Universal rewards", "Against privilege")
 
-b1 <- df_full$perc_effort
-b2 <- df_full$perc_talent
-b3 <- df_full$perc_rich_parents
-b4 <- df_full$perc_contact
-b5 <- df_full$pref_effort
-b6 <- df_full$pref_talent
-b7 <- df_full$pref_rich_parents
-b8 <- df_full$pref_contact
-id <- df_full$id
-
-db_lca_full <- data.frame(id, b1, b2, b3, b4, b5, b6, b7, b8) %>% as_tibble()
-
-db_lca_full <- db_lca_full %>%
-  mutate_at(.vars = 2:9, ~as.factor(.))
-
-f_full <- cbind(b1, b2, b3, b4, b5, b6, b7, b8)~1
-
-fit_lca_full <- function(K, data, formula, nrep = 50, maxiter = 3000, seed = 123) {
-  set.seed(seed)
-  poLCA(formula, data = data, nclass = K,
-        nrep = nrep, maxiter = maxiter,
-        verbose = FALSE, graphs = FALSE)
-}
-
-Ks <- 1:5
-#fits_full <- lapply(Ks, fit_lca_full, data = db_lca_full, formula = f_full, nrep = 30)
-#save(fits_full, file = here("paper", "output/fits_models_lca_full.RData"))
-
-load(here::here("paper", "output/fits_models_lca_full.RData"))
-
-fit_tbl_full <- data.frame(
-  K    = Ks,
-  logLik = sapply(fits_full, `[[`, "llik"),
-  AIC  = sapply(fits_full, `[[`, "aic"),
-  BIC  = sapply(fits_full, `[[`, "bic"),
-  Gsq  = sapply(fits_full, `[[`, "Gsq"),
-  Chisq = sapply(fits_full, `[[`, "Chisq")
+class_df <- data.frame(
+  id = db_lca$id,
+  class4 = factor(recode(as.character(fit4$predclass),
+                         "4" = "1", "1" = "4", "2" = "3", "3" = "2"),
+                  levels = c("1", "2", "3", "4"), labels = class_lab)
 )
 
-fit_tbl_full
+db_reg <- db %>%
+  dplyr::inner_join(class_df, by = "id") %>%
+  dplyr::select(id, just_educ, class4, sex, educ, income_5, pol) %>%
+  na.omit() %>%
+  dplyr::mutate(just_educ = factor(just_educ, ordered = TRUE))
+
+db_reg$income_5 <- relevel(factor(db_reg$income_5, ordered = FALSE), ref = "Q1")
+db_reg$pol      <- relevel(factor(db_reg$pol, ordered = FALSE), ref = "Left")
 ```
 
 ```{r}
-#| label: tbl-fit-full
-#| tbl-cap: "Fit comparison of latent class models, ordinal (non-dichotomized) items"
-#| tbl-cap-location: top
+#| label: tbl-polr
+#| tbl-cap: "Ordinal logistic regression of market justice in education (odds ratios)"
 
-N_used_full <- nrow(db_lca_full)
-m_patterns_full <- n_patterns_from_data(db_lca_full)
+fit_polr1 <- MASS::polr(just_educ ~ class4,
+                        data = db_reg, Hess = TRUE, method = "logistic")
+fit_polr2 <- MASS::polr(just_educ ~ sex + educ + income_5 + pol,
+                        data = db_reg, Hess = TRUE, method = "logistic")
+fit_polr  <- MASS::polr(just_educ ~ class4 + sex + educ + income_5 + pol,
+                        data = db_reg, Hess = TRUE, method = "logistic")
+# Model 4: class x university education interaction, plus the remaining controls
+fit_polr4 <- MASS::polr(just_educ ~ class4 * educ + sex + income_5 + pol,
+                        data = db_reg, Hess = TRUE, method = "logistic")
 
-fit_tbl_full <- tibble(
-  K     = map_int(fits_full, get_K),
-  N     = N_used_full,
-  logLik= map_dbl(fits_full, ~as.numeric(.x$llik)),
-  npar  = map_dbl(fits_full, get_npar),
-  AIC   = map_dbl(fits_full, ~as.numeric(.x$aic)),
-  BIC   = map_dbl(fits_full, ~as.numeric(.x$bic))
-) %>%
-  arrange(K) %>%
-  mutate(
-    dAIC = AIC - lag(AIC),
-    dBIC = BIC - lag(BIC),
-    LRT = 2 * (logLik - lag(logLik)),
-    df_LRT = npar - lag(npar),
-    p_LRT = ifelse(!is.na(LRT) & df_LRT > 0, pchisq(LRT, df = df_LRT, lower.tail = FALSE), NA_real_)
-  )
+ref_rows <- data.frame(
+  term = c("Latent class (Ref = Critical meritocrats)", "Sex (Ref = Male)",
+           "University education (Ref = No university)",
+           "Income quintile (Ref = Q1)", "Political identification (Ref = Left)",
+           "AIC", "BIC"),
+  m1 = c(rep("", 5), sprintf("%.1f", c(AIC(fit_polr1), BIC(fit_polr1)))),
+  m2 = c(rep("", 5), sprintf("%.1f", c(AIC(fit_polr2), BIC(fit_polr2)))),
+  m3 = c(rep("", 5), sprintf("%.1f", c(AIC(fit_polr), BIC(fit_polr)))),
+  m4 = c(rep("", 5), sprintf("%.1f", c(AIC(fit_polr4), BIC(fit_polr4))))
+)
+names(ref_rows) <- c("term", "Model 1", "Model 2", "Model 3", "Model 4")
+hdr_pos <- c(1, 8, 11, 20, 29)   # positions of the reference-category rows
+attr(ref_rows, "position") <- c(hdr_pos, 36, 37)
 
-fit_tbl_full_report <- fit_tbl_full %>%
-  transmute(
-    K, N,
-    logLik = round(logLik, 1),
-    npar = npar,
-    AIC = round(AIC, 1),
-    dAIC = round(dAIC, 1),
-    BIC = round(BIC, 1),
-    dBIC = round(dBIC, 1),
-    LRT = round(LRT, 1),
-    df_LRT = df_LRT,
-    p_LRT = signif(p_LRT, 3)
-  )
+modelsummary::modelsummary(
+  list("Model 1" = fit_polr1, "Model 2" = fit_polr2, "Model 3" = fit_polr,
+       "Model 4" = fit_polr4),
+  exponentiate = TRUE, statistic = "conf.int", stars = TRUE,
+  coef_omit = "\\|",
+  coef_map = c(
+    "class4Privilege advocates" = "Privilege advocates",
+    "class4Universal rewards"   = "Universal rewards",
+    "class4Against privilege"   = "Against privilege",
+    "sexFemale" = "Female",
+    "educ" = "University education",
+    "class4Privilege advocates:educ" = "Privilege advocates x University education",
+    "class4Universal rewards:educ"   = "Universal rewards x University education",
+    "class4Against privilege:educ"   = "Against privilege x University education",
+    "income_5Q2" = "Q2", "income_5Q3" = "Q3", "income_5Q4" = "Q4", "income_5Q5" = "Q5",
+    "polCenter" = "Center", "polRight" = "Right",
+    "polDoes not identify" = "Does not identify"
+  ),
+  gof_map = c("nobs"),
+  add_rows = ref_rows,
+  output = "tinytable"
+) |>
+  tinytable::style_tt(i = hdr_pos, bold = TRUE, background = "#f2f2f2")
+```
 
-fit_tbl_full_report %>%
- kableExtra::kable(format = "html",
-                    align = "c",
-                    booktabs = T,
-                    escape = F,
-                    caption = NULL) %>%
-  kableExtra::kable_styling(full_width = T,
-                            latex_options = "hold_position",
-                            bootstrap_options=c("striped", "bordered", "condensed"),
-                            font_size = 23) %>%
-  kableExtra::column_spec(c(1,8), width = "3.5cm") %>%
-  kableExtra::column_spec(2:7, width = "4cm") %>%
-  kableExtra::column_spec(4, width = "5cm")
+@tbl-polr reports four ordinal logistic regressions of market justice in education. Model 1 includes only latent class membership, Model 2 only the sociodemographic and political variables (sex, university education, income quintile and political identification), Model 3 both sets of predictors, and Model 4 adds the interaction between latent class and university education to the full model. In Model 1, members of the other three classes have significantly higher odds of endorsing market justice in education than the *Critical meritocrats* (reference): *Privilege advocates* (OR = 2.50, 95% CI [2.10, 2.97]), *Universal rewards* (OR = 2.32, [1.88, 2.86]) and *Against privilege* (OR = 2.55, [1.85, 3.53]). The three coefficients are similar and their confidence intervals overlap, so the main contrast is between the *Critical meritocrats* and the remaining classes rather than among the latter. Model 2 shows that women (OR = 0.66) and people with university education (OR = 0.84) have lower odds of market justice, while those identifying with the center (OR = 2.03), the right (OR = 2.98) or not identifying with any position (OR = 1.75) have higher odds than those on the left; income quintiles are not significantly associated with the outcome. In the full model (Model 3), the class coefficients decrease moderately (ORs between 2.04 and 2.28) but remain significant, and the coefficients of the remaining variables change little, with the exception of political identification, whose odds ratios for the center and the right fall from 2.03 to 1.78 and from 2.98 to 2.63. This indicates that the association between latent classes and market justice is not explained by sociodemographic characteristics, although part of it overlaps with political orientation, and that the classes capture belief configurations that are related to, but distinct from, ideological position. Model 3 also has the best fit (AIC = 5,687.9 versus 5,798.0 and 5,777.0 for Models 1 and 2; BIC = 5,775.2 versus 5,832.9 and 5,846.8), so both sets of predictors contribute independently to explaining market justice in education. Finally, Model 4 shows no evidence that the association between latent classes and market justice varies by educational level: none of the interactions between class membership and university education were statistically significant (*Privilege advocates* OR = 1.03, [0.72, 1.48]; *Universal rewards* OR = 0.94, [0.61, 1.44]; *Against privilege* OR = 0.94, [0.47, 1.89]), and the model fits worse than Model 3 (AIC = 5,693.7; BIC = 5,798.4).
 
+```{r}
+#| label: tbl-po-test
+#| tbl-cap: "Likelihood-ratio tests of the proportional odds assumption (one predictor relaxed at a time)"
+#| include: false
+
+# fit_clm <- ordinal::clm(
+#   just_educ ~ class4 + sex + educ + income_5 + pol,
+#   data = db_reg, link = "logit"
+# )
+
+# po_test <- ordinal::nominal_test(fit_clm)
+# po_test <- as.data.frame(po_test)
+# po_test$Term <- rownames(po_test)
+
+# po_test |>
+#   dplyr::filter(Term != "<none>") |>
+#   dplyr::transmute(Term,
+#                    Df = Df,
+#                    `LR stat.` = round(LRT, 2),
+#                    `p-value` = format.pval(`Pr(>Chi)`, digits = 3, eps = .001)) |>
+#   knitr::kable(row.names = FALSE)
 ```
 
 ```{r}
-#| label: fig-visaic-full
-#| out-width: '80%'
-#| fig-asp: 0.8
-#| fig-cap: "Visual: AIC/BIC by K, ordinal items (lower is better)"
-#| fig-cap-location: top
+#| label: tbl-cumlogit
+#| tbl-cap: "Separate binary logistic regressions at each cut-point of market justice in education (odds ratios)"
+#| include: false
 
-fit_long_full <- fit_tbl_full %>%
-  dplyr::select(K, AIC, BIC) %>%
-  pivot_longer(-K, names_to = "criterion", values_to = "value")
+# db_reg <- db_reg %>%
+#   dplyr::mutate(
+#     y_ge2 = as.integer(as.integer(just_educ) >= 2),
+#     y_ge3 = as.integer(as.integer(just_educ) >= 3),
+#     y_ge4 = as.integer(as.integer(just_educ) >= 4)
+#   )
 
-ggplot(fit_long_full, aes(x = K, y = value, group = criterion)) +
-  geom_line() +
-  geom_point() +
-  facet_wrap(~criterion, scales = "free_y") +
-  labs(x = "Number of classes (K)", y = "Value")
+# rhs <- ~ class4 + sex + educ + income_5 + pol
+# cum_fits <- list(
+#   "Y ≥ Disagree"      = glm(update(rhs, y_ge2 ~ .), data = db_reg, family = binomial),
+#   "Y ≥ Agree"         = glm(update(rhs, y_ge3 ~ .), data = db_reg, family = binomial),
+#   "Y = Strongly agree" = glm(update(rhs, y_ge4 ~ .), data = db_reg, family = binomial)
+# )
 
+# modelsummary::modelsummary(
+#   cum_fits, exponentiate = TRUE, statistic = "conf.int", stars = TRUE,
+#   coef_omit = "Intercept",
+#   coef_rename = c(
+#     "class4Privilege advocates" = "Class: Privilege advocates",
+#     "class4Universal rewards"   = "Class: Universal rewards",
+#     "class4Against privilege"   = "Class: Against privilege",
+#     "sexFemale" = "Female", "educ" = "University education",
+#     "income_5Q2" = "Income Q2", "income_5Q3" = "Income Q3",
+#     "income_5Q4" = "Income Q4", "income_5Q5" = "Income Q5",
+#     "polCenter" = "Pol.: Center", "polRight" = "Pol.: Right",
+#     "polDoes not identify" = "Pol.: Does not identify"
+#   ),
+#   gof_map = c("nobs"),
+#   notes = "Reference categories: Class 1 (Critical meritocrats), Male, Income Q1, Left."
+# )
 ```
 
-```{r}
-#| label: fig-dfvisaic-full
-#| out-width: '80%'
-#| fig-asp: 0.8
-#| fig-cap: "ΔAIC and ΔBIC, ordinal items (negative = improvement over K-1)"
-#| fig-cap-location: top
-
-delta_long_full <- fit_tbl_full %>%
-  dplyr::select(K, dAIC, dBIC) %>%
-  pivot_longer(-K, names_to = "delta", values_to = "value")
-
-ggplot(delta_long_full, aes(x = K, y = value, group = delta)) +
-  geom_hline(yintercept = 0) +
-  geom_line() +
-  geom_point() +
-  facet_wrap(~delta, scales = "free_y") +
-  labs(x = "K", y = "Change vs K-1 (negative = better)")
-```
-
-Unlike the dichotomized model, where the improvement in fit dropped sharply after four classes, the ordinal-item models show a smoother, more gradual gain across K = 3 to 5, without as clear an elbow at K = 4 (@fig-dfvisaic-full). Taken purely on statistical grounds, the ordinal data would tolerate a larger number of classes about as readily as four. We nonetheless focus on the four-class solution below, not because it is independently optimal for the ordinal data, but to allow a direct, like-for-like comparison with the dichotomized four-class model reported above.
-
-```{r}
-#| label: fig-prob-full
-#| out-width: '80%'
-#| fig-asp: 0.8
-#| fig-cap: "Mean expected item score (1-4) by class, ordinal items"
-#| fig-cap-location: top
-
-fit4_full <- fits_full[[4]]
-
-items_b <- names(fit4_full$probs)
-
-mean_score_long <- bind_rows(lapply(items_b, function(it) {
-  mat <- fit4_full$probs[[it]]                 # K x 4 (categories 1..4)
-  ncat <- ncol(mat)
-  score <- as.numeric(mat %*% matrix(1:ncat, ncol = 1))
-  tibble(item = it, class = 1:nrow(mat), score = score)
-}))
-
-mean_score_long <- mean_score_long %>%
-  mutate(
-    variable = case_when(item == "b1" ~ "perc_effort",
-                         item == "b2" ~ "perc_talent",
-                         item == "b3" ~ "perc_rich_parents",
-                         item == "b4" ~ "perc_contacts",
-                         item == "b5" ~ "pref_effort",
-                         item == "b6" ~ "pref_talent",
-                         item == "b7" ~ "pref_rich_parents",
-                         item == "b8" ~ "pref_contacts"),
-    variable = factor(variable,
-                      levels = c("perc_effort", "perc_talent", "perc_rich_parents", "perc_contacts",
-                                 "pref_effort", "pref_talent", "pref_rich_parents", "pref_contacts")),
-    class = factor(class),
-    score = round(score, 2)
-  )
-
-g_class_full <- ggplot(mean_score_long, aes(x = variable, y = score, group = class, colour = class)) +
-  geom_line(linewidth = 0.7) +
-  geom_point(size = 2) +
-  MetBrewer::scale_color_met_d("VanGogh2") +
-  coord_cartesian(ylim = c(1, 4)) +
-  labs(x = "Item", y = "Mean expected score",
-       group = "Class", colour = "Class") +
-  theme(legend.position = "top",
-        text = element_text(size = 14),
-        axis.text.x = element_text(angle = 70, vjust = 1, hjust = 1))
-
-ggplotly(g_class_full)
-```
-
-
-The four-class solution estimated on the ordinal items has a markedly different class structure from the dichotomized solution: `r round(100*fit4_full$P[1],1)`%, `r round(100*fit4_full$P[2],1)`%, `r round(100*fit4_full$P[3],1)`%, and `r round(100*fit4_full$P[4],1)`% of respondents, respectively — compared with 6.7%, 19.0%, 37.2%, and 37.1% in the dichotomized model. Substantively:
-
-- **Class 1 (`r round(100*fit4_full$P[1],1)`%)**: Shows moderate-to-low agreement on perceived merit and, distinctively, only *moderate* agreement that privilege factors matter. This is the largest class under the ordinal model.
-
-- **Class 2 (`r round(100*fit4_full$P[2],1)`%)**: Shows the highest agreement on perceived merit combined with high perceived privilege and strong preference for merit-based rewards, but only moderate acceptance of privilege advantage — resembling the dichotomized "Universal rewards" class.
-
-- **Class 3 (`r round(100*fit4_full$P[3],1)`%)**: Combines low perceived merit with very high perceived privilege, strong preference for merit-based rewards, and low acceptance of privilege advantage — resembling the dichotomized "Critical meritocrats" class, though notably smaller here.
-- **Class 4 (`r round(100*fit4_full$P[4],1)`%)**: Also combines low perceived merit with very high perceived privilege and strong preference for merit-based rewards, but shows only moderate (rather than high or low) acceptance of privilege advantage.
-
-## Preliminary conclusions
-
-Based on the analysis for this installment, there are three points worth mentioning in conclusion
-
-**1)** After analyzing careless respondents and eliminating those cases, the fundamental structure of the latent classes remained intact, with only slight variations in their sizes. This means that the classes identified are robust in the face of careless responses and, therefore, are accurate representations of people’s beliefs.
-
-**2)** When latent class analysis was applied without dichotomizing the variables, the fit indices were less clear in the optimal class solution. Specifically, the 4- to 5-class solution did not allow us to conclude that the 4-class model was the most balanced. This might suggest that, by not dichotomizing the variables, there could be other variations in the class solution that would be worth exploring in the future.
-
-
-**3)** In the analysis of latent classes without dichotomization, no equivalence was found with the previously observed classes (dichotomized LCA), but there are similarities worth noting. While Class 1 does not have a very clear equivalent, Class 2 can be associated with Universal Rewards due to the similarity in their profiles. On the other hand, Classes 3 and 4 share a fairly similar structure, except that Class 3 is more opposed to the idea that privilege factors operate in society. In this sense, these classes largely share the characteristics of Critical Meritocrats.
+<!-- The proportional odds assumption is not fully met (@tbl-po-test): the likelihood-ratio tests reject it for class membership, sex, university education, income and political identification. Given the large sample (N = 2,489), these tests are sensitive to small departures, so we examined the cut-point-specific logistic regressions (@tbl-cumlogit). The main pattern holds at the first two cut-points, where all three classes differ from the *Critical meritocrats* (ORs between 2.0 and 2.7) and political identification and sex keep their direction. At the highest cut-point (*Strongly agree*, only 188 respondents in this sample) the class contrasts remain positive but are significant only for the *Privilege advocates*. Some predictors do vary across cut-points: the association with sex is stronger at the middle cut-point (OR = 0.53) than at the first (OR = 0.78), and university education and lower-income groups are associated only with the shift from disagreement to agreement. Thus, the class results are robust in direction, but the ordinal model averages effects that are not perfectly constant across the response scale, and its odds ratios should be read as summaries rather than as uniform effects. -->
 
