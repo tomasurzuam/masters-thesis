@@ -35,7 +35,6 @@ book:
     - index.qmd            # Capitulo inicial o resumen ejecutivo
     - 01-introduccion.qmd
     - 02-antecedentes.qmd
-    - 03-metodologia.qmd
     - 04-resultados.qmd
     - 05-discusion.qmd
     - 06-conclusiones.qmd

@@ -19,6 +19,7 @@ pacman::p_load(tidyverse,
                patchwork,
                RColorBrewer,
                poLCA,
+               tidyLPA,
                reshape,
                summarytools,
                careless,
@@ -37,6 +38,7 @@ rm(list = ls())
 
 here::i_am("paper/04-resultados.qmd")
 load(here::here("paper", "input/data/proc/db_proc.RData"))
+
 ```
 
 ```{r}
@@ -131,6 +133,28 @@ db$pol <- sjlabelled::set_label(db$pol, "Political identification")
 
 
 ```
+
+```{r}
+# income deciles (approximate, since income is collected in 10 ordered brackets)
+decile_breaks <- unique(quantile(income_code, seq(0, 1, .1), type = 1, na.rm = TRUE))
+
+db$income_10 <- cut(income_code, breaks = decile_breaks, include.lowest = TRUE,
+                    labels = paste0("D", seq_len(length(decile_breaks) - 1))) |>
+  sjlabelled::set_label("Income decile")
+
+# dichotomized: 0 = deciles 1-9, 1 = decile 10
+db$income_top10 <- if_else(as.integer(db$income_10) == length(decile_breaks) - 1, 1, 0) |>
+  sjlabelled::set_label("Top income decile")
+
+# dichotomized: 0 = brackets 1-8, 1 = brackets 9-10 (more than $2.700.000)
+db$income_high <- if_else(income_code >= 9, 1, 0) |>
+  sjlabelled::set_label("High income (brackets 9-10)")
+
+table(db$income_10, useNA = "ifany")
+table(db$income_top10, useNA = "ifany")
+table(db$income_high, useNA = "ifany")
+```
+
 
 ## Analysis
 
@@ -257,7 +281,7 @@ db_likert1 <- db %>%
 
 # stacking order: categories ordered outward from the zero line
 db_likert1 <- db_likert1 %>%
-  mutate(cat = factor(cat, levels = c("Strongly desagree", "Desagree",
+  mutate(cat = factor(cat, levels = c("Strongly disagree", "Disagree",
                                       "Agree", "Strongly agree")))
 
 # percentage inside each segment
@@ -271,8 +295,8 @@ lab_seg <- db_likert1 %>%
          lab = scales::percent(p, accuracy = 1)) %>%
   ungroup()
 
-cols <- c("Strongly desagree" = "#6a1718",
-          "Desagree"          = "#d08c8c",
+cols <- c("Strongly disagree" = "#6a1718",
+          "Disagree"          = "#d08c8c",
           "Agree"             = "#8fb3cf",
           "Strongly agree"    = "#1f4e79")
 
@@ -910,6 +934,12 @@ fit_polr  <- MASS::polr(just_educ ~ class4 + sex + educ + income_5 + pol,
 # Model 4: class x university education interaction, plus the remaining controls
 fit_polr4 <- MASS::polr(just_educ ~ class4 * educ + sex + income_5 + pol,
                         data = db_reg, Hess = TRUE, method = "logistic")
+# Model 5: class x sex interaction, plus the remaining controls
+fit_polr5 <- MASS::polr(just_educ ~ class4 * sex + educ + income_5 + pol,
+                        data = db_reg, Hess = TRUE, method = "logistic")
+# Model 6: class x political identification interaction, plus the remaining controls
+fit_polr6 <- MASS::polr(just_educ ~ class4 * pol + sex + educ + income_5,
+                        data = db_reg, Hess = TRUE, method = "logistic")
 
 ref_rows <- data.frame(
   term = c("Latent class (Ref = Critical meritocrats)", "Sex (Ref = Male)",
@@ -919,15 +949,18 @@ ref_rows <- data.frame(
   m1 = c(rep("", 5), sprintf("%.1f", c(AIC(fit_polr1), BIC(fit_polr1)))),
   m2 = c(rep("", 5), sprintf("%.1f", c(AIC(fit_polr2), BIC(fit_polr2)))),
   m3 = c(rep("", 5), sprintf("%.1f", c(AIC(fit_polr), BIC(fit_polr)))),
-  m4 = c(rep("", 5), sprintf("%.1f", c(AIC(fit_polr4), BIC(fit_polr4))))
+  m4 = c(rep("", 5), sprintf("%.1f", c(AIC(fit_polr4), BIC(fit_polr4)))),
+  m5 = c(rep("", 5), sprintf("%.1f", c(AIC(fit_polr5), BIC(fit_polr5)))),
+  m6 = c(rep("", 5), sprintf("%.1f", c(AIC(fit_polr6), BIC(fit_polr6))))
 )
-names(ref_rows) <- c("term", "Model 1", "Model 2", "Model 3", "Model 4")
-hdr_pos <- c(1, 8, 11, 20, 29)   # positions of the reference-category rows
-attr(ref_rows, "position") <- c(hdr_pos, 36, 37)
+names(ref_rows) <- c("term", paste("Model", 1:6))
+hdr_pos <- c(1, 8, 17, 26, 35)   # positions of the reference-category rows
+attr(ref_rows, "position") <- c(hdr_pos, 60, 61)
 
 modelsummary::modelsummary(
   list("Model 1" = fit_polr1, "Model 2" = fit_polr2, "Model 3" = fit_polr,
-       "Model 4" = fit_polr4),
+       "Model 4" = fit_polr4,
+       "Model 5" = fit_polr5, "Model 6" = fit_polr6),
   exponentiate = TRUE, statistic = "conf.int", stars = TRUE,
   coef_omit = "\\|",
   coef_map = c(
@@ -935,13 +968,25 @@ modelsummary::modelsummary(
     "class4Universal rewards"   = "Universal rewards",
     "class4Against privilege"   = "Against privilege",
     "sexFemale" = "Female",
+    "class4Privilege advocates:sexFemale" = "Privilege advocates x Female",
+    "class4Universal rewards:sexFemale"   = "Universal rewards x Female",
+    "class4Against privilege:sexFemale"   = "Against privilege x Female",
     "educ" = "University education",
     "class4Privilege advocates:educ" = "Privilege advocates x University education",
     "class4Universal rewards:educ"   = "Universal rewards x University education",
     "class4Against privilege:educ"   = "Against privilege x University education",
     "income_5Q2" = "Q2", "income_5Q3" = "Q3", "income_5Q4" = "Q4", "income_5Q5" = "Q5",
     "polCenter" = "Center", "polRight" = "Right",
-    "polDoes not identify" = "Does not identify"
+    "polDoes not identify" = "Does not identify",
+    "class4Privilege advocates:polCenter" = "Privilege advocates x Center",
+    "class4Universal rewards:polCenter"   = "Universal rewards x Center",
+    "class4Against privilege:polCenter"   = "Against privilege x Center",
+    "class4Privilege advocates:polRight"  = "Privilege advocates x Right",
+    "class4Universal rewards:polRight"    = "Universal rewards x Right",
+    "class4Against privilege:polRight"    = "Against privilege x Right",
+    "class4Privilege advocates:polDoes not identify" = "Privilege advocates x Does not identify",
+    "class4Universal rewards:polDoes not identify"   = "Universal rewards x Does not identify",
+    "class4Against privilege:polDoes not identify"   = "Against privilege x Does not identify"
   ),
   gof_map = c("nobs"),
   add_rows = ref_rows,
@@ -950,67 +995,346 @@ modelsummary::modelsummary(
   tinytable::style_tt(i = hdr_pos, bold = TRUE, background = "#f2f2f2")
 ```
 
-@tbl-polr reports four ordinal logistic regressions of market justice in education. Model 1 includes only latent class membership, Model 2 only the sociodemographic and political variables (sex, university education, income quintile and political identification), Model 3 both sets of predictors, and Model 4 adds the interaction between latent class and university education to the full model. In Model 1, members of the other three classes have significantly higher odds of endorsing market justice in education than the *Critical meritocrats* (reference): *Privilege advocates* (OR = 2.50, 95% CI [2.10, 2.97]), *Universal rewards* (OR = 2.32, [1.88, 2.86]) and *Against privilege* (OR = 2.55, [1.85, 3.53]). The three coefficients are similar and their confidence intervals overlap, so the main contrast is between the *Critical meritocrats* and the remaining classes rather than among the latter. Model 2 shows that women (OR = 0.66) and people with university education (OR = 0.84) have lower odds of market justice, while those identifying with the center (OR = 2.03), the right (OR = 2.98) or not identifying with any position (OR = 1.75) have higher odds than those on the left; income quintiles are not significantly associated with the outcome. In the full model (Model 3), the class coefficients decrease moderately (ORs between 2.04 and 2.28) but remain significant, and the coefficients of the remaining variables change little, with the exception of political identification, whose odds ratios for the center and the right fall from 2.03 to 1.78 and from 2.98 to 2.63. This indicates that the association between latent classes and market justice is not explained by sociodemographic characteristics, although part of it overlaps with political orientation, and that the classes capture belief configurations that are related to, but distinct from, ideological position. Model 3 also has the best fit (AIC = 5,687.9 versus 5,798.0 and 5,777.0 for Models 1 and 2; BIC = 5,775.2 versus 5,832.9 and 5,846.8), so both sets of predictors contribute independently to explaining market justice in education. Finally, Model 4 shows no evidence that the association between latent classes and market justice varies by educational level: none of the interactions between class membership and university education were statistically significant (*Privilege advocates* OR = 1.03, [0.72, 1.48]; *Universal rewards* OR = 0.94, [0.61, 1.44]; *Against privilege* OR = 0.94, [0.47, 1.89]), and the model fits worse than Model 3 (AIC = 5,693.7; BIC = 5,798.4).
+@tbl-polr reports four ordinal logistic regressions of market justice in education. Model 1 includes only latent class membership, Model 2 only the sociodemographic and political variables (sex, university education, income quintile and political identification), Model 3 both sets of predictors, Model 4 adds the interaction between latent class and university education to the full model, Model 5 the interaction between latent class and sex, and Model 6 the interaction between latent class and political identification. In Model 1, members of the other three classes have significantly higher odds of endorsing market justice in education than the *Critical meritocrats* (reference): *Privilege advocates* (OR = 2.50, 95% CI [2.10, 2.97]), *Universal rewards* (OR = 2.32, [1.88, 2.86]) and *Against privilege* (OR = 2.55, [1.85, 3.53]). The three coefficients are similar and their confidence intervals overlap, so the main contrast is between the *Critical meritocrats* and the remaining classes rather than among the latter. Model 2 shows that women (OR = 0.66) and people with university education (OR = 0.84) have lower odds of market justice, while those identifying with the center (OR = 2.03), the right (OR = 2.98) or not identifying with any position (OR = 1.75) have higher odds than those on the left; income quintiles are not significantly associated with the outcome. In the full model (Model 3), the class coefficients decrease moderately (ORs between 2.04 and 2.28) but remain significant, and the coefficients of the remaining variables change little, with the exception of political identification, whose odds ratios for the center and the right fall from 2.03 to 1.78 and from 2.98 to 2.63. This indicates that the association between latent classes and market justice is not explained by sociodemographic characteristics, although part of it overlaps with political orientation, and that the classes capture belief configurations that are related to, but distinct from, ideological position. Model 3 also has the best fit (AIC = 5,687.9 versus 5,798.0 and 5,777.0 for Models 1 and 2; BIC = 5,775.2 versus 5,832.9 and 5,846.8), so both sets of predictors contribute independently to explaining market justice in education. Finally, Model 4 shows no evidence that the association between latent classes and market justice varies by educational level: none of the interactions between class membership and university education were statistically significant (*Privilege advocates* OR = 1.03, [0.72, 1.48]; *Universal rewards* OR = 0.94, [0.61, 1.44]; *Against privilege* OR = 0.94, [0.47, 1.89]), and the model fits worse than Model 3 (AIC = 5,693.7; BIC = 5,798.4). Models 5 and 6 lead to the same conclusion for sex and political identification. In Model 5 none of the class-by-sex interactions is significant (*Privilege advocates* OR = 0.91, [0.64, 1.28]; *Universal rewards* OR = 0.86, [0.56, 1.31]; *Against privilege* OR = 0.70, [0.36, 1.35]), and in Model 6 none of the nine class-by-political-identification interactions reaches conventional significance either, the closest being *Against privilege* x Right (OR = 0.39, [0.15, 1.06]). Likelihood-ratio tests against Model 3 confirm that neither set of interactions improves the fit (sex: $\chi^2$(3) = 1.34, *p* = .721; political identification: $\chi^2$(9) = 13.37, *p* = .147), and both models have higher BIC than Model 3 (5,797.3 and 5,832.2 versus 5,775.2). The association between latent classes and market justice in education is therefore similar across sex, educational level and political orientation.
 
 ```{r}
-#| label: tbl-po-test
-#| tbl-cap: "Likelihood-ratio tests of the proportional odds assumption (one predictor relaxed at a time)"
+#| label: tbl-bch
+#| tbl-cap: "Robustness: modal assignment versus three-step BCH correction (odds ratios, Ref = Critical meritocrats)"
+
+# Posterior class probabilities, ordered as the relabelled classes (old 4, 3, 2, 1 -> new 1, 2, 3, 4)
+# post <- fit4$posterior[, c(4, 3, 2, 1)]
+# rownames(post) <- db_lca$id
+# modal_lca <- factor(class_lab[max.col(post)], levels = class_lab)
+
+# # BCH weights: inverse of the classification-error matrix A[s, c] = P(modal = s | class c)
+# bch_weights <- function(ids) {
+#   p <- post[as.character(ids), , drop = FALSE]
+#   m <- factor(class_lab[max.col(p)], levels = class_lab)
+#   A <- sapply(1:4, function(cc) tapply(p[, cc], m, sum) / sum(p[, cc]))
+#   A[is.na(A)] <- 0
+#   list(W = solve(t(A)), modal = as.integer(m))
+# }
+
+# # Step 3: stack one copy of the data per class and weight it by the BCH weight
+# bch_fit <- function(dat, formula) {
+#   bw <- bch_weights(dat$id)
+#   stk <- do.call(rbind, lapply(1:4, function(cc) {
+#     d <- dat
+#     d$cls <- factor(class_lab[cc], levels = class_lab)
+#     d$w   <- bw$W[cbind(bw$modal, cc)]
+#     d
+#   }))
+#   suppressWarnings(MASS::polr(formula, data = stk, weights = w,
+#                               Hess = FALSE, method = "logistic"))
+# }
+
+# f1 <- just_educ ~ cls
+# f3 <- just_educ ~ cls + sex + educ + income_5 + pol
+# cls_terms <- paste0("cls", class_lab[-1])
+
+# point <- function(dat) {
+#   c(exp(coef(bch_fit(dat, f1))[cls_terms]), exp(coef(bch_fit(dat, f3))[cls_terms]))
+# }
+# est <- point(db_reg)
+
+# # Respondent-level bootstrap of the weights and the outcome model (LCA fixed)
+# set.seed(2024)
+# B <- 500
+# boot <- t(replicate(B, point(db_reg[sample(nrow(db_reg), replace = TRUE), ])))
+# ci <- apply(boot, 2, quantile, probs = c(.025, .975))
+
+# fmt <- function(or, lo, hi) sprintf("%.2f [%.2f, %.2f]", or, lo, hi)
+# ci_polr <- function(m, nm) {
+#   cf <- summary(m)$coefficients[nm, , drop = FALSE]
+#   fmt(exp(cf[, 1]), exp(cf[, 1] - 1.96 * cf[, 2]), exp(cf[, 1] + 1.96 * cf[, 2]))
+# }
+# nm_modal <- paste0("class4", class_lab[-1])
+
+# tab_bch <- data.frame(
+#   Class = class_lab[-1],
+#   `Model 1 (modal)` = ci_polr(fit_polr1, nm_modal),
+#   `Model 1 (BCH)`   = fmt(est[1:3], ci[1, 1:3], ci[2, 1:3]),
+#   `Model 3 (modal)` = ci_polr(fit_polr,  nm_modal),
+#   `Model 3 (BCH)`   = fmt(est[4:6], ci[1, 4:6], ci[2, 4:6]),
+#   check.names = FALSE
+# )
+# tinytable::tt(tab_bch, notes = "BCH: bootstrap percentile CIs (500 replications); Model 3 includes sex, university education, income quintile and political identification.")
+```
+
+<!-- @tbl-bch compares these estimates with a three-step correction for classification error. The regressions above use modal class assignment, which ignores the uncertainty of the classification and tends to attenuate the class coefficients. In the BCH approach, each respondent contributes to the outcome model once per class, weighted by the inverse of the classification-error matrix of the latent class model (the diagonal of that matrix ranges from .80 to .95), and confidence intervals come from a respondent-level bootstrap with 500 replications. The corrected odds ratios are larger than the modal ones, as expected under attenuation: in Model 1 they are 3.08 for *Privilege advocates*, 2.60 for *Universal rewards* and 2.96 for *Against privilege* (versus 2.50, 2.32 and 2.55), and in Model 3 they are 2.78, 2.28 and 2.56 (versus 2.28, 2.04 and 2.23). The substantive pattern does not change: all three classes have significantly higher odds of market justice than the *Critical meritocrats* and the three coefficients remain similar to each other. The correction was applied to the main effects only; the interaction models were not re-estimated. -->
+
+
+## Latent profile analysis
+
+```{r}
+#| label: lpa-fit
 #| include: false
 
-# fit_clm <- ordinal::clm(
-#   just_educ ~ class4 + sex + educ + income_5 + pol,
-#   data = db_reg, link = "logit"
-# )
+# same sample as the LCA: drop respondents flagged by >= 2 careless indices;
+# the eight 4-point items are treated as continuous indicators
+db_lpa <- db %>%
+  dplyr::filter(!careless_2of3) %>%
+  dplyr::select(id, all_of(vars_m)) %>%
+  mutate(across(all_of(vars_m), as.numeric)) %>%
+  na.omit()
 
-# po_test <- ordinal::nominal_test(fit_clm)
-# po_test <- as.data.frame(po_test)
-# po_test$Term <- rownames(po_test)
+# model 1: equal variances, covariances fixed to zero
+set.seed(123)  # fixes the random starts, so profile numbering is reproducible
+fits_lpa <- db_lpa %>%
+  dplyr::select(-id) %>%
+  estimate_profiles(1:5, variances = "equal", covariances = "zero")
 
-# po_test |>
-#   dplyr::filter(Term != "<none>") |>
-#   dplyr::transmute(Term,
-#                    Df = Df,
-#                    `LR stat.` = round(LRT, 2),
-#                    `p-value` = format.pval(`Pr(>Chi)`, digits = 3, eps = .001)) |>
-#   knitr::kable(row.names = FALSE)
+fit_lpa <- tidyLPA::get_fit(fits_lpa)
 ```
 
 ```{r}
-#| label: tbl-cumlogit
-#| tbl-cap: "Separate binary logistic regressions at each cut-point of market justice in education (odds ratios)"
-#| include: false
+#| label: tbl-lpa-fit
+#| tbl-cap: "Latent profile analysis: fit indices by number of profiles"
 
-# db_reg <- db_reg %>%
-#   dplyr::mutate(
-#     y_ge2 = as.integer(as.integer(just_educ) >= 2),
-#     y_ge3 = as.integer(as.integer(just_educ) >= 3),
-#     y_ge4 = as.integer(as.integer(just_educ) >= 4)
-#   )
+fit_lpa %>%
+  dplyr::select(Classes, LogLik, AIC, BIC, SABIC, Entropy, n_min) %>%
+  mutate(across(c(LogLik, AIC, BIC, SABIC), ~ round(., 0)),
+         across(c(Entropy, n_min), ~ round(., 3))) %>%
+  knitr::kable(col.names = c("Profiles", "LogLik", "AIC", "BIC", "SABIC",
+                             "Entropy", "Min. class prop."))
 
-# rhs <- ~ class4 + sex + educ + income_5 + pol
-# cum_fits <- list(
-#   "Y ≥ Disagree"      = glm(update(rhs, y_ge2 ~ .), data = db_reg, family = binomial),
-#   "Y ≥ Agree"         = glm(update(rhs, y_ge3 ~ .), data = db_reg, family = binomial),
-#   "Y = Strongly agree" = glm(update(rhs, y_ge4 ~ .), data = db_reg, family = binomial)
-# )
-
-# modelsummary::modelsummary(
-#   cum_fits, exponentiate = TRUE, statistic = "conf.int", stars = TRUE,
-#   coef_omit = "Intercept",
-#   coef_rename = c(
-#     "class4Privilege advocates" = "Class: Privilege advocates",
-#     "class4Universal rewards"   = "Class: Universal rewards",
-#     "class4Against privilege"   = "Class: Against privilege",
-#     "sexFemale" = "Female", "educ" = "University education",
-#     "income_5Q2" = "Income Q2", "income_5Q3" = "Income Q3",
-#     "income_5Q4" = "Income Q4", "income_5Q5" = "Income Q5",
-#     "polCenter" = "Pol.: Center", "polRight" = "Pol.: Right",
-#     "polDoes not identify" = "Pol.: Does not identify"
-#   ),
-#   gof_map = c("nobs"),
-#   notes = "Reference categories: Class 1 (Critical meritocrats), Male, Income Q1, Left."
-# )
+# save the table as an image (PNG) and as a grob (RDS) so it can be reused,
+# e.g. in the appendix of presentations/coloquio-2026/coloquio-2026.qmd
+tab_lpa_fit <- fit_lpa %>%
+  dplyr::select(Classes, LogLik, AIC, BIC, SABIC, Entropy, n_min) %>%
+  mutate(across(c(LogLik, AIC, BIC, SABIC), ~ as.character(round(., 0))),
+         across(c(Entropy, n_min), ~ as.character(round(., 3))))
+colnames(tab_lpa_fit) <- c("Profiles", "LogLik", "AIC", "BIC", "SABIC",
+                             "Entropy", "Min. class prop.")
+grob_lpa_fit <- gridExtra::tableGrob(tab_lpa_fit, rows = NULL,
+  theme = gridExtra::ttheme_minimal(core = list(fg_params = list(fontsize = 11)),
+                                    colhead = list(fg_params = list(fontface = "bold", fontsize = 11))))
+saveRDS(grob_lpa_fit, here::here("paper", "output", "tbl-lpa-fit.rds"))
+ragg::agg_png(here::here("paper", "output", "tbl-lpa-fit.png"),
+              width = 1800, height = 600, res = 300, background = "white")
+grid::grid.draw(grob_lpa_fit)
+invisible(dev.off())
 ```
 
-<!-- The proportional odds assumption is not fully met (@tbl-po-test): the likelihood-ratio tests reject it for class membership, sex, university education, income and political identification. Given the large sample (N = 2,489), these tests are sensitive to small departures, so we examined the cut-point-specific logistic regressions (@tbl-cumlogit). The main pattern holds at the first two cut-points, where all three classes differ from the *Critical meritocrats* (ORs between 2.0 and 2.7) and political identification and sex keep their direction. At the highest cut-point (*Strongly agree*, only 188 respondents in this sample) the class contrasts remain positive but are significant only for the *Privilege advocates*. Some predictors do vary across cut-points: the association with sex is stronger at the middle cut-point (OR = 0.53) than at the first (OR = 0.78), and university education and lower-income groups are associated only with the shift from disagreement to agreement. Thus, the class results are robust in direction, but the ordinal model averages effects that are not perfectly constant across the response scale, and its odds ratios should be read as summaries rather than as uniform effects. -->
+```{r}
+#| label: fig-lpa-profiles
+#| fig-cap: "Estimated means of the meritocracy items by latent profile (three-profile solution)"
+#| fig-height: 4.5
 
+# three-profile solution (selected from the fit indices in tbl-lpa-fit)
+tidyLPA::get_estimates(fits_lpa[["model_1_class_3"]]) %>%
+  dplyr::filter(Category == "Means") %>%
+  mutate(Parameter = factor(Parameter, levels = vars_m),
+         Class = factor(Class)) %>%
+  ggplot(aes(x = Parameter, y = Estimate, group = Class, colour = Class)) +
+  geom_line(linewidth = 0.7) +
+  geom_point(size = 2) +
+  MetBrewer::scale_color_met_d("VanGogh2") +
+  coord_cartesian(ylim = c(1, 4)) +
+  labs(x = "Item", y = "Estimated mean (1-4)", colour = "Profile") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "bottom")
+```
+
+### Size of profiles
+
+```{r}
+#| label: lpa-profiles
+#| include: false
+
+# name the profiles from their estimated means (profile numbers are arbitrary):
+# the profile that most rejects privilege (lowest pref_rich_parents) = Critical
+# meritocrats; the one that most endorses it (highest) = Privilege advocates;
+# the remaining one = Effort prioritizers
+means_lpa <- tidyLPA::get_estimates(fits_lpa[["model_1_class_3"]]) %>%
+  dplyr::filter(Category == "Means", Parameter == "pref_rich_parents") %>%
+  dplyr::arrange(Estimate)
+
+lpa_names <- c("Critical meritocrats", "Effort prioritizers", "Privilege advocates")
+names(lpa_names) <- means_lpa$Class
+lpa_levels <- c("Effort prioritizers", "Critical meritocrats", "Privilege advocates")
+
+lpa_df <- data.frame(
+  id = db_lpa$id,
+  profile = factor(lpa_names[as.character(tidyLPA::get_data(fits_lpa[["model_1_class_3"]])$Class)],
+                   levels = lpa_levels)
+)
+
+# posterior probabilities of the three-profile solution (same row order as db_lpa)
+post_lpa <- tidyLPA::get_data(fits_lpa[["model_1_class_3"]])
+post_cols <- paste0("CPROB", names(lpa_names))
+
+size_lpa <- data.frame(
+  profile = lpa_df$profile,
+  # posterior probability of the profile each respondent was assigned to
+  post = as.matrix(post_lpa[, post_cols])[cbind(seq_len(nrow(post_lpa)),
+                                                 match(as.character(post_lpa$Class), names(lpa_names)))]
+) %>%
+  dplyr::group_by(profile) %>%
+  dplyr::summarise(n = dplyr::n(), mean_post = mean(post), .groups = "drop") %>%
+  dplyr::mutate(pct = n / sum(n) * 100)
+```
+
+```{r}
+#| label: tbl-lpa-size
+#| tbl-cap: "Size of the latent profiles (modal assignment)"
+
+size_lpa %>%
+  dplyr::transmute(Profile = profile, N = n,
+                   `%` = sprintf("%.1f", pct),
+                   `Mean posterior probability` = sprintf("%.2f", mean_post)) %>%
+  knitr::kable(align = "lrrr")
+```
+
+```{r}
+#| label: fig-lpa-size
+#| fig-cap: "Size of the latent profiles (share of respondents)"
+#| fig-height: 3
+
+ggplot(size_lpa, aes(x = profile, y = pct, fill = profile)) +
+  geom_col(width = 0.6, show.legend = FALSE) +
+  geom_text(aes(label = sprintf("%.1f%%", pct)), vjust = -0.4, size = 3.5) +
+  MetBrewer::scale_fill_met_d("VanGogh2") +
+  scale_y_continuous(limits = c(0, max(size_lpa$pct) * 1.15)) +
+  labs(x = NULL, y = "Share of respondents (%)") +
+  theme_minimal()
+```
+
+### Bivariates of LPA
+
+```{r}
+#| label: lpa-biv-data
+#| include: false
+
+# same sample as the regression models: complete cases on all of their variables
+db_biv <- db %>%
+  dplyr::inner_join(lpa_df, by = "id") %>%
+  tidyr::drop_na(just_educ, profile, sex, educ, income_5, pol) %>%
+  dplyr::mutate(
+    educ = factor(educ, levels = c(0, 1), labels = c("No university", "University")),
+    pol  = factor(pol, levels = c("Left", "Center", "Right", "Does not identify"))
+  )
+
+# stacked bars: profile composition within each category of a variable
+plot_biv <- function(data, var, xlab) {
+  data %>%
+    dplyr::filter(!is.na(.data[[var]])) %>%
+    dplyr::count(cat = .data[[var]], profile) %>%
+    dplyr::group_by(cat) %>%
+    dplyr::mutate(p = n / sum(n)) %>%
+    dplyr::ungroup() %>%
+    ggplot(aes(x = cat, y = p, fill = profile)) +
+    geom_col(width = 0.7) +
+    geom_text(aes(label = scales::percent(p, accuracy = 1)),
+              position = position_stack(vjust = 0.5), size = 3, colour = "white") +
+    scale_y_continuous(labels = scales::percent) +
+    MetBrewer::scale_fill_met_d("VanGogh2") +
+    labs(x = xlab, y = "Share of respondents", fill = "Profile") +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+}
+```
+
+```{r}
+#| label: fig-lpa-biv
+#| fig-cap: "Latent profile composition by educational level, income quintile and political identification (regression sample)"
+#| fig-height: 9
+
+g_educ   <- plot_biv(db_biv, "educ", "Educational level")
+g_income <- plot_biv(db_biv, "income_5", "Income quintile")
+g_pol    <- plot_biv(db_biv, "pol", "Political identification")
+
+(g_educ / g_income / g_pol) + patchwork::plot_layout(guides = "collect") &
+  theme(legend.position = "bottom")
+```
+
+```{r}
+
+```
+
+
+### Regression model of LPA
+
+```{r}
+#| label: lpa-reg-data
+#| include: false
+
+db_reg_lpa <- db %>%
+  dplyr::inner_join(lpa_df, by = "id") %>%
+  dplyr::select(id, just_educ, profile, sex, educ, income_5, pol) %>%
+  na.omit() %>%
+  dplyr::mutate(just_educ = factor(just_educ, ordered = TRUE))
+
+db_reg_lpa$income_5 <- relevel(factor(db_reg_lpa$income_5, ordered = FALSE), ref = "Q1")
+db_reg_lpa$pol      <- relevel(factor(db_reg_lpa$pol, ordered = FALSE), ref = "Does not identify")
+
+# one dummy per political category, so that each interaction is estimated in its
+# own model (the effects of the interactions do not overlap)
+db_reg_lpa <- db_reg_lpa %>%
+  dplyr::mutate(polLeft   = as.numeric(pol == "Left"),
+                polCenter = as.numeric(pol == "Center"),
+                polRight  = as.numeric(pol == "Right"))
+```
+
+```{r}
+#| label: tbl-polr-lpa
+#| tbl-cap: "Ordinal logistic regression of market justice in education on latent profiles (odds ratios)"
+
+fit_lpa1 <- MASS::polr(just_educ ~ profile,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+fit_lpa2 <- MASS::polr(just_educ ~ profile + sex + educ + income_5 + pol,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+
+# Models 3-5: profile x one political category each; the other two categories
+# enter as main effects only (reference: Does not identify)
+fit_lpa3 <- MASS::polr(just_educ ~ profile * polLeft + polCenter + polRight + sex + educ + income_5,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+fit_lpa4 <- MASS::polr(just_educ ~ profile * polCenter + polLeft + polRight + sex + educ + income_5,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+fit_lpa5 <- MASS::polr(just_educ ~ profile * polRight + polLeft + polCenter + sex + educ + income_5,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+
+# Model 6: profile x university education
+fit_lpa6 <- MASS::polr(just_educ ~ profile * educ + sex + income_5 + pol,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+
+ref_rows_lpa <- data.frame(
+  term = "Latent profile (Ref = Effort prioritizers)",
+  m1 = "", m2 = "", m3 = "", m4 = "", m5 = "", m6 = ""
+)
+names(ref_rows_lpa) <- c("term", paste("Model", 1:6))
+attr(ref_rows_lpa, "position") <- 1
+
+tab_polr_lpa <- modelsummary::modelsummary(
+  list("Model 1" = fit_lpa1, "Model 2" = fit_lpa2, "Model 3" = fit_lpa3,
+       "Model 4" = fit_lpa4, "Model 5" = fit_lpa5, "Model 6" = fit_lpa6),
+  exponentiate = TRUE, statistic = "conf.int", stars = TRUE,
+  coef_omit = "\\|",
+  coef_map = c(
+    "profileCritical meritocrats" = "Critical meritocrats",
+    "profilePrivilege advocates" = "Privilege advocates",
+    "sexFemale" = "Female",
+    "educ" = "University education",
+    "income_5Q2" = "Q2", "income_5Q3" = "Q3", "income_5Q4" = "Q4", "income_5Q5" = "Q5",
+    "polLeft" = "Left", "polCenter" = "Center", "polRight" = "Right",
+    "profileCritical meritocrats:polLeft"   = "Critical meritocrats x Left",
+    "profilePrivilege advocates:polLeft"    = "Privilege advocates x Left",
+    "profileCritical meritocrats:polCenter" = "Critical meritocrats x Center",
+    "profilePrivilege advocates:polCenter"  = "Privilege advocates x Center",
+    "profileCritical meritocrats:polRight"  = "Critical meritocrats x Right",
+    "profilePrivilege advocates:polRight"   = "Privilege advocates x Right",
+    "profileCritical meritocrats:educ" = "Critical meritocrats x University education",
+    "profilePrivilege advocates:educ"  = "Privilege advocates x University education"
+  ),
+  gof_map = c("nobs", "aic", "bic"),
+  add_rows = ref_rows_lpa,
+  output = "tinytable"
+) |>
+  tinytable::style_tt(i = 1, bold = TRUE, background = "#f2f2f2")
+
+# save the table as an object so it can be reused, e.g. in the appendix of
+# presentations/coloquio-2026/coloquio-2026.qmd: readRDS() and print it in a chunk
+saveRDS(tab_polr_lpa, here::here("paper", "output", "tbl-polr-lpa.rds"))
+tab_polr_lpa
+```
