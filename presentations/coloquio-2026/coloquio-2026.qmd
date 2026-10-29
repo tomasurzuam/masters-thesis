@@ -287,7 +287,6 @@ Esta investigación pretende avanzar por este lado
 - El número de perfiles se elige comparando modelos con 1 a *k* perfiles, según:
   - **AIC y BIC**: menores valores indican mejor ajuste
   - **Entropía**: valores cercanos a 1 indican perfiles bien separados
-  - **BLRT**: contrasta si agregar un perfil mejora significativamente el ajuste
   - Tamaño de los perfiles e **interpretabilidad** sustantiva
 :::
 
