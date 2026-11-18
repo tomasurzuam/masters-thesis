@@ -9,6 +9,7 @@ _freeze/
 *.knit.md
 *_cache/
 *_files/
+!docs/**/*_files/
 *.log
 *.aux
 *.toc
