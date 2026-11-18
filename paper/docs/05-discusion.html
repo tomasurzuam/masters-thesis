@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -65,7 +85,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./06-conclusiones.html" rel="next">
-<link href="./04-resultados.html" rel="prev">
+<link href="./04-resultados-esp.html" rel="prev">
 <link href="./assets/favicon-2025-20251031.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -118,6 +138,35 @@ p {
 }
 </style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="assets/styles.scss">
 </head>
@@ -190,7 +239,7 @@ p {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-resultados.html" class="sidebar-item-text sidebar-link">
+  <a href="./04-resultados-esp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Results</span></span></a>
   </div>
 </li>
@@ -242,10 +291,75 @@ p {
 </header>
 
 
+<p>Previous research has found a positive relationship between meritocratic beliefs and market justice in education. However, the purpose of this study is, first and foremost, to demonstrate that meritocratic beliefs must be examined alongside beliefs about privilege, addressing both individual and structural explanations that may account for success. More specifically, the main objective is to demonstrate that there are groups with different configurations of meritocratic and privilege beliefs, which have divergent relationships with market justice in education. Therefore, a person-centered method was applied to construct typologies based on merit and privilege, and then to study their relationship with market justice in education.</p>
+<p>The study’s results identified three latent profiles that combined perceptions and preferences regarding merit and privilege: a profile that combined strong preferences for meritocracy and weak preferences for privilege; a profile that showed similar preferences for both meritocratic and privilege factors; and, finally, a profile that perceived privilege to a lesser extent than the previous two, combined with moderate preferences for both meritocracy and privilege. The first two profiles described can be partially aligned with those found by <span class="citation" data-cites="zhu_meritocratic_2025">Zhu (<a href="references.html#ref-zhu_meritocratic_2025" role="doc-biblioref">2025</a>)</span>, supporting one latent group characterized by a prevailing adherence to meritocracy and another with dual awareness, which recognizes the role of both individual and structural conditions. However, the findings of this research show that these profiles differ fundamentally in their preferences regarding privilege; while the meritocratic profile rejects them, the other embraces them. This reflects that support for or rejection of privilege is a fundamental characteristic for elucidating various patterns of belief. On the other hand, the third profile cannot be linked to the same background factors. One possible interpretation for this group is that these are individuals with a naive attitude toward how society functions (as they have the lowest perception of privilege), in addition to maintaining a passive attitude toward social reality, where moderate preferences seem to be an idea internalized by the system rather than a value that drives these individuals’ normative judgments.</p>
+<p>By focusing on the relationship between latent profiles and market justice in education, we find something new: the configurations of meritocratic beliefs and privilege embodied by the profiles determine the legitimization of educational inequalities in different ways. <a href="04-resultados-esp.html#fig-lpa-pred-means" class="quarto-xref">Figure&nbsp;<span>5.9</span></a> already suggests a distinct relationship between the “Congruent Meritocrats” and the other two profiles, while the regression model reconfirms this. This finding is key, as it challenges the positive relationship between meritocracy and market preferences—a relationship supported in the literature by hypotheses of self-interest or the adoption of the meritocratic narrative as a justification for social status <span class="citation" data-cites="castillo_socialization_2024 castillo_perceptions_2025 castillo_justification_2026 bartram_does_2023 heuer_legitimizing_2020">(<a href="references.html#ref-bartram_does_2023" role="doc-biblioref">Bartram, 2023</a>; <a href="references.html#ref-castillo_socialization_2024" role="doc-biblioref">Castillo et&nbsp;al., 2024</a>; <a href="references.html#ref-castillo_perceptions_2025" role="doc-biblioref">Castillo, Laffert, et&nbsp;al., 2025</a>; <a href="references.html#ref-castillo_justification_2026" role="doc-biblioref">Castillo et&nbsp;al., 2026</a>; <a href="references.html#ref-heuer_legitimizing_2020" role="doc-biblioref">Heuer et&nbsp;al., 2020</a>)</span>. Here, the existence of “Congruent Meritocrats” demonstrates that a strong belief in meritocracy does not necessarily lead to a greater preference for market-based criteria. In this case, the pattern of beliefs that defines the profile helps explain the reason for this relationship: because they perceive that privilege is rewarded in society at the expense of merit, they prefer merit as the primary factor in the distribution of rewards. This aversion to privilege is ultimately consistent with opposing the idea that the ability to pay should be a determining factor in accessing a good education. The other two profiles offer a different explanation: the coexistence of merit and privilege in its ascriptive dimension leads to support for the idea that basic socioeconomic conditions should determine the education people receive. Thus, this dual perspective held by privilege advocates does not imply a challenge to structural conditions, but rather acknowledges—and even endorses—that privileges should function as a distributive criterion at the societal and educational levels. This may be related to studies such as those by <span class="citation" data-cites="khan_saying_2013">Khan &amp; Jerolmack (<a href="references.html#ref-khan_saying_2013" role="doc-biblioref">2013</a>)</span> and <span class="citation" data-cites="gogescu_meritocracy_2024">Gogescu (<a href="references.html#ref-gogescu_meritocracy_2024" role="doc-biblioref">2024</a>)</span>, which suggest that the recognition of merit coexists with the protection of privileges. Another explanation can be found in the ideas put forward by <span class="citation" data-cites="scharff_unspeakability_2021">Scharff (<a href="references.html#ref-scharff_unspeakability_2021" role="doc-biblioref">2021</a>)</span>, who notes that in a context of high inequality such as Chile’s, some people view this reality as inevitable and would therefore prefer to use any resource at their disposal to advance their careers. Thus, by examining meritocracy alongside privilege, we can highlight that the meritocratic narrative can legitimize inequalities, but it can also serve as a mechanism to mitigate educational disparities.</p>
+<p>Education was found to have an effect opposite to that posited in <span class="math inline">\(H_{1}\)</span>; therefore, there is no evidence in support of this hypothesis. The data indicate that a higher level of education is negatively associated with market justice in education, demonstrating that educational training fosters a perspective capable of recognizing the role that structural conditions play in the access to and quality of social services—such as education—and opposes this <span class="citation" data-cites="freire_pedagogia_2015 busemeyer_inequality_2012">(<a href="references.html#ref-busemeyer_inequality_2012" role="doc-biblioref">Busemeyer, 2012</a>; <a href="references.html#ref-freire_pedagogia_2015" role="doc-biblioref">Freire, 2015</a>)</span>. This perspective is associated with what the literature has termed the “enlightening effect” of education. While this finding runs counter to the posits of authors such as <span class="citation" data-cites="nye_education_2026">Nye et&nbsp;al. (<a href="references.html#ref-nye_education_2026" role="doc-biblioref">2026</a>)</span> or <span class="citation" data-cites="vannoord_educationbased_2019">Van Noord et&nbsp;al. (<a href="references.html#ref-vannoord_educationbased_2019" role="doc-biblioref">2019</a>)</span>, it is important to consider the regional and national context. In a region such as Latin America—historically marked by conflicts that repeatedly bring inequality and the influence of socioeconomic conditions on life trajectories to the forefront—education may have a more decisive illuminating effect than in regions with greater well-being <span class="citation" data-cites="dussel_pedagogics_2019">(<a href="references.html#ref-dussel_pedagogics_2019" role="doc-biblioref">Dussel, 2019</a>)</span>. In contrast, income did not show a significant effect in any of its quintiles; therefore, there is insufficient evidence to support <span class="math inline">\(H_{2}\)</span>. Furthermore, a Bottom/Middle/Top operationalization (40/50/10) was tested, but no effects were found there either.</p>
+<p>The relationship between political identification and market justice in education followed the expected pattern, providing evidence to support <span class="math inline">\(H_{3}\)</span>. Here, identification with the left aligns with the progressive tendencies that have typically characterized this group on various issues, such as reducing inequality, expanding social rights, and improving quality of life, for instance <span class="citation" data-cites="rivera_nuevo_2023">(<a href="references.html#ref-rivera_nuevo_2023" role="doc-biblioref">Rivera, 2023</a>)</span>. In contrast, groups that identify with the right in terms of political ideology tend to support market-based distribution criteria <span class="citation" data-cites="lee_fairness_2024 castillo_changes_2025">(<a href="references.html#ref-castillo_changes_2025" role="doc-biblioref">Castillo, Iturra, et&nbsp;al., 2025</a>; <a href="references.html#ref-lee_fairness_2024" role="doc-biblioref">Lee &amp; Stacey, 2024</a>)</span>, and are less likely to align with criteria of equity and equality <span class="citation" data-cites="vanhootegem_worlds_2022">(<a href="references.html#ref-vanhootegem_worlds_2022" role="doc-biblioref">Van Hootegem, 2022</a>)</span>. Although this pattern of relationships is consistent with what has been previously found in the literature, a specific finding emerged when the interactions between the different latent profiles and political identification were examined: Congruent meritocrats who identify with the right exhibit a moderation in their rejection of market-based justice in education. This can be explained by the identity realignment currently taking place on the right; in the past, the right found a coherent discourse within a defined value system, whereas now some right-wing groups have distanced themselves from the mainstream, which is reflected in the fact that adherence to this political spectrum can coexist with supposedly contradictory conditions <span class="citation" data-cites="hausermann_realignment_2026">(<a href="references.html#ref-hausermann_realignment_2026" role="doc-biblioref">Häusermann et&nbsp;al., 2026</a>)</span>. Thus, within a latent group that rejects privilege, identification with the right acts as a catalyst for the legitimization of inequalities.</p>
+<p>In summary, the results show that studying belief patterns using person-centered methods can provide new insights into how perceptions and preferences regarding merit and privilege are organized in people’s minds. Beyond that, this heterogeneity in people’s attitudinal makeup reveals that, by studying merit alongside privilege, we can observe that the relationship between merit and the legitimization of inequalities is not so straightforward. In this context, depending on which beliefs prevail among individuals, merit and privilege can either help to perpetuate or to reject the justification of inequalities in education. This “black box” containing meritocratic beliefs and the legitimization of inequalities has only just been opened; the interaction with political identification presents another finding that may yield new insights into the value systems that characterize the political spectrums of contemporary Chile.</p>
 
 
 <!-- -->
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-bartram_does_2023" class="csl-entry" role="listitem">
+Bartram, D. (2023). Does Belief in Meritocracy Increase with Inequality? A Reconsideration for European Countries. <em>The British Journal of Sociology</em>, <em>74</em>(5), 763-780. <a href="https://doi.org/10.1111/1468-4446.13042">https://doi.org/10.1111/1468-4446.13042</a>
+</div>
+<div id="ref-busemeyer_inequality_2012" class="csl-entry" role="listitem">
+Busemeyer, M. R. (2012). Inequality and the Political Economy of Education: An Analysis of Individual Preferences in OECD Countries. <em>Journal of European Social Policy</em>, <em>22</em>(3), 219-240. <a href="https://doi.org/10.1177/0958928712440200">https://doi.org/10.1177/0958928712440200</a>
+</div>
+<div id="ref-castillo_justification_2026" class="csl-entry" role="listitem">
+Castillo, J. C., Canales-Sellés, R., Laffert, A., &amp; Urzúa, T. (2026). Justification Trajectories for Pension Inequality in Chile (2016–2023): The Role of Social Class and Beliefs in Meritocracy. <em>Frontiers in Sociology</em>, <em>11</em>, 1771856. <a href="https://doi.org/10.3389/fsoc.2026.1771856">https://doi.org/10.3389/fsoc.2026.1771856</a>
+</div>
+<div id="ref-castillo_changes_2025" class="csl-entry" role="listitem">
+Castillo, J. C., Iturra, J., &amp; Carrasco, K. (2025). Changes in the Justification of Educational Inequalities: The Role of Perceptions of Inequality and Meritocracy During the COVID Pandemic. <em>Social Justice Research</em>, <em>38</em>(3), 240-263. <a href="https://doi.org/10.1007/s11211-025-00458-0">https://doi.org/10.1007/s11211-025-00458-0</a>
+</div>
+<div id="ref-castillo_perceptions_2025" class="csl-entry" role="listitem">
+Castillo, J. C., Laffert, A., Carrasco, K., &amp; Iturra-Sanhueza, J. (2025). Perceptions of Inequality and Meritocracy: Their Interplay in Shaping Preferences for Market Justice in Chile (2016–2023). <em>Frontiers in Sociology</em>, <em>10</em>. <a href="https://doi.org/10.3389/fsoc.2025.1634219">https://doi.org/10.3389/fsoc.2025.1634219</a>
+</div>
+<div id="ref-castillo_socialization_2024" class="csl-entry" role="listitem">
+Castillo, J. C., Salgado, M., Carrasco, K., &amp; Laffert, A. (2024). The Socialization of Meritocracy and Market Justice Preferences at School. <em>Societies</em>, <em>14</em>(11), 214. <a href="https://doi.org/10.3390/soc14110214">https://doi.org/10.3390/soc14110214</a>
+</div>
+<div id="ref-dussel_pedagogics_2019" class="csl-entry" role="listitem">
+Dussel, E. (2019). <em>The Pedagogics of Liberation</em>. Punctum books. <a href="https://doi.org/10.21983/P3.0257.1.00">https://doi.org/10.21983/P3.0257.1.00</a>
+</div>
+<div id="ref-freire_pedagogia_2015" class="csl-entry" role="listitem">
+Freire, P. (2015). <em>Pedagogía Del Oprimido</em> (J. Mellado, Trad.; 4a edición argentina, corregida y revisada). Siglo Veintiuno Editores.
+</div>
+<div id="ref-gogescu_meritocracy_2024" class="csl-entry" role="listitem">
+Gogescu, F. (2024). Meritocracy Seen through the Eyes of Its Champions: A Comparative Study of Educational Elites. <em>British Journal of Sociology of Education</em>. <a href="https://www.tandfonline.com/doi/abs/10.1080/01425692.2024.2418097">https://www.tandfonline.com/doi/abs/10.1080/01425692.2024.2418097</a>
+</div>
+<div id="ref-hausermann_realignment_2026" class="csl-entry" role="listitem">
+Häusermann, S., Bornschier, S., Zollinger, D., &amp; Steenbergen, M. (2026). Realignment within the Right Field: Competition between the Mainstream Right and the Far Right. <em>West European Politics</em>, <em>49</em>(3), 812-840. <a href="https://doi.org/10.1080/01402382.2025.2515546">https://doi.org/10.1080/01402382.2025.2515546</a>
+</div>
+<div id="ref-heuer_legitimizing_2020" class="csl-entry" role="listitem">
+Heuer, J.-O., Lux, T., Mau, S., &amp; Zimmermann, K. (2020). Legitimizing Inequality: The Moral Repertoires of Meritocracy in Four Countries. <em>Comparative Sociology</em>, <em>19</em>(4-5), 542-584. <a href="https://doi.org/10.1163/15691330-BJA10017">https://doi.org/10.1163/15691330-BJA10017</a>
+</div>
+<div id="ref-khan_saying_2013" class="csl-entry" role="listitem">
+Khan, S., &amp; Jerolmack, C. (2013). Saying Meritocracy and Doing Privilege. <em>The Sociological Quarterly</em>, <em>54</em>(1), 9-19. <a href="https://doi.org/10.1111/tsq.12008">https://doi.org/10.1111/tsq.12008</a>
+</div>
+<div id="ref-lee_fairness_2024" class="csl-entry" role="listitem">
+Lee, J.-S., &amp; Stacey, M. (2024). Fairness Perceptions of Educational Inequality: The Effects of Self-Interest and Neoliberal Orientations. <em>The Australian Educational Researcher</em>, <em>51</em>(4), 1215-1237. <a href="https://doi.org/10.1007/s13384-023-00636-6">https://doi.org/10.1007/s13384-023-00636-6</a>
+</div>
+<div id="ref-nye_education_2026" class="csl-entry" role="listitem">
+Nye, J. V., Bryukhanov, M., Litman, C., &amp; Polyachenko, S. (2026). Education and Market Liberal Preferences. <em>Journal of Economic Behavior &amp; Organization</em>, <em>241</em>, 107387. <a href="https://doi.org/10.1016/j.jebo.2025.107387">https://doi.org/10.1016/j.jebo.2025.107387</a>
+</div>
+<div id="ref-rivera_nuevo_2023" class="csl-entry" role="listitem">
+Rivera, S. (2023). El Nuevo Progresismo Latinoamericano: ¿posneoliberalismo o Transición Fugaz? <em>El Cotidiano</em>, <em>38</em>. <a href="https://www.proquest.com/docview/2830440516?pq-origsite=gscholar&amp;fromopenview=true&amp;sourcetype=Scholarly%20Journals">https://www.proquest.com/docview/2830440516?pq-origsite=gscholar&amp;fromopenview=true&amp;sourcetype=Scholarly%20Journals</a>
+</div>
+<div id="ref-scharff_unspeakability_2021" class="csl-entry" role="listitem">
+Scharff, C. M. (2021). From Unspeakability to Inequality Talk: Why Conversations about Inequalities May Not Lead to Change. <em>Open Library of Humanities</em>, <em>7</em>(2). <a href="https://doi.org/10.16995/olh.4674">https://doi.org/10.16995/olh.4674</a>
+</div>
+<div id="ref-vanhootegem_worlds_2022" class="csl-entry" role="listitem">
+Van Hootegem, A. (2022). Worlds of Distributive Justice Preferences: Individual- and Country-Level Profiles of Support for Equality, Equity and Need. <em>Social Science Research</em>, <em>106</em>, 102721. <a href="https://doi.org/10.1016/j.ssresearch.2022.102721">https://doi.org/10.1016/j.ssresearch.2022.102721</a>
+</div>
+<div id="ref-vannoord_educationbased_2019" class="csl-entry" role="listitem">
+Van Noord, J., Spruyt, B., Kuppens, T., &amp; Spears, R. (2019). Education-Based Status in Comparative Perspective: The Legitimization of Education as a Basis for Social Stratification. <em>Social Forces</em>, <em>98</em>(2), 649-676. <a href="https://doi.org/10.1093/sf/soz012">https://doi.org/10.1093/sf/soz012</a>
+</div>
+<div id="ref-zhu_meritocratic_2025" class="csl-entry" role="listitem">
+Zhu, L. (2025). Meritocratic Beliefs in the United States, Finland, and China: A Multidimensional Approach Using Latent Class Analysis. <em>The British Journal of Sociology</em>, <em>76</em>(1), 153-172. <a href="https://doi.org/10.1111/1468-4446.13152">https://doi.org/10.1111/1468-4446.13152</a>
+</div>
+</div>
 
 </main> <!-- /main -->
 <script>
@@ -1426,7 +1540,7 @@ document.addEventListener("DOMContentLoaded", () => {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./04-resultados.html" class="pagination-link" aria-label="Results">
+      <a href="./04-resultados-esp.html" class="pagination-link" aria-label="Results">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Results</span></span>
       </a>          
   </div>
@@ -1438,7 +1552,19 @@ document.addEventListener("DOMContentLoaded", () => {
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Ejecutar el código</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Discussion"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Previous research has found a positive relationship between meritocratic beliefs and market justice in education. However, the purpose of this study is, first and foremost, to demonstrate that meritocratic beliefs must be examined alongside beliefs about privilege, addressing both individual and structural explanations that may account for success. More specifically, the main objective is to demonstrate that there are groups with different configurations of meritocratic and privilege beliefs, which have divergent relationships with market justice in education. Therefore, a person-centered method was applied to construct typologies based on merit and privilege, and then to study their relationship with market justice in education.</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>The study’s results identified three latent profiles that combined perceptions and preferences regarding merit and privilege: a profile that combined strong preferences for meritocracy and weak preferences for privilege; a profile that showed similar preferences for both meritocratic and privilege factors; and, finally, a profile that perceived privilege to a lesser extent than the previous two, combined with moderate preferences for both meritocracy and privilege. The first two profiles described can be partially aligned with those found by @zhu_meritocratic_2025, supporting one latent group characterized by a prevailing adherence to meritocracy and another with dual awareness, which recognizes the role of both individual and structural conditions. However, the findings of this research show that these profiles differ fundamentally in their preferences regarding privilege; while the meritocratic profile rejects them, the other embraces them. This reflects that support for or rejection of privilege is a fundamental characteristic for elucidating various patterns of belief. On the other hand, the third profile cannot be linked to the same background factors. One possible interpretation for this group is that these are individuals with a naive attitude toward how society functions (as they have the lowest perception of privilege), in addition to maintaining a passive attitude toward social reality, where moderate preferences seem to be an idea internalized by the system rather than a value that drives these individuals' normative judgments.</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>By focusing on the relationship between latent profiles and market justice in education, we find something new: the configurations of meritocratic beliefs and privilege embodied by the profiles determine the legitimization of educational inequalities in different ways. @fig-lpa-pred-means already suggests a distinct relationship between the “Congruent Meritocrats” and the other two profiles, while the regression model reconfirms this. This finding is key, as it challenges the positive relationship between meritocracy and market preferences—a relationship supported in the literature by hypotheses of self-interest or the adoption of the meritocratic narrative as a justification for social status <span class="co">[</span><span class="ot">@castillo_socialization_2024; @castillo_perceptions_2025; @castillo_justification_2026; @bartram_does_2023; @heuer_legitimizing_2020</span><span class="co">]</span>. Here, the existence of “Congruent Meritocrats” demonstrates that a strong belief in meritocracy does not necessarily lead to a greater preference for market-based criteria. In this case, the pattern of beliefs that defines the profile helps explain the reason for this relationship: because they perceive that privilege is rewarded in society at the expense of merit, they prefer merit as the primary factor in the distribution of rewards. This aversion to privilege is ultimately consistent with opposing the idea that the ability to pay should be a determining factor in accessing a good education. The other two profiles offer a different explanation: the coexistence of merit and privilege in its ascriptive dimension leads to support for the idea that basic socioeconomic conditions should determine the education people receive. Thus, this dual perspective held by privilege advocates does not imply a challenge to structural conditions, but rather acknowledges—and even endorses—that privileges should function as a distributive criterion at the societal and educational levels. This may be related to studies such as those by @khan_saying_2013 and @gogescu_meritocracy_2024, which suggest that the recognition of merit coexists with the protection of privileges. Another explanation can be found in the ideas put forward by @scharff_unspeakability_2021, who notes that in a context of high inequality such as Chile’s, some people view this reality as inevitable and would therefore prefer to use any resource at their disposal to advance their careers. Thus, by examining meritocracy alongside privilege, we can highlight that the meritocratic narrative can legitimize inequalities, but it can also serve as a mechanism to mitigate educational disparities. </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Education was found to have an effect opposite to that posited in $H_{1}$; therefore, there is no evidence in support of this hypothesis. The data indicate that a higher level of education is negatively associated with market justice in education, demonstrating that educational training fosters a perspective capable of recognizing the role that structural conditions play in the access to and quality of social services—such as education—and opposes this <span class="co">[</span><span class="ot">@freire_pedagogia_2015; @busemeyer_inequality_2012</span><span class="co">]</span>. This perspective is associated with what the literature has termed the “enlightening effect” of education. While this finding runs counter to the posits of authors such as @nye_education_2026 or @vannoord_educationbased_2019, it is important to consider the regional and national context. In a region such as Latin America—historically marked by conflicts that repeatedly bring inequality and the influence of socioeconomic conditions on life trajectories to the forefront—education may have a more decisive illuminating effect than in regions with greater well-being <span class="co">[</span><span class="ot">@dussel_pedagogics_2019</span><span class="co">]</span>. In contrast, income did not show a significant effect in any of its quintiles; therefore, there is insufficient evidence to support $H_{2}$. Furthermore, a Bottom/Middle/Top operationalization (40/50/10) was tested, but no effects were found there either.</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>The relationship between political identification and market justice in education followed the expected pattern, providing evidence to support $H_{3}$. Here, identification with the left aligns with the progressive tendencies that have typically characterized this group on various issues, such as reducing inequality, expanding social rights, and improving quality of life, for instance <span class="co">[</span><span class="ot">@rivera_nuevo_2023</span><span class="co">]</span>. In contrast, groups that identify with the right in terms of political ideology tend to support market-based distribution criteria <span class="co">[</span><span class="ot">@lee_fairness_2024; @castillo_changes_2025</span><span class="co">]</span>, and are less likely to align with criteria of equity and equality <span class="co">[</span><span class="ot">@vanhootegem_worlds_2022</span><span class="co">]</span>. Although this pattern of relationships is consistent with what has been previously found in the literature, a specific finding emerged when the interactions between the different latent profiles and political identification were examined: Congruent meritocrats who identify with the right exhibit a moderation in their rejection of market-based justice in education. This can be explained by the identity realignment currently taking place on the right; in the past, the right found a coherent discourse within a defined value system, whereas now some right-wing groups have distanced themselves from the mainstream, which is reflected in the fact that adherence to this political spectrum can coexist with supposedly contradictory conditions <span class="co">[</span><span class="ot">@hausermann_realignment_2026</span><span class="co">]</span>. Thus, within a latent group that rejects privilege, identification with the right acts as a catalyst for the legitimization of inequalities.</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>In summary, the results show that studying belief patterns using person-centered methods can provide new insights into how perceptions and preferences regarding merit and privilege are organized in people’s minds. Beyond that, this heterogeneity in people’s attitudinal makeup reveals that, by studying merit alongside privilege, we can observe that the relationship between merit and the legitimization of inequalities is not so straightforward. In this context, depending on which beliefs prevail among individuals, merit and privilege can either help to perpetuate or to reject the justification of inequalities in education. This “black box” containing meritocratic beliefs and the legitimization of inequalities has only just been opened; the interaction with political identification presents another finding that may yield new insights into the value systems that characterize the political spectrums of contemporary Chile.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

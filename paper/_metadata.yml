@@ -1,9 +1,9 @@
 crossref:
-  eq-prefix: Ecuacion
-  fig-prefix: Figura
-  fig-title: Figura
-  tbl-prefix: Tabla
-  tbl-title: Tabla
+  eq-prefix: Ecuation
+  fig-prefix: Figure
+  fig-title: Figure
+  tbl-prefix: Table
+  tbl-title: Table
 df-print: default
 lang: es
 link-citations: true

@@ -626,7 +626,7 @@ The fourth class is the smallest and least clearly structured. It is characteriz
 
 
 
-### Latent class analysis without dichotomized items {#sec-lca-full}
+### Latent class analysis without dichotomized items
 
 To check whether the four-class solution is an artifact of dichotomizing the items, I re-estimated the latent class models on the eight original 4-category items, keeping the full ordinal response scale instead of collapsing it to a binary indicator. The sample was screened for careless responding in exactly the same way as the dichotomized model, so both models are estimated on the same set of respondents and are directly comparable.
 
@@ -847,3 +847,224 @@ Based on the analysis for this installment, there are three points worth mention
 
 **3)** In the analysis of latent classes without dichotomization, no equivalence was found with the previously observed classes (dichotomized LCA), but there are similarities worth noting. While Class 1 does not have a very clear equivalent, Class 2 can be associated with Universal Rewards due to the similarity in their profiles. On the other hand, Classes 3 and 4 share a fairly similar structure, except that Class 3 is more opposed to the idea that privilege factors operate in society. In this sense, these classes largely share the characteristics of Critical Meritocrats.
 
+
+### SEM and market justice education
+
+```{r}
+db_sem2 <- db %>% 
+  dplyr::select(just_educ, all_of(vars_m), age, sex, educ, income_5, pol) |> 
+  na.omit()
+
+db_sem2$just_educ <- as.numeric(db_sem2$just_educ)
+
+db_sem2 <- db_sem2 %>% 
+  mutate(
+    across(
+      .cols = all_of(vars_m),
+      .fns = ~as.numeric(.)
+    ))
+
+# asegurar referencias
+db_sem2$income_5 <- relevel(db_sem2$income_5, ref = "Q1")
+db_sem2$pol <- relevel(db_sem2$pol, ref = "Left")
+
+# crear dummies
+X_income <- model.matrix(~ income_5, data = db_sem2)[, -1, drop = FALSE]
+X_pol    <- model.matrix(~ pol, data = db_sem2)[, -1, drop = FALSE]
+
+# unir
+db_sem2 <- cbind(db_sem2, as.data.frame(X_income), as.data.frame(X_pol))
+
+# limpiar nombres
+names(db_sem2) <- make.names(names(db_sem2))
+
+db_sem2$sex_female <- ifelse(db_sem2$sex == "Female", 1, 0)
+
+model <- c('
+  perc_merit =~ perc_effort + perc_talent
+  perc_nmerit =~ perc_rich_parents + perc_contact
+  pref_merit =~ pref_effort + pref_talent
+  pref_nmerit =~ pref_rich_parents + pref_contact
+
+  just_educ ~ perc_merit + perc_nmerit + pref_merit + pref_nmerit +
+                 age + educ + sex_female +
+                 income_5Q2 + income_5Q3 + income_5Q4 + income_5Q5 +
+                 polCenter + polRight + polDoes.not.identify
+')
+
+ord_vars <- c(
+  "just_educ",
+  "perc_effort", "perc_talent",
+  "perc_rich_parents", "perc_contact",
+  "pref_effort", "pref_talent",
+  "pref_rich_parents", "pref_contact"
+)
+
+fit_sem2 <- lavaan::sem(
+  model,
+  data = db_sem2,
+  estimator = "WLSMV",
+  ordered = ord_vars
+)
+
+#summary(fit_sem2, fit.measures = TRUE, standardized = TRUE, rsquare = TRUE)
+
+#fitmeasures(fit_sem2, c("chisq", "pvalue", "df", "cfi", "tli", "rmsea", "rmsea.ci.lower", "rmsea.ci.upper", "srmr"))
+
+```
+
+```{r}
+#| label: fig-sem2
+#| echo: false
+#| fig-cap: "SEM: perceptions and preferences of merit and non-merit factors predicting market justice in education (standardized estimates, WLSMV; controls omitted)"
+#| fig-cap-location: top
+#| fig-width: 11
+#| fig-height: 5.5
+
+pe <- lavaan::standardizedSolution(fit_sem2) |>
+  dplyr::filter(op %in% c("=~", "~")) |>
+  dplyr::mutate(sig = dplyr::case_when(pvalue < .001 ~ "***", pvalue < .01 ~ "**",
+                                       pvalue < .05 ~ "*", TRUE ~ ""),
+                lab = sprintf("%.2f%s", est.std, sig),
+                sig_flag = pvalue < .05)
+
+ind <- c("perc_effort", "perc_talent", "perc_rich_parents", "perc_contact",
+         "pref_effort", "pref_talent", "pref_rich_parents", "pref_contact")
+ind_lab <- rep(c("Esfuerzo", "Talento", "Padres ricos", "Contactos"), 2)
+lat <- c("perc_merit", "perc_nmerit", "pref_merit", "pref_nmerit")
+lat_lab <- c("Mérito\npercibido", "Privilegio\npercibido", "Mérito\npreferido", "Privilegio\npreferido")
+ctl <- c("age", "educ", "sex_female", "income_5Q2", "income_5Q3", "income_5Q4",
+         "income_5Q5", "polCenter", "polRight", "polDoes.not.identify")
+ctl_lab <- c("Edad", "Educación", "Mujer", "Ingreso Q2", "Ingreso Q3", "Ingreso Q4",
+             "Ingreso Q5", "Pol.: Centro", "Pol.: Derecha", "Pol.: No se identifica")
+
+ind_y <- setNames(8:1, ind)
+lat_y <- setNames(c(7.5, 5.5, 3.5, 1.5), lat)
+X_IND <- 0; X_LAT <- 4.2; X_OUT <- 9; Y_OUT <- 4.5
+
+# loadings (latent -> indicator)
+load_df <- pe |>
+  dplyr::filter(op == "=~") |>
+  dplyr::mutate(xs = X_LAT - .7, ys = lat_y[lhs], xe = X_IND + .75, ye = ind_y[rhs],
+                lx = (xs + xe) / 2, ly = (ys + ye) / 2)
+# structural paths (latent -> outcome)
+str_df <- pe |>
+  dplyr::filter(op == "~", rhs %in% lat) |>
+  dplyr::mutate(xs = X_LAT + .7, ys = lat_y[rhs], xe = X_OUT - 1.2, ye = Y_OUT,
+                lx = xs + (xe - xs) * .5, ly = ys + (ye - ys) * .5)
+ggplot2::ggplot() +
+  ggplot2::geom_segment(data = load_df,
+    ggplot2::aes(x = xs, y = ys, xend = xe, yend = ye),
+    colour = "grey45", linewidth = .4,
+    arrow = ggplot2::arrow(length = grid::unit(2, "mm"), type = "closed")) +
+  ggplot2::geom_label(data = load_df, ggplot2::aes(lx, ly, label = lab),
+    size = 3, label.size = 0, fill = "white", label.padding = grid::unit(.5, "mm")) +
+  ggplot2::geom_segment(data = str_df,
+    ggplot2::aes(x = xs, y = ys, xend = xe, yend = ye,
+                 colour = est.std > 0, linetype = sig_flag),
+    linewidth = 1,
+    arrow = ggplot2::arrow(length = grid::unit(3, "mm"), type = "closed")) +
+  ggplot2::geom_label(data = str_df,
+    ggplot2::aes(lx, ly, label = lab, colour = est.std > 0),
+    size = 3.4, fontface = "bold", label.size = 0, fill = "white",
+    label.padding = grid::unit(.6, "mm"), show.legend = FALSE) +
+  # nodes
+  ggplot2::annotate("tile", x = X_IND, y = unname(ind_y), width = 1.5, height = .7,
+                    fill = "white", colour = "grey30") +
+  ggplot2::annotate("text", x = X_IND, y = unname(ind_y), label = ind_lab, size = 3) +
+  ggplot2::annotate("point", x = X_LAT, y = unname(lat_y), shape = 21, size = 24,
+                    fill = "#e8c9c9", colour = "#6a1718") +
+  ggplot2::annotate("text", x = X_LAT, y = unname(lat_y), label = lat_lab,
+                    size = 3.2, lineheight = .85) +
+  ggplot2::annotate("tile", x = X_OUT, y = Y_OUT, width = 2.4, height = 1.1,
+                    fill = "white", colour = "black", linewidth = .8) +
+  ggplot2::annotate("text", x = X_OUT, y = Y_OUT, label = "Justicia de mercado\nen educación",
+                    size = 3.4, lineheight = .85) +
+  ggplot2::annotate("text", x = c(X_IND, X_LAT), y = 9, size = 3.3, fontface = "bold",
+                    label = c("Indicadores", "Factores latentes")) +
+  ggplot2::scale_colour_manual(values = c(`TRUE` = "#6a1718", `FALSE` = "#2c5f8a"),
+                               labels = c(`TRUE` = "Positivo", `FALSE` = "Negativo"),
+                               name = NULL) +
+  ggplot2::scale_linetype_manual(values = c(`TRUE` = "solid", `FALSE` = "dashed"),
+                                 labels = c(`TRUE` = "p < .05", `FALSE` = "n.s."),
+                                 name = NULL) +
+  ggplot2::guides(linetype = ggplot2::guide_legend(override.aes = list(colour = "grey30", arrow = NULL)),
+                  colour = ggplot2::guide_legend(override.aes = list(arrow = NULL, linetype = "solid"))) +
+  ggplot2::coord_fixed(xlim = c(-.9, 10.4), ylim = c(.4, 9.6)) +
+  ggplot2::theme_void() +
+  ggplot2::theme(legend.position = "bottom")
+
+```
+
+@fig-sem2 presents the standardized estimates of the structural equation model, which includes age, education, sex, income quintiles and political orientation as control variables (omitted from the figure for clarity). The model fits the data well (scaled CFI = .959, TLI = .985, RMSEA = .046, 90% CI [.043, .049], SRMR = .037). Also, the measurement model is satisfactory: all standardized loadings are significant and range from .55 to .92, with the privilege factors being particularly well defined (.81 to .90). Regarding the structural paths, preferences for privilege factor show the strongest association with market justice in education ($\beta$ = .32, *p* < .001), indicating that individuals who favor non-meritocratic criteria are more likely to justify a market-based education system. In contrast, perceptions of privilege factors are negatively associated with market justice ($\beta$ = −.20, *p* < .001): those who perceive that parental wealth and contacts shape opportunities in Chile are less likely to endorse a market-based education. Perceived merit has a very small positive effect ($\beta$ = .05, *p* < .05), while preferred merit is not significantly related to the outcome ($\beta$ = .04, *p* = .294). Overall, market justice in education is shaped mainly by beliefs about privilege criteria rather than by meritocratic ones, and perceptions and preferences operate in opposite directions in meritocratic dimension.  
+
+## Regression models with interactions
+
+```{r}
+#| label: tbl-polr-lpa
+#| tbl-cap: "Ordinal logistic regression of market justice in education on latent profiles (odds ratios)"
+
+# Model 1: profiles only
+fit_lpa1 <- MASS::polr(just_educ ~ profile,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+# Model 2: profiles + sex + university education + income
+fit_lpa2 <- MASS::polr(just_educ ~ profile + sex + educ + income_5,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+# Model 3: + political identification
+fit_lpa3 <- MASS::polr(just_educ ~ profile + sex + educ + income_5 + pol,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+
+# Models 4-6: profile x one political category each; the other two categories
+# enter as main effects only (reference: Does not identify)
+fit_lpa4 <- MASS::polr(just_educ ~ profile * polLeft + polCenter + polRight + sex + educ + income_5,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+fit_lpa5 <- MASS::polr(just_educ ~ profile * polCenter + polLeft + polRight + sex + educ + income_5,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+fit_lpa6 <- MASS::polr(just_educ ~ profile * polRight + polLeft + polCenter + sex + educ + income_5,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+
+# Model 7: profile x university education
+fit_lpa7 <- MASS::polr(just_educ ~ profile * educ + sex + income_5 + pol,
+                       data = db_reg_lpa, Hess = TRUE, method = "logistic")
+
+ref_rows_lpa <- data.frame(
+  term = "Latent profile (Ref = Partial meritocrats)",
+  m1 = "", m2 = "", m3 = "", m4 = "", m5 = "", m6 = "", m7 = ""
+)
+names(ref_rows_lpa) <- c("term", paste("Model", 1:7))
+attr(ref_rows_lpa, "position") <- 1
+
+tab_polr_lpa <- modelsummary::modelsummary(
+  list("Model 1" = fit_lpa1, "Model 2" = fit_lpa2, "Model 3" = fit_lpa3,
+       "Model 4" = fit_lpa4, "Model 5" = fit_lpa5, "Model 6" = fit_lpa6,
+       "Model 7" = fit_lpa7),
+  exponentiate = TRUE, statistic = "conf.int",
+  stars = c("*" = .05, "**" = .01, "***" = .001),
+  coef_omit = "\\|",
+  coef_map = c(
+    "profileCongruent meritocrats" = "Congruent meritocrats",
+    "profilePrivilege advocates" = "Privilege advocates",
+    "sexFemale" = "Female",
+    "educ" = "University education",
+    "income_5Q2" = "Q2", "income_5Q3" = "Q3", "income_5Q4" = "Q4", "income_5Q5" = "Q5",
+    "polLeft" = "Left", "polCenter" = "Center", "polRight" = "Right",
+    "profileCongruent meritocrats:polLeft"   = "Congruent meritocrats × Left",
+    "profilePrivilege advocates:polLeft"    = "Privilege advocates × Left",
+    "profileCongruent meritocrats:polCenter" = "Congruent meritocrats × Center",
+    "profilePrivilege advocates:polCenter"  = "Privilege advocates × Center",
+    "profileCongruent meritocrats:polRight"  = "Congruent meritocrats × Right",
+    "profilePrivilege advocates:polRight"   = "Privilege advocates × Right",
+    "profileCongruent meritocrats:educ" = "Congruent meritocrats × University education",
+    "profilePrivilege advocates:educ"  = "Privilege advocates × University education"
+  ),
+  gof_map = data.frame(raw = c("nobs", "aic", "bic"), clean = c("N", "AIC", "BIC"), fmt = c(0, 1, 1)),
+  add_rows = ref_rows_lpa,
+  output = "tinytable"
+) |>
+  tinytable::style_tt(i = 1, bold = TRUE, background = "#f2f2f2")
+
+# save the table as an object so it can be reused, e.g. in the appendix of
+# presentations/coloquio-2026/coloquio-2026.qmd: readRDS() and print it in a chunk
+saveRDS(tab_polr_lpa, here::here("paper", "output", "tbl-polr-lpa.rds"))
+tab_polr_lpa
+```

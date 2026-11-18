@@ -15,7 +15,7 @@ book:
   author:
     - name: Tomás Urzúa Moreno
       affiliation: Departamento de Sociología, Universidad de Chile
-      orcid: 0000-0000-0000-0000
+      orcid: 0009-0008-3167-6819
   date: today              # Usa fecha fija (YYYY-MM-DD) si necesitas control editorial
   date-format: D [de] MMMM [de] YYYY
   doi: ""
@@ -35,7 +35,8 @@ book:
     - index.qmd            # Capitulo inicial o resumen ejecutivo
     - 01-introduccion.qmd
     - 02-antecedentes.qmd
-    - 04-resultados.qmd
+    - 03-metodologia.qmd
+    - 04-resultados-esp.qmd
     - 05-discusion.qmd
     - 06-conclusiones.qmd
     - references.qmd

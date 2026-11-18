@@ -4,38 +4,39 @@ title: "Data, Variables and Methods"
 
 ## Data
 
-The data come from the EDUMERCO dataset, a survey conducted as part of the EDUMER-funded project that focused on beliefs and attitudes toward meritocracy and inequality. The survey was conducted in 2025 via Computer-Assisted Web Interviewing (CAWI) among adults aged 18 to 75 in the Santiago Metropolitan Region of Chile. The sampling design was a quota-based non-probability sample, with quotas for age, sex, educational level, and socioeconomic status that approximated the population parameters. The total sample consisted of 3,470 respondents.
+The data come from the EDUMERCO dataset, a survey conducted as part of the EDUMER-funded project that focused on beliefs and attitudes toward meritocracy and inequality. The survey was conducted in 2025 via Computer-Assisted Web Interviewing (CAWI) among adults aged 18 to 75 in the Santiago Metropolitan Region of Chile. The sampling design was a quota-based non-probability sample, with quotas for age, sex, educational level, and socioeconomic status that approximated the population parameters. The total sample consisted of 3,470 respondents, while the analytical sample consisted of 2,489 respondents.
 
 ## Variables
 
-The dependent variable of this study is the preference for market justice in education. This construct is measured using the following statement: “It is just that high-income people have a better education for their children than people with lower incomes” (“Es justo que las personas de altos ingresos tengan una mejor educación para sus hijos que las personas con ingresos más bajos” in Spanish). The responses cathegories are based on a Likert scale from (1) “strongly disagree” to (5) “strongly agree”. 
+The dependent variable of this study is the preference for market justice in education. This construct is measured using the following statement: “It is just that high-income people have a better education for their children than people with lower incomes” (“Es justo que las personas de altos ingresos tengan una mejor educación para sus hijos que las personas con ingresos más bajos” in Spanish). The response categories are on a four-point Likert scale from (1) “strongly disagree” to (4) “strongly agree”. 
 
-The main independent variable in this study is meritocratic beliefs. To this end, two dimensions are distinguished: (1) meritocratic perceptions and preferences, and (2) perceptions and acceptance of privilege. Meritocratic and privilege-based perceptions and preferences were measured using the same items proposed in the original scale [@castillo_multidimensional_2023]. The items are as follows:
+The main independent variable in this study is meritocratic beliefs. To this end, two areas are distinguished: (1) meritocratic perceptions and preferences, and (2) perceptions and acceptance of privilege. Meritocratic and privilege-based perceptions and preferences were measured using the same items proposed in the original scale [@castillo_multidimensional_2023]. The dimensions are summarized in @tbl-beliefs.
 
--  Meritocratic perceptions: the extent to which effort and ability are rewarded in Chile,
--  Meritocratic preferences: agreement with that those who work harder or are more talented should be better rewarded,
--  Privilege perceptions: the extent to which success is perceived as linked to connections and family wealth,
--  Privilege acceptance: agreement that it is acceptable for individuals with better connections or wealthy parents to achieve
-greater success.
+| Dimension | Type | Description |
+|:----------|:-----|:------------|
+| Meritocratic perceptions | Perception | Extent to which effort and ability are rewarded in Chile |
+| Meritocratic preferences | Preference | Agreement that those who work harder or are more talented should be better rewarded |
+| Privilege perceptions | Perception | Extent to which success is perceived as linked to connections and family wealth |
+| Privilege acceptance | Preference | Agreement that it is acceptable for individuals with better connections or wealthy parents to achieve greater success |
+
+: Dimensions of meritocratic beliefs {#tbl-beliefs}
 
 Each item is rated on a four-point Likert scale ranging from “strongly disagree” (1) to “strongly agree” (4), higher
 scores indicate stronger endorsement of the corresponding perception or preference.
 
-In addition, other independent variables considered are educational level and political identification. Educational level is measured using the question: “What is the most recent course or level of study you completed?” (“¿Cuál es el último curso o nivel de estudios que completó?” in Spanish). The response categories range from 1 to 9, where higher values indicate a higher level of education among respondents. Political identification, meanwhile, is measured along a left-right axis using a 6-category scale, where 1 indicates right, 5 indicates left, and 6 indicates independent.
+In addition, other independent variables considered are educational level, income and political identification. Educational level is measured using the question: “What is the most recent course or level of study you completed?”. The response categories range from 1 to 9, where higher values indicate a higher level of education among respondents. This variable was subsequently dichotomized to examine differences between individuals with and without higher education. Income was measured using a question asking about the person's monthly income, with 10 response categories. For modeling purposes, this variable was recategorized into 5 categories, expressed as quintiles. Finally, political identification is measured along a left-right axis using a 6-category scale, where 1 indicates right, 5 indicates left, and 6 indicates independent. This variable was recategorized, resulting in four categories: left, center, right, and does not identify
 
 ```{r}
 #| echo: false
+#| message: false
 
 if (!require("pacman")) install.packages("pacman")
 
 pacman::p_load(tidyverse,
-               sjmisc, 
                here,
                sjlabelled,
-               naniar,
                knitr,
                kableExtra)
-
 
 options(scipen=999)
 rm(list = ls())
@@ -47,20 +48,39 @@ load(here::here("paper", "input/data/proc/db_proc.RData"))
 
 # 3. Variables ------------------------------------------------------------
 
-# db_proc.RData is already processed (see procesamiento/proc-data.r)
+# db_proc.RData is already processed (see procesamiento/proc-data.r).
+# Recodings below are the same ones used in the models of the results chapter
+# (04-resultados-esp.qmd).
 
-vars_m <- c("perc_effort",
-            "perc_talent",
-            "perc_rich_parents",
-            "perc_contact",
-            "pref_effort",
-            "pref_talent",
-            "pref_rich_parents",
-            "pref_contact")
+vars_m <- c("perc_effort", "perc_talent", "perc_rich_parents", "perc_contact",
+            "pref_effort", "pref_talent", "pref_rich_parents", "pref_contact")
 
-# descriptive table: dependent and independent variables ----
+# income quintiles (approximate, since income is collected in 10 ordered brackets)
+income_levels <- c(
+  "Menos de $280.000 mensuales liquidos",
+  "De $280.001 a $380.000 mensuales liquidos",
+  "De $380.001 a $470.000 mensuales liquidos",
+  "De $470.001 a $610.000 mensuales liquidos",
+  "De $610.001 a $730.000 mensuales liquidos",
+  "De $730.001 a $890.000 mensuales liquidos",
+  "De $890.001 a $1.100.000 mensuales liquidos",
+  "De $1.100.001 a $2.700.000 mensuales liquidos",
+  "De $2.700.001 a $4.100.000 mensuales liquidos",
+  "Mas de $4.100.001 mensuales liquidos"
+)
+income_code   <- as.integer(factor(db$income, levels = income_levels))
+income_breaks <- unique(quantile(income_code, seq(0, 1, .2), type = 1, na.rm = TRUE))
 
-vars_indep <- c(vars_m, "educ", "pol", "income")
+db_desc <- db %>%
+  mutate(
+    sex      = factor(if_else(sex == 1, "Male", "Female"), levels = c("Male", "Female")),
+    # educ is coded 1-9; 7-9 = university or more
+    educ     = factor(if_else(educ >= 7, "University education", "No university education"),
+                      levels = c("No university education", "University education")),
+    income_5 = cut(income_code, breaks = income_breaks, include.lowest = TRUE,
+                   labels = paste0("Q", seq_len(length(income_breaks) - 1))),
+    pol      = factor(pol, levels = c("Left", "Center", "Right", "Does not identify"))
+  )
 
 var_labels <- c(
   just_educ         = "Education market justice preferences",
@@ -72,45 +92,44 @@ var_labels <- c(
   pref_talent       = "Talent preference",
   pref_rich_parents = "Rich parents preference",
   pref_contact      = "Contact preference",
-  educ              = "Educational level",
-  pol               = "Political identification",
-  income            = "Income"
+  sex               = "Sex",
+  educ              = "University education",
+  income_5          = "Income quintile",
+  pol               = "Political identification"
 )
 
-desc_dep <- db %>%
-  dplyr::select(just_educ) %>%
-  mutate(across(everything(), as.character)) %>%
-  pivot_longer(everything(), names_to = "variable", values_to = "category") %>%
-  filter(!is.na(category)) %>%
-  count(variable, category, name = "n") %>%
-  mutate(group = "Dependent variable")
+# variables grouped as they appear in the table (Likert items keep their 1-4 scale)
+var_groups <- list(
+  "Dependent variable"         = "just_educ",
+  "Meritocratic beliefs" = vars_m,
+  "Covariates"                 = c("sex", "educ", "income_5", "pol")
+)
 
-desc_indep <- db %>%
-  dplyr::select(all_of(vars_indep)) %>%
-  mutate(across(everything(), as.character)) %>%
-  pivot_longer(everything(), names_to = "variable", values_to = "category") %>%
-  filter(!is.na(category)) %>%
-  count(variable, category, name = "n") %>%
-  mutate(group = "Independent variables")
+# frequency table of a variable, categories in their natural order
+freq_tab <- function(v) {
+  x <- as.factor(db_desc[[v]])
+  tibble(variable = var_labels[[v]],
+         category = sub("esagree", "isagree", levels(x)),
+         n        = as.integer(table(x)),
+         pct      = n / sum(n) * 100)
+}
 
-desc_tbl <- bind_rows(desc_dep, desc_indep) %>%
-  mutate(variable = factor(variable,
-                           levels = c("just_educ", vars_indep),
-                           labels = var_labels[c("just_educ", vars_indep)])) %>%
-  arrange(group, variable) %>%
-  dplyr::select(group, variable, category, n)
+desc_tbl <- imap_dfr(var_groups, function(vs, g) {
+  map_dfr(vs, freq_tab) %>% mutate(group = g)
+}) %>%
+  mutate(group = factor(group, levels = names(var_groups))) %>%
+  dplyr::select(group, variable, category, n, pct)
 
-group_index <- desc_tbl %>%
-  count(group) %>%
-  tibble::deframe()
+group_index <- desc_tbl %>% count(group) %>% tibble::deframe()
 
 out_format <- if (knitr::is_latex_output()) "latex" else "html"
 
 tab_desc <- desc_tbl %>%
   dplyr::select(-group) %>%
-  rename(Variable = variable, Category = category, `Valid N` = n) %>%
+  mutate(pct = sprintf("%.1f", pct)) %>%
+  rename(Variable = variable, Category = category, `Valid N` = n, `%` = pct) %>%
   kbl(format = out_format,
-      align = "llr",
+      align = "llrr",
       booktabs = TRUE) %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
                 latex_options = c("striped", "hold_position"),
@@ -119,40 +138,49 @@ tab_desc <- desc_tbl %>%
   collapse_rows(columns = 1, valign = "top") %>%
   pack_rows(index = group_index)
 
+# save the table so it can be reused in other .qmd documents:
+#   tab_desc <- readRDS(here::here("paper", "output", "tbl-desc.rds")); tab_desc
+#   (tbl-desc-data.rds holds the underlying data frame)
+saveRDS(tab_desc, here::here("paper", "output", "tbl-desc.rds"))
+saveRDS(desc_tbl, here::here("paper", "output", "tbl-desc-data.rds"))
+
 ```
 
 ```{r}
 #| label: tbl-desc
-#| tbl-cap: Descriptive statistics of variables
+#| tbl-cap: Descriptive statistics of variables (as recoded for the models)
 #| tbl-cap-location: top
 #| echo: false
 
 tab_desc
 ```
 
-Based on previous research [@castillo_perceptions_2025], the statistical models include sociodemographic controls to account for potential compositional effects in the population. The control variables are age (en años) and sex (0 = male; 1 = women).
 
 ## Analytical strategy
 
-First, a latent class analysis (LCA) is conducted to identify the latent classes (C) that represent meritocratic belief patterns. Second, once the optimal model has been determined, each individual is assigned the latent class to which they are most likely to belong. Third, a multinomial logistic regression is performed to examine the relationship between membership in latent classes and a preference for market justice in education, while also considering the effects of education and political identification on the dependent variable. 
+The analysis proceeds in three steps. First, a latent profile analysis (LPA) identifies subgroups of respondents that share a common configuration of meritocratic perceptions and preferences. Second, each respondent is assigned to the profile to which they most likely belong. Third, an ordinal logistic regression estimates the association between profile membership and the preference for market justice in education, net of sociodemographic and political controls.
 
-### Latent class analysis
+### Latent profile analysis
 
-LCA is conducted using the poLCA package in R [@linzer_polca_2011], with meritocratic and privilege-based indicators as dichotomized variables. The model is estimated using the Expectation-Maximization (EM) and Newton-Raphson algorithms, which iteratively estimate the model's parameters until convergence. The optimal number of latent classes is determined based on a combination of statistical criteria, including the Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), and entropy. Lower AIC and BIC values indicate better model fit, while higher entropy values indicate better classification accuracy.
+LPA is a person-centered finite mixture model. It assumes that a population that looks homogeneous is in fact a mixture of a small number of unobserved subgroups, and it uses the pattern of responses to a set of indicators to estimate each respondent's probability of belonging to each subgroup [@jason_handbook_2015]. This fits the aim of the study, which is not to place respondents on a single meritocracy scale but to uncover qualitatively different combinations of perceptions and preferences, such as endorsing meritocracy while also perceiving or accepting privilege. LPA and latent class analysis (LCA) are very similar and share the same fit statistics. They differ in the type of indicator: LCA is designed for categorical indicators and describes classes by conditional probabilities of endorsement, whereas LPA is used for continuous indicators and describes profiles by their mean on each indicator [@jason_handbook_2015; @scottorosato_latent_2012]. The eight items are four-point Likert responses. LPA is used because they are treated as continuous, which retains the intensity of agreement that dichotomizing the items for an LCA would discard. Treating ordinal items with four categories as continuous is a common simplification, but it is an assumption and a limitation of this specification.
 
-```{r}
-#| label: fig-h1
-#| fig-cap: Conceptual map for latent class analysis (LCA). "C" represents latent class memberships. "M1-M4" represents four meritocratic intems used as LCA indicators, and "P1-P4" represents four privileged items used as LCA indicators.
-#| fig-cap-location: bottom
-#| echo: false
+Solutions with one to five profiles are estimated in R with the `tidyLPA` package, using maximum likelihood estimated through the Expectation-Maximization algorithm and random starting values, with a fixed seed for reproducibility. The number of profiles is chosen by combining statistical and substantive criteria, since no single index is decisive:
 
-knitr::include_graphics("input/images/h-lca.png")
-```
+1. **Information criteria.** AIC and BIC are compared across solutions, with lower values indicating better fit. BIC has been identified as the most reliable index for selecting the number of classes. Because these indices tend to keep decreasing as profiles are added, the size of each improvement relative to the K−1 solution is examined, and a marginal gain suggests that an extra profile adds little.
+2. **Classification quality.** Relative entropy (0 to 1) assesses how clearly respondents are separated into profiles, with higher values indicating more accurate classification. After selecting the solution, the mean posterior probability of the assigned profile is reported for each profile.
+3. **Profile size.** The proportion of the smallest profile is examined, and solutions with very small profiles are viewed with caution because they tend to be unstable.
+4. **Interpretability.** The final decision depends on whether the profiles make theoretical sense and differ qualitatively, not only quantitatively, in their pattern of means.
+
+A class or profile is a statistical construct, not necessarily a real group. Spurious profiles can arise from non-normality or from misspecification of the model, so the profiles are interpreted as useful descriptions of belief configurations and not as proof of tangible subgroups.
 
 ### Ordinal logistic regression
 
-After determining the optimal number of latent classes, individuals are assigned to their most likely latent class memberships based on their posterior probabilities. An ordinal logistic regression is then conducted to examine the relationship between latent class memberships and the preference for market justice in education. The ordinal logistic regression model is also estimated in R, with the preference for market justice in education as the dependent variable and latent class memberships, educational level, and political identification as independent variables.
+After selecting the number of profiles, each respondent is assigned to the profile with the highest posterior probability (modal assignment). Preference for market justice in education, a five-category ordered response, is then regressed on profile membership with ordinal (proportional-odds) logistic regression, estimated with the MASS package in R. Results are reported as odds ratios with 95% confidence intervals, and the reference category is the *Partial meritocrats* profile.
+
+Seven models are estimated. Model 1 includes only profile membership. Model 2 adds sex, university education and income quintile, and Model 3 adds political identification. Models 4 to 6 add to Model 3 the interaction of profile with each political category (left, center and right, respectively, with those who do not identify with any position as reference), and Model 7 adds the interaction of profile with university education. The interactions examine whether the association between profile and the outcome varies across these groups. Each political interaction is estimated in a separate model so that their effects do not overlap.
+
+Modal assignment treats profile membership as known, although it is estimated with error, which tends to attenuate the association with the outcome. The mean posterior probability of each profile is reported as an indicator of how large this uncertainty is.
 
 ### Robustness analysis
 
-To ensure the robustness of the research findings, I decided to replicate the procedure with a student population from the same country. This was possible because I had access to a dataset generated by the same project from the main database. As a result, the same variables were available to conduct a complete replication of the study. The analyses in this section will be performed using the same software and the same code libraries.
+to prevent latent profiles from being an artifice due to suspicious response patterns, Respondents flagged as careless responders were excluded before estimation. Three indices were computed on the eight items (longstring, intra-individual response variability and Mahalanobis distance), and respondents flagged by at least two of them were removed, as were those with missing values on any indicator [@ward_dealing_2023; @curran_methods_2016]. The resulting sample is far above the minimum of about 100 cases usually recommended for mixture models.
