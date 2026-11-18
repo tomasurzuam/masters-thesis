@@ -1,9 +1,5 @@
 ﻿---
 title: "Results"
-format:
-  html:
-    code-fold: true
-    code-summary: "Mostrar código"
 ---
 
 This section is structured as follows: First, we present the descriptive results to provide an overview of how beliefs regarding market justice, as well as those regarding merit and privilege, are distributed. Second, we present the LPA, explaining how the final solution was reached and illustrating the characteristics of the individuals who make up each profile. Finally, the relationship between each of the latent profiles and market justice in education is analyzed, including the other independent variables.
